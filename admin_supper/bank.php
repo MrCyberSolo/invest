@@ -47,7 +47,7 @@ $userid = $_SESSION['userid'];
 											</div>
                                             <div class="col-md-12">
 												<label  class="form-label">Image</label>
-												<input type="file" class="form-control" name="file"  >
+												<input type="file" class="form-control" name="file" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp" >
 											</div>
 											<div class="col-12">
                                                 <center> <button class="btn btn-primary" type="submit" name="submit" ><i class="fa fa-fw fa-lg fa-check-circle"></i> Create</button></center>
@@ -178,6 +178,16 @@ $userid = $_SESSION['userid'];
         $file_size = $_FILES['file']['size'];
         $file_type = $_FILES['file']['type'];
         $folder="../asupport/";
+        
+        $allowed_extensions = array("jpg", "jpeg", "png", "gif", "webp", "bmp");
+        $file_extension = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+
+        if (!in_array($file_extension, $allowed_extensions)) {
+            echo "<script>alert('Invalid file format. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
+            echo "<script>window.open('bank.php','_self')</script>";
+            exit();
+        }
+        
         // new file size in KB
         $new_size = $file_size/1024;  
         // new file size in KB
