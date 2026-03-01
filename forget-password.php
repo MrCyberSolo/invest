@@ -321,27 +321,23 @@ if(isset($_POST['number']))
 		$query = mysqli_query($con,"insert into mobileotp (`otp_mobile`,`otp_number`,`otp_date`) values('$mobile','$new_pins',Now())");	
 	//SMS Code Started here 
 		$fields = array(
+			"sender_id" => "198",
 			"variables_values" => $new_pins,
-			"route" => "otp",
-			"numbers" => $mobile,
+			"numbers" => $mobile
 		);
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => "https://www.fast2sms.com/dev/bulkV2",
+		CURLOPT_URL => "https://blacksms.in/sms",
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => "",
 		CURLOPT_MAXREDIRS => 10,
 		CURLOPT_TIMEOUT => 30,
-		CURLOPT_SSL_VERIFYHOST => 0,
-		CURLOPT_SSL_VERIFYPEER => 0,
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => "POST",
 		CURLOPT_POSTFIELDS => json_encode($fields),
 		CURLOPT_HTTPHEADER => array(
-			"authorization: 79rQCrdIsJKYb06l5p4Mj01X28BWT7uYMJanPe1NrW064BeiLeEvHYxYPJHO",
-			"accept: */*",
-			"cache-control: no-cache",
-			"content-type: application/json"
+			"Authorization: df3d053b8399b02ed070a0b3b7e1b82f",
+			"Content-Type: application/json"
 		),
 		));
 
