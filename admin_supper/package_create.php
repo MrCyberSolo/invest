@@ -94,7 +94,7 @@ if(isset($_GET['pac']))
 											</div>
 											<div class="col-md-4">
 												<label  class="form-label">Image</label>
-												<input type="file" class="form-control" name="file"  >
+												<input type="file" class="form-control" name="file" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp" >
 											</div>
                                             <div class="col-md-12">
 												<label class="form-label">Details</label>
@@ -187,6 +187,15 @@ if(isset($_POST['package_create']))
 	$file_size = $_FILES['file']['size'];
 	$file_type = $_FILES['file']['type'];
 	$folder="../asupport/package/";
+	
+    $allowed_extensions = array("jpg", "jpeg", "png", "gif", "webp", "bmp");
+    $file_extension = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+
+    if (!in_array($file_extension, $allowed_extensions)) {
+        echo "<script>alert('Invalid file format. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
+        echo "<script>window.open('package_create.php','_self')</script>";
+        exit();
+    }
 	// new file size in KB
 	$new_size = $file_size/1024;  
 	// new file size in KB

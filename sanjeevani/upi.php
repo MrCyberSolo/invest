@@ -450,6 +450,16 @@ $amount = $_SESSION['amount'];
      $file_size = $_FILES['file']['size'];
      $file_type = $_FILES['file']['type'];
      $folder="img/payment/";
+     
+     $allowed_extensions = array("jpg", "jpeg", "png", "gif", "webp", "bmp");
+     $file_extension = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+
+     if (!in_array($file_extension, $allowed_extensions)) {
+         echo "<script>alert('Invalid file format. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
+         echo "<script>window.open('pay.php','_self')</script>";
+         exit();
+     }
+     
      // new file size in KB
      $new_size = $file_size/1024;  
      // new file size in KB

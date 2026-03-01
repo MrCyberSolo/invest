@@ -57,7 +57,7 @@ if(isset($_GET['pac']))
 											</div>
 											<div class="col-md-12">
 												<label  class="form-label">Image</label>
-												<input type="file" class="form-control" name="image"  >
+												<input type="file" class="form-control" name="image" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp" >
 											</div>
 										
                                             
@@ -146,6 +146,15 @@ if(isset($_GET['pac']))
         $imageType = $_FILES['image']['type'];
         $imageSize = $_FILES['image']['size'];
         $imageTmp = $_FILES['image']['tmp_name'];
+
+        $allowed_extensions = array("jpg", "jpeg", "png", "gif", "webp", "bmp");
+        $file_extension = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
+
+        if (!in_array($file_extension, $allowed_extensions)) {
+            echo "<script>alert('Invalid file format. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
+            echo "<script>window.open('blog_create.php','_self')</script>";
+            exit();
+        }
 
         // Move the uploaded image to a desired directory
         $uploadPath = "../asupport/blog/" . $imageName;

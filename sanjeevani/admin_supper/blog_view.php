@@ -76,12 +76,12 @@ if(isset($_GET['pac']))
 										<form class="row g-3 needs-validation"  action="" method="post" enctype="multipart/form-data">
 										    <div class="col-md-6">
 											   <label  class="form-label">Image</label>
-											     <input type="file" class="form-control" name="file1">
+											     <input type="file" class="form-control" name="file1" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp">
 											  	<img src="../asupport/blog/<?php echo $blog_image; ?>" class="msg-avatar" style="width: 30%;">
 											</div>
 											<div class="col-md-6">
 											    <label  class="form-label">Image</label>
-											    <input type="file" class="form-control" name="file2">
+											    <input type="file" class="form-control" name="file2" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp">
 											  	<img src="../asupport/blog/<?php echo $blog_image2; ?>" class="msg-avatar" style="width: 30%;">
 											</div>
 											<div class="col-12">
@@ -174,31 +174,57 @@ if(isset($_GET['pac']))
             }        
     }
 ?>
-Copy code
-<?php
 // Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST["submit2"])) {
   
     // File upload handling for first image
     $target_dir = "../asupport/blog/";
-     
-  $target_file1 = $target_dir . basename($_FILES["file1"]["name"]);
-    move_uploaded_file($_FILES["file1"]["tmp_name"], $target_file1);
-
-    // File upload handling for second image
-    $target_file2 = $target_dir . basename($_FILES["file2"]["name"]);
-    move_uploaded_file($_FILES["file2"]["tmp_name"], $target_file2);
+    $allowed_extensions = array("jpg", "jpeg", "png", "gif", "webp", "bmp");
     
-    $imag_1 = basename($_FILES["file1"]["name"]);
-    $imag_2 = basename($_FILES["file2"]["name"]);
-    // SQL query to update the blog table
-    $sql = "UPDATE `blog` SET `b_image`='$imag_1', `b_image2`='$imag_2' WHERE `b_id`='$blog_id'";
-
-    if ($con->query($sql) === TRUE) {
-        echo "Record updated successfully";
-    } else {
-        echo "Error updating record: " . $conn->error;
+    $imag_1 = "";
+    if (!empty($_FILES["file1"]["name"])) {
+        $imag_1 = basename($_FILES["file1"]["name"]);
+        $file_extension1 = strtolower(pathinfo($imag_1, PATHINFO_EXTENSION));
+        if (!in_array($file_extension1, $allowed_extensions)) {
+            echo "<script>alert('Invalid file format for Image 1. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
+            echo "<script>window.open('blog.php','_self')</script>";
+            exit();
+        }
+        $target_file1 = $target_dir . $imag_1;
+        move_uploaded_file($_FILES["file1"]["tmp_name"], $target_file1);
     }
 
-    $conn->close();
+    // File upload handling for second image
+    $imag_2 = "";
+    if (!empty($_FILES["file2"]["name"])) {
+        $imag_2 = basename($_FILES["file2"]["name"]);
+        $file_extension2 = strtolower(pathinfo($imag_2, PATHINFO_EXTENSION));
+        if (!in_array($file_extension2, $allowed_extensions)) {
+            echo "<script>alert('Invalid file format for Image 2. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
+            echo "<script>window.open('blog.php','_self')</script>";
+            exit();
+        }
+        $target_file2 = $target_dir . $imag_2;
+        move_uploaded_file($_FILES["file2"]["tmp_name"], $target_file2);
+    }
+    
+    // SQL query to update the blog table
+    $sql_updates = array();
+    if (!empty($imag_1)) $sql_updates[] = "`b_image`='$imag_1'";
+    if (!empty($imag_2)) $sql_updates[] = "`b_image2`='$imag_2'";
+    
+    if (count($sql_updates) > 0) {
+        $sql = "UPDATE `blog` SET " . implode(", ", $sql_updates) . " WHERE `b_id`='$blog_id'";
+
+        if ($con->query($sql) === TRUE) {
+            echo "<script>alert('Record updated successfully')</script>";
+            echo "<script>window.open('blog.php','_self')</script>";
+        } else {
+            // echo "Error updating record: " . $conn->error;
+        }
+    } else {
+        echo "<script>alert('No images updated')</script>";
+        echo "<script>window.open('blog.php','_self')</script>";
+    }
 }
+?>
