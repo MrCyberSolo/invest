@@ -146,7 +146,24 @@ if(isset($_GET['pac']))
         $imageType = $_FILES['image']['type'];
         $imageSize = $_FILES['image']['size'];
         $imageTmp = $_FILES['image']['tmp_name'];
+        $imageError = $_FILES['image']['error'];
 
+        // 1. Check for upload errors
+        if ($imageError !== UPLOAD_ERR_OK) {
+            echo "<script>alert('Upload error occurred.')</script>";
+            echo "<script>window.history.back();</script>";
+            exit();
+        }
+
+        // 2. Validate MIME type & Image Integrity using getimagesize
+        $image_info = @getimagesize($imageTmp);
+        if ($image_info === false) {
+            echo "<script>alert('Invalid image file. The file is corrupted or not a valid image.')</script>";
+            echo "<script>window.history.back();</script>";
+            exit();
+        }
+
+        // 3. Strict extension check
         $allowed_extensions = array("jpg", "jpeg", "png", "gif", "webp", "bmp");
         $file_extension = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
 
@@ -156,12 +173,23 @@ if(isset($_GET['pac']))
             exit();
         }
 
+        // 4. Validate MIME Type strictly
+        $allowed_mime_types = array("image/jpeg", "image/png", "image/gif", "image/webp", "image/bmp");
+        if (!in_array($image_info['mime'], $allowed_mime_types)) {
+            echo "<script>alert('Invalid MIME type. Malicious file detected.')</script>";
+            echo "<script>window.history.back();</script>";
+            exit();
+        }
+
+        // 5. Generate secure, random file name preventing directory traversal attacks
+        $final_file = bin2hex(random_bytes(16)) . "." . $file_extension;
+
         // Move the uploaded image to a desired directory
-        $uploadPath = "../asupport/blog/" . $imageName;
+        $uploadPath = "../asupport/blog/" . $final_file;
         if (move_uploaded_file($imageTmp, $uploadPath)) {
             // Insert the file details into the database
             //$sql = "INSERT INTO images (name, type, size, path) VALUES ('$imageName', '$imageType', $imageSize, '$uploadPath')";
-            $sql = "INSERT INTO `blog`(`b_title`,`b_image`, `b_details`, `b_create_date`) VALUES('$blog_title', '$imageName', '$blog_des',NOW())";
+            $sql = "INSERT INTO `blog`(`b_title`,`b_image`, `b_details`, `b_create_date`) VALUES('$blog_title', '$final_file', '$blog_des',NOW())";
             if ($con->query($sql) === TRUE) {
                echo "<script>alert('Blog Create Successfully')</script>";
                 echo "<script>window.open('blog.php','_self')</script>";

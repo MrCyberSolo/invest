@@ -284,19 +284,28 @@ if (isset($_POST['user_setting']))
     $final_file = "";
 
     // If file uploaded
-    if (!empty($_FILES['file']['name'])) 
+    if (!empty($_FILES['file']['name']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) 
     {
         $allowed_ext = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp'];
+        $allowed_mime_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];
         $file_name   = $_FILES['file']['name'];
         $file_tmp    = $_FILES['file']['tmp_name'];
         $file_size   = $_FILES['file']['size'];
+
+        // Validate MIME type & Image Integrity using getimagesize
+        $image_info = @getimagesize($file_tmp);
+        if ($image_info === false) {
+            echo "<script>alert('Invalid logo file. The file is corrupted or not a valid image.')</script>";
+            echo "<script>window.history.back();</script>";
+            exit();
+        }
 
         // Extract extension
         $ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
         // Validate extension
-        if (!in_array($ext, $allowed_ext)) {
-            echo "<script>alert('Invalid file type! Only JPG, PNG, WEBP allowed.')</script>";
+        if (!in_array($ext, $allowed_ext) || !in_array($image_info['mime'], $allowed_mime_types)) {
+            echo "<script>alert('Invalid file format or malicious file detected.')</script>";
             echo "<script>window.open('setting.php','_self')</script>";
             exit();
         }
@@ -309,7 +318,7 @@ if (isset($_POST['user_setting']))
         }
 
         // Secure filename
-        $final_file = "logo_" . time() . "_" . rand(1000,9999) . "." . $ext;
+        $final_file = "logo_" . time() . "_" . bin2hex(random_bytes(8)) . "." . $ext;
 
         // Move file
         if (!move_uploaded_file($file_tmp, $upload_dir . $final_file)) {

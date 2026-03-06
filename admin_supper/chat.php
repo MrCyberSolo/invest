@@ -26,20 +26,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             mkdir($targetDir, 0777, true);
         }
 
-        $imageName = time() . "_" . basename($_FILES["image"]["name"]);
-        $targetFile = $targetDir . $imageName;
-        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-        $allowed = ["jpg", "jpeg", "png", "gif", "webp", "bmp"];
+        $imageTmp = $_FILES["image"]["tmp_name"];
+        $imageName = $_FILES["image"]["name"];
 
-        if (in_array($imageFileType, $allowed)) {
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+        // Validate MIME type & Image Integrity using getimagesize
+        $image_info = @getimagesize($imageTmp);
+        $allowed_mime_types = ["image/jpeg", "image/png", "image/gif", "image/webp", "image/bmp"];
+        
+        $imageFileType = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
+        $allowed_extensions = ["jpg", "jpeg", "png", "gif", "webp", "bmp"];
+
+        if ($image_info !== false && in_array($imageFileType, $allowed_extensions) && in_array($image_info['mime'], $allowed_mime_types)) {
+            $secureImageName = time() . "_" . bin2hex(random_bytes(8)) . "." . $imageFileType;
+            $targetFile = $targetDir . $secureImageName;
+
+            if (move_uploaded_file($imageTmp, $targetFile)) {
                 // Store only image path in DB (relative to your web root)
                 $message = ""; // Clear message if image uploaded
             } else {
                 $targetFile = ""; // reset if move fails
             }
         } else {
-            $targetFile = ""; // reset if extension not allowed
+            $targetFile = ""; // reset if extension not allowed or malicious file
         }
     }
     $modifiedPath = substr($targetFile, 3);

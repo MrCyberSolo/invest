@@ -182,45 +182,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // File upload handling for first image
     $target_dir = "../asupport/blog/";
     $allowed_extensions = array("jpg", "jpeg", "png", "gif", "webp", "bmp");
+    $allowed_mime_types = array("image/jpeg", "image/png", "image/gif", "image/webp", "image/bmp");
      
     $file1_name = basename($_FILES["file1"]["name"]);
     $file2_name = basename($_FILES["file2"]["name"]);
     
-    if (!empty($file1_name)) {
+    $imag_1 = $blog_image; // keep original by default
+    $imag_2 = $blog_image2; // keep original by default
+    
+    // Process File 1 if uploaded
+    if (!empty($file1_name) && $_FILES["file1"]["error"] === UPLOAD_ERR_OK) {
+        $file1_tmp = $_FILES["file1"]["tmp_name"];
+        $image1_info = @getimagesize($file1_tmp);
+        if ($image1_info === false) {
+            echo "<script>alert('Invalid image file 1. Corrupted or not a valid image.')</script>";
+            echo "<script>window.history.back();</script>";
+            exit();
+        }
+
         $file1_ext = strtolower(pathinfo($file1_name, PATHINFO_EXTENSION));
-        if (!in_array($file1_ext, $allowed_extensions)) {
-            echo "<script>alert('Invalid file format for Image 1. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
+        if (!in_array($file1_ext, $allowed_extensions) || !in_array($image1_info['mime'], $allowed_mime_types)) {
+            echo "<script>alert('Invalid file format or malicious file detected for Image 1.')</script>";
             echo "<script>window.history.back();</script>";
             exit();
         }
+        
+        $imag_1 = bin2hex(random_bytes(16)) . "." . $file1_ext;
+        $target_file1 = $target_dir . $imag_1;
+        move_uploaded_file($file1_tmp, $target_file1);
     }
     
-    if (!empty($file2_name)) {
+    // Process File 2 if uploaded
+    if (!empty($file2_name) && $_FILES["file2"]["error"] === UPLOAD_ERR_OK) {
+        $file2_tmp = $_FILES["file2"]["tmp_name"];
+        $image2_info = @getimagesize($file2_tmp);
+        if ($image2_info === false) {
+            echo "<script>alert('Invalid image file 2. Corrupted or not a valid image.')</script>";
+            echo "<script>window.history.back();</script>";
+            exit();
+        }
+
         $file2_ext = strtolower(pathinfo($file2_name, PATHINFO_EXTENSION));
-        if (!in_array($file2_ext, $allowed_extensions)) {
-            echo "<script>alert('Invalid file format for Image 2. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
+        if (!in_array($file2_ext, $allowed_extensions) || !in_array($image2_info['mime'], $allowed_mime_types)) {
+            echo "<script>alert('Invalid file format or malicious file detected for Image 2.')</script>";
             echo "<script>window.history.back();</script>";
             exit();
         }
+        
+        $imag_2 = bin2hex(random_bytes(16)) . "." . $file2_ext;
+        $target_file2 = $target_dir . $imag_2;
+        move_uploaded_file($file2_tmp, $target_file2);
     }
 
-    $target_file1 = $target_dir . $file1_name;
-    move_uploaded_file($_FILES["file1"]["tmp_name"], $target_file1);
-
-    // File upload handling for second image
-    $target_file2 = $target_dir . $file2_name;
-    move_uploaded_file($_FILES["file2"]["tmp_name"], $target_file2);
-    
-    $imag_1 = $file1_name;
-    $imag_2 = basename($_FILES["file2"]["name"]);
     // SQL query to update the blog table
     $sql = "UPDATE `blog` SET `b_image`='$imag_1', `b_image2`='$imag_2' WHERE `b_id`='$blog_id'";
 
     if ($con->query($sql) === TRUE) {
         echo "Record updated successfully";
     } else {
-        echo "Error updating record: " . $conn->error;
+        echo "Error updating record: " . $con->error;
     }
 
-    $conn->close();
+    // The connect script usually keeps $con not $conn
+    $con->close();
 }

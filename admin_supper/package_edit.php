@@ -262,12 +262,28 @@ if(isset($_POST['package_create']))
     $pa_sponser = $_POST['pa_sponser'];
         
     //$user_id = $userid;	
-	$file = rand(1000,100000)."-".$_FILES['file']['name'];
-    $file_loc = $_FILES['file']['tmp_name'];
+	$file_tmp = $_FILES['file']['tmp_name'];
 	$file_size = $_FILES['file']['size'];
-	$file_type = $_FILES['file']['type'];
+	$file_error = $_FILES['file']['error'];
+
 	$folder="../uploads/20230328/";
 	
+	// 1. Check for upload errors
+	if ($file_error !== UPLOAD_ERR_OK) {
+		echo "<script>alert('Upload error occurred.')</script>";
+		echo "<script>window.history.back();</script>";
+		exit();
+	}
+
+	// 2. Validate MIME type & Image Integrity using getimagesize
+	$image_info = @getimagesize($file_tmp);
+	if ($image_info === false) {
+		echo "<script>alert('Invalid image file. The file is corrupted or not a valid image.')</script>";
+		echo "<script>window.history.back();</script>";
+		exit();
+	}
+
+	// 3. Strict extension check
 	$allowed_extensions = array("jpg", "jpeg", "png", "gif", "webp", "bmp");
 	$file_extension = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
 
@@ -277,17 +293,18 @@ if(isset($_POST['package_create']))
 		exit();
 	}
 
-	// new file size in KB
-	$new_size = $file_size/1024;  
-	// new file size in KB
-	
-	// make file name in lower case
-	$new_file_name = strtolower($file);
-	// make file name in lower case
-	
-	$final_file=str_replace(' ','-',$new_file_name);
+	// 4. Validate MIME Type strictly
+	$allowed_mime_types = array("image/jpeg", "image/png", "image/gif", "image/webp", "image/bmp");
+	if (!in_array($image_info['mime'], $allowed_mime_types)) {
+		echo "<script>alert('Invalid MIME type. Malicious file detected.')</script>";
+		echo "<script>window.history.back();</script>";
+		exit();
+	}
 
-	if(move_uploaded_file($file_loc,$folder.$final_file)){
+    // 5. Generate secure, random file name preventing directory traversal attacks
+	$final_file = bin2hex(random_bytes(16)) . "." . $file_extension;
+
+	if(move_uploaded_file($file_tmp, $folder.$final_file)){
 	    mysqli_query($con,"UPDATE `package` SET  `pa_amount`='$pa_amount',`pa_day`='$pa_day',`pa_com_amount`='$pa_com_amount',`pa_cash`='$pa_cash',`pa_sponser`='$pa_sponser',`pa_name`='$pa_name',`pa_text`='$pa_text',`pa_image`='$final_file' WHERE `pa_id`='$pac_id'");
 		
 			echo "<script>alert ('Package Edit Successfull')</script>";
