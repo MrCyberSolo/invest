@@ -73,6 +73,10 @@ $query_setting = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `settings`"
 												<input type="text" class="form-control" name="s_withdrawl" value="<?php echo $query_setting['s_withdrawl']; ?>" >
 											</div>
 											<div class="col-md-4">
+												<label  class="form-label">Withdrawl API </label>
+												<input type="text" class="form-control" name="s_with_api" value="<?php echo $query_setting['s_with_api']; ?>" >
+											</div>
+											<div class="col-md-4">
 												<label  class="form-label">Payment Start Time</label>
 												<select class="form-control" name="s_start_time" id="exampleSelect1" required>
                                                     <option value="<?php echo $query_setting['s_start_time']; ?>"><?php echo $query_setting['s_start_time']; ?></option>                                            
@@ -135,8 +139,16 @@ $query_setting = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `settings`"
                                                 </select>
 											</div>
 											<div class="col-md-4">
+												<label  class="form-label">OTP Type</label>
+												<select class="form-control" name="s_otp" id="exampleSelect1" required>
+												<option value="<?php echo $query_setting['s_otp']; ?>"><?php echo $query_setting['s_otp']; ?></option> 
+                                                    <option value="On">On</option>                                            
+                                                    <option value="Off">Off</option>                                                       
+                                                </select>
+											</div>
+											<div class="col-md-4">
 												<label  class="form-label">Logo </label>
-												<input type="file" class="form-control" name="file" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp" >
+												<input type="file" class="form-control" name="file"  >
 											</div>
                                             
 											<div class="col-12">
@@ -249,76 +261,165 @@ $query_setting = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `settings`"
 
 </html>
 <?php
-if(isset($_POST['user_setting']))
+if (isset($_POST['user_setting'])) 
 {
-    $s_name = $_POST['s_name'];    
-    $s_telegram = $_POST['s_telegram'];    
-    $s_whatsapp = $_POST['s_whatsapp'];    
-    $s_whatsapp_group = $_POST['s_whatsapp_group'];    
-    $s_withdrawl = $_POST['s_withdrawl'];    
-    $s_start_time = $_POST['s_start_time'];    
-    $s_end_time = $_POST['s_end_time'];    
-    $s_payout_close = $_POST['s_payout_close'];    
-    $s_withdrawal_status = $_POST['s_withdrawal_status'];    
-    $s_recharge = $_POST['s_recharge'];    
+    // Escape user inputs
+    $s_name              = mysqli_real_escape_string($con, $_POST['s_name']);
+    $s_telegram          = mysqli_real_escape_string($con, $_POST['s_telegram']);
+    $s_whatsapp          = mysqli_real_escape_string($con, $_POST['s_whatsapp']);
+    $s_whatsapp_group    = mysqli_real_escape_string($con, $_POST['s_whatsapp_group']);
+    $s_withdrawl         = mysqli_real_escape_string($con, $_POST['s_withdrawl']);
+    $s_start_time        = mysqli_real_escape_string($con, $_POST['s_start_time']);
+    $s_end_time          = mysqli_real_escape_string($con, $_POST['s_end_time']);
+    $s_payout_close      = mysqli_real_escape_string($con, $_POST['s_payout_close']);
+    $s_withdrawal_status = mysqli_real_escape_string($con, $_POST['s_withdrawal_status']);
+    $s_recharge          = mysqli_real_escape_string($con, $_POST['s_recharge']);
+    $s_otp               = mysqli_real_escape_string($con, $_POST['s_otp']);   
+    $s_with_api          = mysqli_real_escape_string($con, $_POST['s_with_api']);   
 
-    //$user_id = $userid;	
-	$file = rand(1000,100000)."-".$_FILES['file']['name'];
-    $file_loc = $_FILES['file']['tmp_name'];
-	$file_size = $_FILES['file']['size'];
-	$file_type = $_FILES['file']['type'];
-	$folder="../asupport/";
-	
-    $allowed_extensions = array("jpg", "jpeg", "png", "gif", "webp", "bmp");
-    $file_extension = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+    // Upload directory
+    $upload_dir = "../asupport/";
 
-    if (!in_array($file_extension, $allowed_extensions)) {
-        echo "<script>alert('Invalid file format. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
+    // Default logo (if no new upload)
+    $final_file = "";
+
+    // If file uploaded
+    if (!empty($_FILES['file']['name'])) 
+    {
+        $allowed_ext = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp'];
+        $file_name   = $_FILES['file']['name'];
+        $file_tmp    = $_FILES['file']['tmp_name'];
+        $file_size   = $_FILES['file']['size'];
+
+        // Extract extension
+        $ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+        // Validate extension
+        if (!in_array($ext, $allowed_ext)) {
+            echo "<script>alert('Invalid file type! Only JPG, PNG, WEBP allowed.')</script>";
+            echo "<script>window.open('setting.php','_self')</script>";
+            exit();
+        }
+
+        // Validate file size (max 2MB)
+        if ($file_size > 2 * 1024 * 1024) {
+            echo "<script>alert('File is too large! Maximum 2MB allowed.')</script>";
+            echo "<script>window.open('setting.php','_self')</script>";
+            exit();
+        }
+
+        // Secure filename
+        $final_file = "logo_" . time() . "_" . rand(1000,9999) . "." . $ext;
+
+        // Move file
+        if (!move_uploaded_file($file_tmp, $upload_dir . $final_file)) {
+            echo "<script>alert('Error uploading file!')</script>";
+            exit();
+        }
+    }
+
+    // Build SQL Query
+    if ($final_file != "") {
+        // Update with logo
+        $sql = "UPDATE settings SET 
+            s_name=?, s_logo=?, s_telegram=?, s_whatsapp=?, s_whatsapp_group=?, 
+            s_recharge=?, s_withdrawl=?, s_start_time=?, s_end_time=?, 
+            s_payout_close=?, s_withdrawal_status=?, s_with_api=?, s_otp=?
+            WHERE s_id=1";
+    } else {
+        // Update without logo
+        $sql = "UPDATE settings SET 
+            s_name=?, s_telegram=?, s_whatsapp=?, s_whatsapp_group=?, 
+            s_recharge=?, s_withdrawl=?, s_start_time=?, s_end_time=?, 
+            s_payout_close=?, s_withdrawal_status=?, s_with_api=?, s_otp=?
+            WHERE s_id=1";
+    }
+
+    // Prepare Statement
+    $stmt = $con->prepare($sql);
+
+    if ($final_file != "") {
+        $stmt->bind_param(
+            "sssssssssssss", 
+            $s_name, 
+            $final_file, 
+            $s_telegram, 
+            $s_whatsapp,
+            $s_whatsapp_group,
+            $s_recharge, 
+            $s_withdrawl,
+            $s_start_time,
+            $s_end_time,
+            $s_payout_close,
+            $s_withdrawal_status,
+            $s_with_api,
+            $s_otp
+        );
+    } else {
+        $stmt->bind_param(
+            "ssssssssssss",
+            $s_name,
+            $s_telegram,
+            $s_whatsapp,
+            $s_whatsapp_group,
+            $s_recharge,
+            $s_withdrawl,
+            $s_start_time,
+            $s_end_time,
+            $s_payout_close,
+            $s_withdrawal_status,
+            $s_with_api,
+            $s_otp
+        );
+    }
+
+    // Execute Query
+    if ($stmt->execute()) {
+        echo "<script>alert('Account Updated Successfully!')</script>";
         echo "<script>window.open('setting.php','_self')</script>";
-        exit();
+    } else {
+        echo "<script>alert('Error updating settings!')</script>";
     }
-	// new file size in KB
-	$new_size = $file_size/1024;  
-	// new file size in KB
-	
-	// make file name in lower case
-	$new_file_name = strtolower($file);
-	// make file name in lower case
-	
-	$final_file=str_replace(' ','-',$new_file_name);
 
-	if(move_uploaded_file($file_loc,$folder.$final_file)){
-	    mysqli_query($con,"UPDATE `settings` SET `s_name`='$s_name',`s_logo`='$final_file',`s_telegram`='$s_telegram',`s_whatsapp`='$s_whatsapp',`s_whatsapp_group`='$s_whatsapp_group',`s_recharge`='$s_recharge',`s_withdrawl`='$s_withdrawl',`s_start_time`='$s_start_time',`s_end_time`='$s_end_time',`s_payout_close`='$s_payout_close',`s_withdrawal_status`='$s_withdrawal_status' WHERE `s_id`='1'");
-		
-			echo "<script>alert ('Account Updated Successfull')</script>";
-			echo "<script>window.open('setting.php','_self')</script>";
-    }
-    
+    $stmt->close();
 }
 ?>
+
 <?php
-//include("dbconnection.php");
-if(isset($_POST['Submit']))
-{
-     $oldpass=$_POST['opwd'];
-     $newpassword=$_POST['npwd'];
-     $cpwd=$_POST['cpwd'];
-     
-    if($newpassword==$cpwd){
-        $sql=mysqli_query($con,"SELECT password FROM admin where password='$oldpass' && id='1'");
-        $num=mysqli_fetch_array($sql);
-    if($num>0)
-    {
-        $con=mysqli_query($con,"UPDATE `admin` SET `password`='$newpassword' WHERE `id`='1'");
-        echo "<script>alert('Password Changed Successfully !!')</script>";
+if (isset($_POST['Submit'])) {
+
+    $oldpass      = $_POST['opwd'];
+    $newpassword  = $_POST['npwd'];
+    $cpwd         = $_POST['cpwd'];
+
+    // Confirm new and confirm password match
+    if ($newpassword != $cpwd) {
+        echo "<script>alert('New Password and Confirm Password do not match!');</script>";
+        exit;
     }
-    else
-    {
-        echo "<script>alert('Old Password not match !!')</script>";
+
+    // Check old password using prepared statement
+    $stmt = $con->prepare("SELECT id FROM admin WHERE id = 1 AND password = ?");
+    $stmt->bind_param("s", $oldpass);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows == 1) {
+
+        // Update password safely
+        $update = $con->prepare("UPDATE admin SET password=? WHERE id=1");
+        $update->bind_param("s", $newpassword);
+
+        if ($update->execute()) {
+            echo "<script>alert('Password Changed Successfully!');</script>";
+        } else {
+            echo "<script>alert('Error updating password!');</script>";
+        }
+
+    } else {
+        echo "<script>alert('Old Password does not match!');</script>";
     }
-         
-     }else{
-        echo "<script>alert('New Password and Confirm password not match !!')</script>";
-    }
+
+    $stmt->close();
 }
 ?>

@@ -67,7 +67,7 @@ if(isset($_GET['pac']))
 											</div>                                          
 										    <div class="col-md-4">
 												<label  class="form-label">Image</label>
-												<input type="file" class="form-control" name="file" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp" required>
+												<input type="file" class="form-control" name="file"  required>
 											</div>                                            
 											<div class="col-4">
                                                 <br>
@@ -206,10 +206,10 @@ if(isset($_GET['pac']))
 
         if (!in_array($file_extension, $allowed_extensions)) {
             echo "<script>alert('Invalid file format. Only JPG, JPEG, PNG, GIF, WEBP and BMP images are allowed.')</script>";
-            echo "<script>window.open('package_img.php','_self')</script>";
+            echo "<script>window.history.back();</script>";
             exit();
         }
-        
+
         // new file size in KB
         $new_size = $file_size/1024;  
         // new file size in KB

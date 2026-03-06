@@ -75,8 +75,8 @@ $userid = $_SESSION['userid'];
                                         <td><a href="#"><?php echo $o_id; ?></a></td>
                                         <td><a href="#"><?php echo $o_sep_order_id; ?></a></td>
                                         <td><a href="#"><?php echo $o_package; ?></a></td>
-                                        <td><a href="#">Level <?php echo $level; ?></a></td>
                                         <td><a href="#"><?php echo $user_id; ?></a></td>
+                                        <td><a href="#">Level <?php echo $level; ?></a></td>
                                         <td><a href="#"><?php echo $o_amount; ?></a></td>
                                         <td><a href="#"><?php echo $o_percentage; ?></a></td>
                                        

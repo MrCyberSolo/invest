@@ -487,7 +487,7 @@ $row_user= mysqli_fetch_array($run);
 												<th>Amount</th>
 												<th>Status </th>
 												<th>Payment Type</th>
-												<th>Interest Amount </th>
+											
 												<th>Payment Date</th>
                                             </tr>
                                         </thead>
@@ -515,23 +515,7 @@ $row_user= mysqli_fetch_array($run);
                     <td><a href="interest_paid.php?pac=<?php echo $o_id; ?>"><?php echo $o_amount; ?></a></td>
                     <td><?php echo $o_pay_status; ?></td>
                      <td><?php echo $o_pay_type; ?></td>
-                    <td>
-                        <?php					
-									$int_amount = 0;
-									$query = mysqli_query($con,"select * from interest where int_acc_id='$o_id' order by int_id DESC");
-									if(mysqli_num_rows($query)>0)
-									{
-										while($row=mysqli_fetch_array($query))
-										{
-											$int_id = $row['int_id'];
-											$int_amounts = $row['int_amount'];
-											
-											$int_amount = $int_amount + $int_amounts;
-										}
-									}
-											echo $int_amount;
-								?>
-                    </td>
+                    
                     <td><?php echo $o_date; ?></td>
                     
                   </tr>
@@ -560,6 +544,7 @@ $row_user= mysqli_fetch_array($run);
 												<th>Order ID</th>
 											<!--	<th>Package ID</th>-->
 												<th>User ID</th>
+												<th>Level </th>
 												<th>Amount</th>
 												<th>Status </th>
 												<th>Payment Type</th>
@@ -578,6 +563,7 @@ $row_user= mysqli_fetch_array($run);
 							$o_amount = $row['o_amount'];
 							$o_pay_status = $row['o_status'];
 							$o_pay_type = $row['o_pay_type'];
+							$o_user_type = $row['o_user_type'];
 							
 							$o_date = $row['o_date'];
 							
@@ -587,6 +573,7 @@ $row_user= mysqli_fetch_array($run);
                     <td><a href="interest_paid.php?pac=<?php echo $o_id; ?>"><?php echo $o_id; ?></a></td>
                    <!-- <td><a href="interest_paid.php?pac=<?php echo $o_id; ?>"><?php echo $o_package; ?></a></td>-->
                     <td><a href="interest_paid.php?pac=<?php echo $o_id; ?>"><?php echo $o_spo; ?></a></td>
+                    <td><a href="interest_paid.php?pac=<?php echo $o_id; ?>">Level <?php echo $o_user_type+1; ?></a></td>
                     <td><a href="interest_paid.php?pac=<?php echo $o_id; ?>"><?php echo $o_amount; ?></a></td>
                     <td><?php echo $o_pay_status; ?></td>
                      <td><?php echo $o_pay_type; ?></td>

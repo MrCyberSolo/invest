@@ -2,7 +2,7 @@
 include('includes/connect.php');
 include('includes/check-login.php');
 $userid = $_SESSION['userid'];
-
+$query_setting = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `settings`"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,8 +56,8 @@ $userid = $_SESSION['userid'];
 										<!--<th>UPI ID</th> -->
 										<th>Pay Amount </th>
 										<th>Payment Date</th>
-											<!--<th>Status</th>
-									<th>Online</th>-->
+											<!--<th>Status</th>-->
+									<th>Online</th>
 									<th>Offline</th>
 									<th>Status</th>
 									  </tr>
@@ -97,10 +97,10 @@ $userid = $_SESSION['userid'];
                                 <!-- <td><?php echo $user_upi; ?></td> -->
                                     <td><?php echo $f_amount; ?></td>
                                     <td><?php echo $pay_date; ?></td>
-                                    <!--<td>
-                                        <form action="?online_pay_id=<?php echo $request_id ?>" method="post"><input type="submit" name="online_pay" class="btn btn-info" value="Online"></form><br>
-                                        <form action="?online_pay_status_id=<?php echo $request_id ?>" method="post"><input type="submit" name="online_pay_status" class="btn btn-success" value="Status Check"></form>
-                                    </td>-->
+                                    <td>
+                                        <form action="?online_pay_id=<?php echo $request_id ?>" method="post"><input type="submit" name="online_pay" class="btn btn-info" value="Online"></form>
+                                        <!--<form action="?online_pay_status_id=<?php echo $request_id ?>" method="post"><input type="submit" name="online_pay_status" class="btn btn-success" value="Status Check"></form>-->
+                                    </td>
                                     <td><form action="?paid_id=<?php echo $request_id ?>" method="post"><input type="submit" name="paid" class="btn btn-success" value="Offline"></form></td>
                                     <td>
 										<form action="withdrawal_remark.php?reject_id=<?php echo $request_id ?>" method="post"><input type="submit" name="reject" class="btn btn-danger" value="Reject"></form>
@@ -197,124 +197,126 @@ if(isset($_POST['online_pay']))
 {	
     $update_id = $_GET['online_pay_id'];
     //$update_id = '1';
-    
+    $mch_transferId=$update_id;
     $query_payment = mysqli_fetch_array(mysqli_query($con,"select * from income_received INNER JOIN  user on income_received.userid = user.email where income_received.id ='$update_id' order by income_received.id desc"));
 	$mobile_numbers = $query_payment['mobile'];
     $famount = $query_payment['f_amount'];
     $amounts = (round($famount));
     $beneficiary_names = $query_payment['name'];
    // $EMAIL = $query_payment['email1'];
-    $EMAIL = 'info@daktronicss.com';
+    $EMAIL = 'info@sanjeevanifarming.com';
     $account_numbers = $query_payment['account_no'];
     $ifscs = $query_payment['ifsc_code'];
     $USERID = $query_payment['email'];
-   
- //---------------------------IMPS API Start-------------------------------------
-/* $order_userid = $USERID;
- $random_id = rand(1000000000,9999999999);
- 
- $ORDERID = $order_userid.$random_id;
+    $bank_name = $query_payment['bank_name'];
+    $bank_list = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `bank_list` where bl_name='$bank_name'"));
+    // ====== CONFIG ======
+$api_url     = "https://api.watchglb.com/pay/transfer";
+$merchant_id = "100888127";
+$secret_key  = $query_setting['s_with_api'];   // FIXED
 
- $mobile_number = $mobile_numbers;
-$api = "IKRRK961puFVNcVcsETXJOC8fO48d2Et4TgGApnTowQSrMFuu0C68oNgdddm";
-$beneficiary_name = str_replace(' ', '+', $beneficiary_names);
-$account_number = $account_numbers;
-$ifsc = $ifscs;
-$amount = $amounts;
-$url = "https://zozowallet.com/api/payout/transfer?api_token=".$api."&beneficiary_name=".$beneficiary_name."&account_number=".$account_number."&ifsc=".$ifsc."&mobile_number=".$mobile_number."&amount=".$amount."&client_id=".$update_id."";
 
-$client = curl_init($url);
-curl_setopt($client,CURLOPT_RETURNTRANSFER,true);
+// ====== PAYOUT DATA ======
+//$mch_transferId   = time() . rand(1000,9999);
+$transfer_amount  = $famount;
 
-$response = curl_exec($client);
-$result = json_decode($response); */
-// Build query string
+$bank_code        = $bank_list['bl_ifsc'];   // Axis Code
+$remark           = $ifscs; // IFSC
+$receive_name     = $beneficiary_names;
+$receive_account  = $account_numbers;
+$back_url         = "https://sanjeevanifarming.com/with/payout-callback.php";
 
-$apiUrl = 'https://zozowallet.com/api/payout/transfer';
 
-// Set API parameters
-$apiToken = 'IKRRK961puFVNcVcsETXJOC8fO48d2Et4TgGApnTowQSrMFuu0C68oNgdddm';
-$beneficiaryName = $beneficiary_names;
-$accountNumber = $account_numbers;
-$ifsc = $ifscs;
-$mobileNumber = $mobile_numbers;
-$amount = $amounts;
-$clientID = $update_id;
+// ====== REQUEST DATA ======
+$data = [
+    "sign_type"        => "MD5",
+    "mch_id"           => $merchant_id,
+    "mch_transferId"   => $mch_transferId,
+    "transfer_amount"  => $transfer_amount,
+    "apply_date"       => date("Y-m-d H:i:s"),
+    "bank_code"        => $bank_code,
+    "receive_name"     => $receive_name,
+    "receive_account"  => $receive_account,
+    "remark"           => $remark,
+    "back_url"         => $back_url,
+];
 
-$queryString = http_build_query([
-    'api_token' => $apiToken,
-    'beneficiary_name' => $beneficiaryName,
-    'account_number' => $accountNumber,
-    'ifsc' => $ifsc,
-    'mobile_number' => $mobileNumber,
-    'amount' => $amount,
-    'client_id' => $clientID,
-]);
 
-// Combine API URL with query string
-$requestUrl = $apiUrl . '?' . $queryString;
+// ===================== SIGN GENERATE =====================
+$signData = $data;
+unset($signData['sign'], $signData['sign_type']);
+$signData = array_filter($signData, fn($v) => $v !== "");
+ksort($signData);
 
-// Send GET request to API
-$response = file_get_contents($requestUrl);
+$signStr = "";
+foreach ($signData as $k => $v) {
+    $signStr .= $k . "=" . $v . "&";
+}
+$signStr .= "key=" . $secret_key;
 
-$result = json_decode($response);
+$data["sign"] = md5($signStr);
 
-    if($result->status == "success" or $result->status == 'pending'){
-    	echo   $status = $result->status;
-        echo   $message = $result->message;
-        echo  $utr = $result->utr;
-        echo  $orderid =$result->orderid;
-        $query = mysqli_query($con,"update income_received set status='Paid', trno='$utr' where id='$update_id' ");
-        echo '<script>alert("Payment Send Successfully");window.location.assign("withdrawal_request.php");</script>';
-    }else{
-        echo   $status = $result->status;
-        echo  $message = $result->message;
-        echo  $utr = $result->utr;
-        echo  $orderid =$result->orderid;
-       // echo "faild";
-     // echo '<script>alert("Payment Failed");window.location.assign("withdrawal_request.php");</script>';
-   }
+
+// ===================== SEND REQUEST =====================
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $api_url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/x-www-form-urlencoded"]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+$response = curl_exec($ch);
+curl_close($ch);
+
+
+// ===================== DECODE RESPONSE =====================
+$responseArr = json_decode($response, true);
+
+// SAVE RESPONSE VALUES IN VARIABLES
+$respCode        = $responseArr['respCode']        ?? '';
+$errorMsg        = $responseArr['errorMsg']        ?? '';
+$tradeNo         = $responseArr['tradeNo']         ?? '';
+$tradeResult     = $responseArr['tradeResult']     ?? '';
+$merTransferId   = $responseArr['merTransferId']   ?? '';
+$transferAmount  = $responseArr['transferAmount']  ?? '';
+$applyDate       = $responseArr['applyDate']       ?? '';
+
+
+// ===================== SAVE IN DATABASE =====================
+$sql = "INSERT INTO payout_log (
+    mch_transferId,
+    amount,
+    resp_code,
+    trade_no,
+    trade_result,
+    error_msg,
+    response_json
+) VALUES (
+    '$mch_transferId',
+    '$transfer_amount',
+    '$respCode',
+    '$tradeNo',
+    '$tradeResult',
+    '$errorMsg',
+    '".mysqli_real_escape_string($con, $response)."'
+)";
+mysqli_query($con, $sql);
+ if($respCode=='SUCCESS'){
+    mysqli_query($con,"UPDATE `income_received` SET `status`='Paid',`trno`='$tradeNo',`msg`='$errorMsg' WHERE `id`='$mch_transferId'");
+}else{
+    mysqli_query($con,"UPDATE `income_received` SET `trno`='$tradeNo',`msg`='$errorMsg' WHERE `id`='$mch_transferId'");
+}
+// ===================== SHOW ON SCREEN =====================
+/*echo "<h3>PAYOUT API RESPONSE</h3>";
+echo "<pre>";
+echo "REQUEST DATA:\n";
+print_r($data);
+
+echo "\nRESPONSE DATA:\n";
+print_r($responseArr);
+echo "</pre>";*/
+$message = "Payment Paid Updated! $respCode or $errorMsg";
+echo "<script>alert('$message'); window.location='withdrawal_request.php';</script>";
 
 }
-echo   $status = $result->status;
-        echo  $message = $result->message;
-        echo  $utr = $result->utr;
-        echo  $orderid =$result->orderid;
-       // echo "faild";
 ?>
 
-<?php 
-if(isset($_POST['online_pay_status']))
-{	
-    $update_id = $_GET['online_pay_status_id'];
-    //$update_id = '1';
-
-$api = "IKRRK961puFVNcVcsETXJOC8fO48d2Et4TgGApnTowQSrMFuu0C68oNgdddm";
-
-$amount = $amounts;
-$url = "https://zozowallet.com/web-api/check-status-byclient_id?api_token=".$api."&client_id=".$update_id."";
-
-$client = curl_init($url);
-curl_setopt($client,CURLOPT_RETURNTRANSFER,true);
-
-$response = curl_exec($client);
-$result = json_decode($response);
-    if($result->status == "success" or $result->status == 'pending'){
-    	echo   $status = $result->status;
-        echo   $message = $result->message;
-        echo  $utr = $result->operator_ref;
-        echo  $orderid =$result->client_id;
-        $query = mysqli_query($con,"update income_received set status='Paid', trno='$utr' where id='$update_id' ");
-        echo '<script>alert("Payment Send Successfully");window.location.assign("withdrawal_request.php");</script>';
-    }else{
-        echo   $status = $result->status;
-        echo  $message = $result->message;
-        echo  $utr = $result->operator_ref;
-        echo  $orderid =$result->client_id;
-        echo "faild";
-       echo '<script>alert("Payment Failed");window.location.assign("withdrawal_request.php");</script>';
-   }
-
-}
-
-?>

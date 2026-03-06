@@ -83,6 +83,7 @@ $row_user= mysqli_fetch_array($run);
 						<li> <a href="withdrawal_paid.php"><i class="bx bx-right-arrow-alt"></i>Withdrawal Paid </a></li>
 						<li> <a href="fund_paid.php"><i class="bx bx-right-arrow-alt"></i>Fund Request Paid </a></li>
 						<li> <a href="fund_reject.php"><i class="bx bx-right-arrow-alt"></i>Fund Request Reject </a></li>
+						<li> <a href="bonus_add.php"><i class="bx bx-right-arrow-alt"></i>Bonus Add </a></li>
 						
 					</ul>
 				</li>
@@ -139,6 +140,7 @@ $row_user= mysqli_fetch_array($run);
 						<li> <a href="bank.php"><i class="bx bx-right-arrow-alt"></i>Bank Add </a></li>
 						<li> <a href="notice.php"><i class="bx bx-right-arrow-alt"></i>Notice Add</a></li>
 						<li> <a href="mobile_otp.php"><i class="bx bx-right-arrow-alt"></i>Mobile OTP</a></li>
+						<li> <a href="chat_details.php"><i class="bx bx-right-arrow-alt"></i>Chat</a></li>
 						
 					</ul>
 				</li>
