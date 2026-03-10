@@ -1,11 +1,15 @@
-:root{
-    --color1:#005a36; 
+:root {
+    --color1: #005a36;
 }
-header h5{
+
+header h5 {
     color: white;
 }
 
-body{
-    background-color: #007749;
-   }
+body {
+    background-color: #007749 !important;
+}
 
+.appCapsule {
+    background-color: #007749 !important;
+}
