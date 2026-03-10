@@ -486,7 +486,7 @@ header .line{
 <div id="myModal" class="modal">
   <div class="modal-content">
       <!-- <button type="button" class="close">&times;</button> -->
-      <img src="img/logo.jpg" style="width: 150px; height: 150px; margin: auto;" class="img-fluid" alt="">
+      <img src="img/hikoki_logo.png" style="width: 150px; height: 150px; margin: auto;" class="img-fluid" alt="">
       
       <div class="modalBody">
           <p>The client himself, will be able to enhance the grace of the client company. There is no architect to meet with the requirements, it is the very labor of those who praise that the flight of features is most criticized, for those who like easy and apart from flattery</p>
