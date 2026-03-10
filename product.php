@@ -38,29 +38,19 @@ include('user_menu/database_connect.php');
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #014f97; */
         margin: auto;
-
        }
 
-       .appCapsule{
+       .appCapsule {
         padding-bottom: 5rem;
+        background-color: #1a569d;
+        min-height: 100vh;
        }
 
-       /* body{
-        background-color: #014f97;
-       } */
-
-       
-
-
-/* ==========================  */
-/* footer section   */
-.footerBox .active2{
-  color:#045EB6 ;
-}
-
-header .line{
+       body {
+        background-color: #1a569d;
+        color: white;
+       }
   width: 30px;
   height: 2px;
   border-radius: 40px;
@@ -108,94 +98,111 @@ header .line{
 .product-section .card{
   width: 100%;
   height: 100%;
-  padding: 0 !important;
-  background-color: transparent;
+  background-color: white;
+  border-radius: 12px;
   border: none;
-  
+  overflow: hidden;
+  position: relative;
 }
 
   .product-section .card-title{
-      font-weight:bold;
+      font-weight: 700;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 8px;
   }
   
     .product-section .card-img{
         width:100%;
+        position: relative;
+        padding-top: 10px;
+        background: white;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
-    .product-section .card-text{
-        width:100%;
-        background-color:#dfeeff;
-        padding:10px;
-        border-radius:10px;
+    .product-section .card-img img {
+        width: 80%;
+        height: auto;
+        object-fit: contain;
     }
 
+    .image-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: red;
+        color: white;
+        font-size: 8px;
+        font-weight: bold;
+        padding: 2px 4px;
+        border-radius: 2px;
+    }
+
+    .bosch-logo {
+        position: absolute;
+        top: 5px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .blue-banner {
+        background: #1a569d;
+        color: white;
+        text-align: center;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 6px 4px;
+        text-transform: uppercase;
+    }
 
 .product-section h6{
   color: rgb(75, 75, 75);
   font-weight: normal;
-  
-}
-.product-section .card-body{
-  padding: 0;
-  padding-top: 5px;
-  background-color: #F5F5F5;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  
 }
 
-.product-section .inner small{
-  color: #424242;
+.product-section .card-body{
+  padding: 12px;
+  background-color: white;
 }
 
 .product-section .inner{
-  margin-top: 5px;
+  display: flex;
+  margin-bottom: 5px;
+  font-size: 11px;
 }
 
-
-
-
-/* .product-section .inner small:first-child{
-  color: #CCCCCC;
-  font-size: 12px;
+.product-section .inner small:first-child{
+  color: #888;
+  width: 75px;
 }
 
 .product-section .inner small:last-child{
-  color:#014f97;
-  font-size: 13px;
-} */
-
-.product-section img{
-  width: 100%;
-  height: 100%;
+  color: #444;
+  font-weight: 500;
 }
 
-/* .product-section .btnBox a{
-  padding: 10px;
-} */
-
-
-.headerTab a{
-  text-decoration: none;
+.btnBox a{
+  background-color: #398af2;
   color: white;
-  padding: 7px;
-  width: 47%;
-  text-align: center;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  background-color: #ffffff;
-  color:black;
-  transition: .4s;
-
+  border-radius: 20px;
+  font-size: 13px;
+  padding: 8px;
+  font-weight: 500;
 }
 
-.headerTab .active{
-      background-color: #ff1300;
-    color: #fff;
-}
 
-.headerTab a:hover{
-  background-color: #F5F5F5;
+.header-title-custom {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-weight: 500;
 }
 
 .product-section a{
@@ -207,23 +214,12 @@ header .line{
   <body>
 <div class="appCapsule container">
     <header class="mt-3">
-        <!-- <div class="header-title text-center py-3">
-            <h5>Product</h5>
-            <div class="line"></div>
-        </div> -->
-
-        <div class="headerTab d-flex justify-content-around">
-          <a href="product.php" class="active">
-            <i class="bi bi-gear-fill"></i> H-power</a>
-         <!-- <a href="product_2.php">LAY'S</a>-->
+        <div class="header-title-custom">
+            <span>H-power tools🔪</span>
         </div>
+    </header>
 
-      
-  </header>
-
-
-
-<div class="row product-section gx-2 gy-2">
+<div class="row product-section gx-2 gy-2 px-2">
 <?php
       $i=0;
     $result = mysqli_query($con,"SELECT * FROM `package` WHERE `status`='Active' AND `pa_type`='User'"); 
@@ -232,44 +228,51 @@ header .line{
       while ($row = mysqli_fetch_assoc($result)) {
           
     ?>
- <div class="col-12">
+ <div class="col-6 mb-2">
       <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>">
-        <div class="card p-2">
-           
-            <div class="card-body p-2 d-flex align-items-center ">
-                <div class="card-img">
-                     <img src="asupport/package/<?php echo $row["pa_image"];?>" class="card-img-top  " alt="...">
+        <div class="card">
+            
+            <div class="card-img">
+                <div class="image-badge">HEAVY<br>DUTY</div>
+                <div class="bosch-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Bosch-Logo.svg/1024px-Bosch-Logo.svg.png" style="height: 14px; width: auto;" alt="">
                 </div>
-                
-             
-              <div class="card-text ">
-                   <h6 class="card-title m-0">🏅<?php echo $row["pa_name"]; ?></h6>
+                <!-- Assuming the original image doesn't have the logo embedded directly based on the new UI screenshot -->
+                <img src="asupport/package/<?php echo $row["pa_image"];?>" class="card-img-top" alt="...">
+            </div>
+            
+            <div class="blue-banner">
+                <?php echo $row["pa_name"]; ?>
+            </div>
+               
+            <div class="card-body">
+                <h6 class="card-title"><?php echo $row["pa_name"]; ?></h6>
                    
                 <div class="inner">
-                  <small class="">Price: </small>
-                  <small> ₹<?php echo $row["pa_amount"]; ?></small>
+                  <small>Price: </small>
+                  <small><?php echo $row["pa_amount"]; ?>.00RS</small>
                 </div>
 
                 <div class="inner">
                   <small>Term:</small>
-                  <small><?php echo $row["pa_day"]; ?>days</small>
+                  <small><?php echo $row["pa_day"]; ?> days</small>
                 </div>
 
                 <div class="inner">
-                  <small>Daily Income</small>
-                  <small>₹ <?php echo $row["pa_com_amount"]; ?></small>
+                  <small>Daily income:</small>
+                  <small><?php echo $row["pa_com_amount"]; ?>RS</small>
                 </div>
 
                 <div class="inner">
-                  <small>Total revenue:</small>
-                  <small>₹<?php echo  $row["pa_com_amount"] * $row["pa_day"]; ?></small>
+                  <small>Total profit:</small>
+                  <small><?php echo  $row["pa_com_amount"] * $row["pa_day"]; ?>.00RS</small>
                 </div>
-                <div class="btnBox d-grid mt-1">
-                  <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>" class="btn text-white" style="background-color: #014f97; font-size: 15px; padding: 5px;">See details</a>
+                
+                <div class="btnBox d-grid mt-3">
+                  <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>" class="btn">View project</a>
                 </div>                
             </div>
           </div>
-      </div>
     </a>   
 </div>
 <?php  $i++; } } ?>   
