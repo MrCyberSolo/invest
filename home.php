@@ -284,13 +284,13 @@ header .line{
 
       <style>
 .carousel-inner img{
-  height: 250px !important;
+  height: 220px !important;
   object-fit: cover;
 }
       </style>
-      <div class="row pt-4 position-relative">
-          <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner" style="border-radius: 8px; overflow: hidden;">
+      <div class="pt-4 position-relative d-flex align-items-center" style="padding-left: 10px;">
+          <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel" style="width: calc(100% - 118px);">
+              <div class="carousel-inner" style="border-radius: 8px; overflow: hidden; box-shadow: 2px 4px 10px rgba(0,0,0,0.1);">
                 <div class="carousel-item active">
                   <img src="img/1.jpg" class="d-block w-100" alt="...">
                 </div>
