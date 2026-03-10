@@ -117,14 +117,14 @@ include('user_menu/database_connect.php');
         position: relative;
         padding-top: 10px;
         background: white;
-        height: 120px;
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius: 12px 12px 0 0;
     }
     
     .product-section .card-img img {
-        width: 80%;
+        width: 100%;
         height: auto;
         object-fit: contain;
     }
@@ -139,26 +139,7 @@ include('user_menu/database_connect.php');
         font-weight: bold;
         padding: 2px 4px;
         border-radius: 2px;
-    }
-
-    .bosch-logo {
-        position: absolute;
-        top: 5px;
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-    }
-    
-    .blue-banner {
-        background: #1a569d;
-        color: white;
-        text-align: center;
-        font-size: 10px;
-        font-weight: bold;
-        padding: 6px 4px;
-        text-transform: uppercase;
+        z-index: 2;
     }
 
 .product-section h6{
@@ -169,22 +150,24 @@ include('user_menu/database_connect.php');
 .product-section .card-body{
   padding: 12px;
   background-color: white;
+  border-radius: 0 0 12px 12px;
 }
 
 .product-section .inner{
   display: flex;
   margin-bottom: 5px;
   font-size: 11px;
+  justify-content: space-between;
 }
 
 .product-section .inner small:first-child{
   color: #888;
-  width: 75px;
 }
 
 .product-section .inner small:last-child{
   color: #444;
   font-weight: 500;
+  text-align: right;
 }
 
 .btnBox a{
@@ -234,15 +217,7 @@ include('user_menu/database_connect.php');
             
             <div class="card-img">
                 <div class="image-badge">HEAVY<br>DUTY</div>
-                <div class="bosch-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Bosch-Logo.svg/1024px-Bosch-Logo.svg.png" style="height: 14px; width: auto;" alt="">
-                </div>
-                <!-- Assuming the original image doesn't have the logo embedded directly based on the new UI screenshot -->
                 <img src="asupport/package/<?php echo $row["pa_image"];?>" class="card-img-top" alt="...">
-            </div>
-            
-            <div class="blue-banner">
-                <?php echo $row["pa_name"]; ?>
             </div>
                
             <div class="card-body">
