@@ -164,10 +164,11 @@ header .line{
 
     </style>
   
-    <style>body, .appCapsule { background-color: #007749 !important; }</style>
+    <style>body, .appCapsule { background-color: #005b6e !important; }</style>
 </head>
   <body>
-   <div class="appCapsule">
+   <div class="appCapsule" style="padding-bottom: 70px;">
+    <div style="background-color: #007749; padding-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
     <header class="container">
 
       <div class="header-title text-center py-3">
@@ -225,15 +226,14 @@ header .line{
                 $blog_short = $row['b_details'];
                 $blog_create_date = $row['b_create_date'];
           ?>
-          <a href="news_details.php?pac=<?php echo $blog_id; ?>" class="inner d-flex justify-content-between ">
-            <div class="text text-dark ">
-              <p><?php echo $blog_title; ?></p>
-              <br>
-              <small class=""><?php echo $blog_create_date; ?></small>
+          <a href="news_details.php?pac=<?php echo $blog_id; ?>" class="inner d-flex justify-content-between align-items-center" style="padding: 15px; border-bottom: 1px solid #eee; text-decoration: none;">
+            <div class="text text-dark" style="flex: 1;">
+              <p style="font-size: 16px; margin-bottom: 15px;"><?php echo $blog_title; ?></p>
+              <small style="color: #666;"><?php echo date('Y-m-d', strtotime($blog_create_date)); ?></small>
             </div>
   
-            <div class="imges">
-              <img src="img/hikoki_logo.png" class="img-fluid" alt="" style="max-width: 150px; border-radius: 8px;">
+            <div class="imges" style="margin-left: 15px;">
+              <img src="asupport/blog/<?php echo $blog_image; ?>" class="img-fluid" alt="" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
             </div>
           </a>
           <?php } } ?>
@@ -241,9 +241,9 @@ header .line{
       <div class="py-3 text-center" style="margin-bottom: 1rem; color: white;">
         <p>No more</p>
       </div>
-       
       </div>
     </div>
+    </div> <!-- Close top green section -->
 
 
 </div>

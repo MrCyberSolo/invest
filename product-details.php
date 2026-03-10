@@ -116,7 +116,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
     
     </style>
   
-    <style>body, .appCapsule { background-color: #007749 !important; }</style>
+    <style>body, .appCapsule { background-color: #005b6e !important; }</style>
 </head>
   <body>
 <div class="appCapsule container">
@@ -151,8 +151,8 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 </header>
   </div>
 
-
-  <div class="row product-details px-2 mt-4">
+  <div style="background-color: #007749; padding-top: 60px; padding-bottom: 20px; margin: 0 -12px;">
+  <div class="row product-details px-3">
     <div class="col-12 mx-auto px-0">
         <div class="inner">
             <img src="" class="img-fluid" alt="">
@@ -198,25 +198,19 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
                 <hr class="m-0 bg-dark">
 
                   <div class="description mt-3">
-                    <h4>Project desrcription</h4>
+                    <h4>Project description</h4>
                     <p><?php echo $pa_text; ?></p>
-
                   </div>
-
-                  <div class="btnBox d-grid fixed-bottom p-2" >
-                    <button onclick="openModal()" type="button" class="btn text-white " style="background-color: #131313; border-radius: 20px; margin-top: 1rem; padding: 10px; "> Invest this project</button>
-                  </div>
-
-
                 </div>
               </div>
         </div>
+    </div>
+    </div>
+  </div> <!-- Close green wrapper -->
 
-    </div>
-    
-  
-        
-    </div>
+  <div class="btnBox d-grid fixed-bottom p-2 mb-2" style="max-width: 641px; margin: auto;">
+    <button onclick="openModal()" type="button" class="btn text-white" style="background-color: #131313; border-radius: 20px; padding: 10px; border: none; font-size: 16px;"> Invest this project</button>
+  </div>
   </div>
 
 

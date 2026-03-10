@@ -110,9 +110,10 @@ include('user_menu/database_connect.php');
        }
 
        .textBox .inner{
-        background-color: #0b60cc;
-        padding: 8px 12px;
+        background-color: #1761d1;
+        padding: 5px 12px;
         border-radius: 8px;
+        margin-top: -5px;
        }
 
        .textBox .inner i{
@@ -351,37 +352,33 @@ header .line{
 
 
 
-    <div class="row topMenu mt-3">
+    <div class="row mt-3 px-2">
       <div class="col-12">
-        <div class="menuBox" style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-          <a href="myproducts.php" class="inner" style="width: auto;">
-            <i class="bi bi-box2-heart-fill"></i>
-            <p>My Product</p>
+        <div class="menuBox" style="display: flex; justify-content: space-between; align-items: center; text-align: center;">
+          <a href="myproducts.php" class="inner" style="flex: 1; text-decoration: none;">
+            <i class="bi bi-box2-heart-fill" style="font-size: 28px; color: white;"></i>
+            <p style="font-size: 13px; color: white; margin-top: 5px;">My Product</p>
           </a>
-          <a href="task_details3.php" class="inner" style="width: auto;">
-            <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-            <p>Salary</p>
+          <a href="task_details3.php" class="inner" style="flex: 1; text-decoration: none;">
+            <i class="bi bi-file-spreadsheet" style="font-size: 28px; color: white;"></i>
+            <p style="font-size: 13px; color: white; margin-top: 5px;">Salary</p>
           </a>
-          <a href="bindbank.php" class="inner" style="width: auto;">
-             <i class="bi bi-bank2"></i>
-            <p>Bank</p>
+          <a href="bindbank.php" class="inner" style="flex: 1; text-decoration: none;">
+             <i class="bi bi-bank2" style="font-size: 28px; color: white;"></i>
+            <p style="font-size: 13px; color: white; margin-top: 5px;">Bank</p>
           </a>
-          <a href="myteams.php" class="inner" style="width: auto;">
-            <i class="bi bi-people-fill"></i>
-            <p>Team</p>
+          <a href="myteams.php" class="inner" style="flex: 1; text-decoration: none;">
+            <i class="bi bi-people-fill" style="font-size: 28px; color: white;"></i>
+            <p style="font-size: 13px; color: white; margin-top: 5px;">Team</p>
           </a>
         </div>
       </div>
     </div>
     
     
-    <div class="row videoSection mt-4">
-
-    
-        
+    <div class="row videoSection mt-4 px-2">
       <div class="col-12 inner mb-3">
-        <video src="img/video.mp4" class="img-fluid rounded" controls style="width: 100%; height: 300v;"></video>
-       <!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/ezaD--_Ugd4?si=VGOcwb0rj8lwBVQP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>-->
+        <video src="img/video.mp4" class="img-fluid" controls style="width: 100%; border-radius: 8px; background-color: black; min-height: 220px;"></video>
       </div>
       
         <div class="col-12 task mb-2 text-white">

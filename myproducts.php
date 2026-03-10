@@ -125,44 +125,32 @@ header .line{
       .memberTab{
         display: flex;
         justify-content: space-between;
-        background-color:#dbdbdb;
-        /* border: 1px solid black; */
+        background-color: #f1f1f1;
         border-radius: 5px;
-        padding: 1px;
+        padding: 0;
         overflow: hidden;
-
-          
+        margin: 0 5px;
+        border: 1px solid white;
       }
 .member-section button {
-  text-decoration: none;
-    color: rgb(0, 0, 0);
-    border: #ffffff solid 1px;
+    text-decoration: none;
+    color: #333;
     border: none;
     background-color: transparent;
     width: 100%;
-    padding: 7px ;
-
+    padding: 10px;
+    font-size: 15px;
+    transition: 0.3s;
 }
-
-.member-section button:first-child{
-  border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-}
-
-.member-section button:last-child{
-  border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-}
-
 
 .member-section button:hover {
   background-color:#005a36;
   color: rgb(255, 255, 255);
-
 }
 
 .member-section button.active {
-  background-color:#005a36;   color: rgb(255, 255, 255);
+  background-color:#005a36;   
+  color: rgb(255, 255, 255);
 }
 
 .member-section .tabcontent {
@@ -193,7 +181,7 @@ header .line{
 
     </style>
   
-    <style>body, .appCapsule { background-color: #007749 !important; }</style>
+    <style>body, .appCapsule { background-color: #005b6e !important; }</style>
 </head>
   <body>
 <div class="appCapsule container ">
@@ -224,12 +212,13 @@ header .line{
 
     <div class="col-12 member-section">
 
+<div style="background-color: #007749; padding: 15px 0;">
 <div class="memberTab">
   <button class="tablinks active" onclick="openMember(event, 'memberOne')">unexpired product</button>
   <button class="tablinks" onclick="openMember(event, 'memberTwo')">expired product</button>
 </div>
 
-<div class=" text-center py-2">
+<div class=" text-center py-2" style="color: white;">
   <?php
   $total_order=0;
   $query = mysqli_query($con,"select * from order_book where  o_userid ='$userid_access' order by o_id desc");
@@ -239,6 +228,7 @@ header .line{
       $total_order =$total_order + $o_amount;
      }} ?>
     <small>Total: ₹<?php echo $total_order; ?></small>
+</div>
 </div>
 
 <style>
