@@ -110,14 +110,14 @@ include('user_menu/database_connect.php');
        }
 
        .textBox .inner{
-        background-color: #045EB6;
-        padding: 6px 10px;
-        border-radius: 5px;
+        background-color: #0b60cc;
+        padding: 8px 12px;
+        border-radius: 8px;
        }
 
        .textBox .inner i{
-        color: #FFC983;
-        font-size: 20px;
+        color: #ffb854;
+        font-size: 22px;
        }
 
        .newsSection .inner{
@@ -226,17 +226,17 @@ header .line{
 }
 
 .floating-btn {
-    background: linear-gradient(to right, #4aa3fb, #166fe2);
+    background: #398af2;
     color: white;
     text-decoration: none;
-    padding: 6px 8px 6px 12px;
+    padding: 7px 8px 7px 12px;
     border-radius: 20px 0 0 20px;
-    font-size: 11px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     gap: 6px;
-    box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
-    width: 105px;
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
+    width: 110px;
 }
 
 .floating-btn i {
@@ -304,8 +304,8 @@ header .line{
           </div>
           
           <div class="floating-right-menu">
-              <a href="recharge.php" class="floating-btn"><i class="bi bi-wallet-fill"></i> <span>Recharge</span></a>
-              <a href="withdraw.php" class="floating-btn"><i class="bi bi-cash-stack"></i> <span>Withdraws</span></a>
+              <a href="recharge.php" class="floating-btn"><i class="bi bi-wallet2"></i> <span>Recharge</span></a>
+              <a href="withdraw.php" class="floating-btn"><i class="bi bi-cash"></i> <span>Withdraws</span></a>
               <a href="services.php" class="floating-btn"><i class="bi bi-chat-dots-fill"></i> <span>customer ...</span></a>
               <a href="invitiation.php" class="floating-btn"><i class="bi bi-person-plus-fill"></i> <span>Invitation</span></a>
               <a href="redeembonus.php" class="floating-btn"><i class="bi bi-gift-fill"></i> <span>Redeem b...</span></a>
