@@ -172,7 +172,7 @@ $userid_access = $_SESSION['username'];
             <!-- Define the invite link early so we can put it in the QR code -->
             <?php $inviteLinkFull = "https://www.boschch.com/bosch/register/" . $userid_access; ?>
             <div class="qr-top d-flex justify-content-center">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo urlencode($inviteLinkFull); ?>" class="img-fluid" style="border-radius: 10px; width: 60%;" alt="QR Code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=<?php echo urlencode($inviteLinkFull); ?>" class="img-fluid" style="border-radius: 10px; width: 60%;" alt="QR Code">
             </div>
             
             <div class="qr-top-divider">
