@@ -33,7 +33,7 @@ $userid_access = $_SESSION['username'];
    .appCapsule {
     max-width: 641px;
     margin: auto;
-    background-image: url(img/invite.jpg);
+    background-image: url(img/bg.jpeg);
     background-color: #1a569d;
     background-size: cover;
     background-position: center;
