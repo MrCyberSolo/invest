@@ -213,7 +213,64 @@ header .line{
     height:80%;
 }
 
+.floating-right-menu {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+    align-items: flex-end;
+}
 
+.floating-btn {
+    background: linear-gradient(to right, #4aa3fb, #166fe2);
+    color: white;
+    text-decoration: none;
+    padding: 6px 8px 6px 12px;
+    border-radius: 20px 0 0 20px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+    width: 105px;
+}
+
+.floating-btn i {
+    font-size: 14px;
+    color: white;
+}
+
+.floating-btn span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.news-card {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    margin-bottom: 5px;
+}
+
+.news-card img {
+    height: 110px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+}
+
+.news-card-body {
+    background: linear-gradient(180deg, #4aa3fb, #166fe2);
+    padding: 8px 5px;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
     
     </style>
   </head>
@@ -227,12 +284,13 @@ header .line{
 
       <style>
 .carousel-inner img{
-  height: 170px !important;
+  height: 250px !important;
+  object-fit: cover;
 }
       </style>
-      <div class="row pt-4">
+      <div class="row pt-4 position-relative">
           <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
+              <div class="carousel-inner" style="border-radius: 8px; overflow: hidden;">
                 <div class="carousel-item active">
                   <img src="img/1.jpg" class="d-block w-100" alt="...">
                 </div>
@@ -242,20 +300,16 @@ header .line{
                 <div class="carousel-item">
                   <img src="img/2.jpg" class="d-block w-100" alt="...">
                 </div>
-
-                 <!--<div class="carousel-item">
-                  <img src="img/s4.jpg" class="d-block w-100" alt="...">
-                </div> -->
-
               </div>
-              <!-- <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button> -->
-              <!-- <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button> -->
+          </div>
+          
+          <div class="floating-right-menu">
+              <a href="recharge.php" class="floating-btn"><i class="bi bi-wallet-fill"></i> <span>Recharge</span></a>
+              <a href="withdraw.php" class="floating-btn"><i class="bi bi-cash-stack"></i> <span>Withdraws</span></a>
+              <a href="services.php" class="floating-btn"><i class="bi bi-chat-dots-fill"></i> <span>customer ...</span></a>
+              <a href="invitiation.php" class="floating-btn"><i class="bi bi-person-plus-fill"></i> <span>Invitation</span></a>
+              <a href="redeembonus.php" class="floating-btn"><i class="bi bi-gift-fill"></i> <span>Redeem b...</span></a>
+              <a href="reward.php" class="floating-btn"><i class="bi bi-cloud-arrow-down-fill"></i> <span>App Down...</span></a>
           </div>
       </div>
       
@@ -297,91 +351,26 @@ header .line{
 
     <div class="row topMenu mt-3">
       <div class="col-12">
-        <div class="menuBox">
-             <a href="myproducts.php" class="inner">
-            <!-- <img src="img/iconme/1.png" alt=""> -->
+        <div class="menuBox" style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+          <a href="myproducts.php" class="inner" style="width: auto;">
             <i class="bi bi-box2-heart-fill"></i>
             <p>My Product</p>
           </a>
-          
-            <a href="invitiation.php" class="inner">
-            <!-- <img src="img/iconme/6.png" alt=""> -->
-            <i class="bi bi-person-plus-fill"></i>
-            <p>Invitation</p>
+          <a href="task_details3.php" class="inner" style="width: auto;">
+            <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+            <p>Salary</p>
           </a>
-          
-
-          <a href="redeembonus.php" class="inner">
-            <!-- <img src="img/iconme/5.png" alt=""> -->
-            <i class="bi bi-bag-heart-fill"></i>
-            <p>Redeem Bonus</p>
+          <a href="bindbank.php" class="inner" style="width: auto;">
+             <i class="bi bi-bank2"></i>
+            <p>Bank</p>
           </a>
-        
-          <a href="reward.php" class="inner">
-            <!-- <img src="img/iconme/10.png" alt=""> -->
-           <i class="bi bi-cloud-download-fill"></i>
-            <p>App Download</p>
-          </a>
-         
-
-       
-
-        </div>
-        
-        
-         <div class="menuBox">
-             
-              <a href="task_details3.php" class="inner">
-            <!-- <img src="img/iconme/10.png" alt=""> -->
-           <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-            <p>Monthly Salary</p>
-          </a>
-
-          <a href="bindbank.php" class="inner">
-            <!-- <img src="img/iconme/5.png" alt=""> -->
-            <i class="bi bi-bank2"></i>
-            <p>bank account</p>
-          </a>
-           <a href="myteams.php" class="inner">
-            <!-- <img src="img/iconme/1.png" alt=""> -->
+          <a href="myteams.php" class="inner" style="width: auto;">
             <i class="bi bi-people-fill"></i>
             <p>Team</p>
           </a>
-
-          <a href="services.php" class="inner">
-            <!-- <img src="img/iconme/1.png" alt=""> -->
-            <i class="bi bi-people-fill"></i>
-            <p>Customer Services</p>
-          </a>
-
         </div>
-
-  
       </div>
-
     </div>
-
-    <div class="row mt-3">
-              <div class="col-6 ">
-        <div class="headerBox">
-            <a href="recharge.php">
-                <img src="img/me/recharge.png" alt="">
-                <h6>Recharge</h6>
-            </a>
-         
-        </div>
-    </div>
-
-    <div class="col-6 ">
-        <div class="headerBox">
-            <a href="withdraw.php">
-                <img src="img/me/withdraw.png" alt="">
-                <h6>Withdraws</h6>
-            </a>
-     
-        </div>
-    </div>
-</div>
     
     
     <div class="row videoSection mt-4">
@@ -423,6 +412,7 @@ header .line{
             <i class="bi bi-chevron-right"></i>
           </a>
         </div> 
+        <div class="row gx-2">
         <?php 
         $i=1;
         $query = mysqli_query($con,"select * from blog order by b_id desc");
@@ -435,17 +425,18 @@ header .line{
                 $blog_short = $row['b_details'];
                 $blog_create_date = $row['b_create_date'];
           ?> 
-          <a href="news_details.php?pac=<?php echo $blog_id; ?>" class="inner d-flex justify-content-between " style="text-decoration: none;">
-           <div class="text text-white ">
-                <p><?php echo $blog_title; ?></p>
-                <br>
-                <small class=""><?php echo $blog_create_date; ?></small>
+          <div class="col-6 mb-3">
+            <a href="news_details.php?pac=<?php echo $blog_id; ?>" class="text-decoration-none">
+              <div class="card news-card">
+                <img src="asupport/blog/<?php echo $blog_image; ?>" alt="...">
+                <div class="news-card-body">
+                  <p class="text-white mb-0" style="font-size: 13px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"><?php echo $blog_title; ?></p>
+                </div>
               </div>
-              <div class="imges">
-                <img src="asupport/blog/<?php echo $blog_image; ?>" class="img-fluid" alt="" style="max-width: 150px;  border-radius: 8px;">
-              </div>
-          </a>
+            </a>
+          </div>
         <?php } } ?>
+        </div>
       </div>
     </div>
 
