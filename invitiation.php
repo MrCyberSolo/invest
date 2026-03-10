@@ -33,10 +33,7 @@ $userid_access = $_SESSION['username'];
    .appCapsule {
     max-width: 641px;
     margin: auto;
-    background-image: url(img/bg.jpeg);
     background-color: #007749;
-    background-size: cover;
-    background-position: center;
     width: 100%;
     min-height: 100vh;
    }

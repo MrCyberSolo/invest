@@ -32,8 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         font-family: 'Arial', sans-serif;
         margin: 0;
         padding: 0;
-        background: url('img/bgspin.jpg') no-repeat center center fixed;
-        background-size: cover;
+        background-color: #007749;
         display: flex;
         flex-direction: column;
         align-items: center;

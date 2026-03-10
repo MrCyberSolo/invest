@@ -85,7 +85,7 @@
     </style>
 </head>
 
-<body style="    background-image: linear-gradient(rgba(1, 79, 151, 0.5), rgba(1, 79, 151, 0.5)), url(img/bg.jpeg); background-attachment: fixed; background-repeat: no-repeat; background-position: center; background-size: cover;">
+<body style="background-color: #007749;">
 
     <!-- App Header -->
     <div class="appHeader">
