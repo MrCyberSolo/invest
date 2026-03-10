@@ -57,7 +57,7 @@ include('user_menu/database_connect.php');
 /* ==========================  */
 /* footer section   */
 .footerBox .active2{
-  color:#045EB6 ;
+  color:#014f97 ;
 }
 
 header .line{
@@ -105,74 +105,101 @@ header .line{
 /* ==========================  */
 
 /* product page ================  */
-.product-section .card{
+/* product page ================  */
+.product-section {
+  padding: 0 10px;
+}
+
+.product-section .card {
   width: 100%;
   height: 100%;
   padding: 0 !important;
-  background-color: transparent;
-  border: none;
-  
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
 }
 
-  .product-section .card-title{
-      font-weight:bold;
-  }
-  
-    .product-section .card-img{
-        width:100%;
-    }
-    
-    .product-section .card-text{
-        width:100%;
-        background-color:#dfeeff;
-        padding:10px;
-        border-radius:10px;
-    }
-
-
-.product-section h6{
-  color: rgb(75, 75, 75);
-  font-weight: normal;
-  
+.product-section .card-img {
+    width: 100%;
+    position: relative;
+    background: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.product-section .card-body{
+
+.product-section img {
+    max-width: 100%;
+    max-height: 120px;
+    object-fit: contain;
+}
+
+.product-name-banner {
+    background-color: #014f97;
+    color: white;
+    text-align: center;
+    padding: 6px 4px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.product-section .card-text {
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-section .card-title {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.product-section .card-body {
   padding: 0;
-  padding-top: 5px;
-  background-color: #F5F5F5;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  
+  background-color: transparent;
 }
 
-.product-section .inner small{
-  color: #424242;
+.product-section .inner small {
+  color: #666;
+  font-size: 11px;
 }
 
-.product-section .inner{
-  margin-top: 5px;
+.product-section .inner small.val {
+  color: #333;
+  font-weight: 500;
 }
 
-
-
-
-/* .product-section .inner small:first-child{
-  color: #CCCCCC;
-  font-size: 12px;
+.product-section .inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
 }
 
-.product-section .inner small:last-child{
-  color:#014f97;
-  font-size: 13px;
-} */
-
-.product-section img{
-  width: 100%;
-  height: 100%;
+.view-project-btn {
+    background-color: #398af2; 
+    color: white !important;
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 6px 0;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    margin-top: 10px;
+    display: inline-block;
+    border: none;
 }
-
-/* .product-section .btnBox a{
-  padding: 10px;
-} */
 
 
 .headerTab a{
@@ -232,45 +259,48 @@ header .line{
       while ($row = mysqli_fetch_assoc($result)) {
           
     ?>
- <div class="col-12">
-      <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>">
-        <div class="card p-2">
-           
-            <div class="card-body p-2 d-flex align-items-center ">
-                <div class="card-img">
-                     <img src="asupport/package/<?php echo $row["pa_image"];?>" class="card-img-top  " alt="...">
-                </div>
-                
-             
-              <div class="card-text ">
-                   <h6 class="card-title m-0">🏅<?php echo $row["pa_name"]; ?></h6>
-                   
+ <div class="col-6 mb-2 mt-2">
+      <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>" class="text-decoration-none">
+        <div class="card">
+            
+            <div class="card-img">
+                 <img src="asupport/package/<?php echo $row["pa_image"];?>" alt="Product Image">
+            </div>
+
+            <!-- Note: Replaced 🏅 with the screenshot's design (just name and blue banner above it if possible, here using banner for pa_name since it matches the layout better) -->
+            <div class="product-name-banner">
+                <?php echo $row["pa_name"]; ?>
+            </div>
+            
+            <div class="card-text">
+               <h6 class="card-title"><?php echo $row["pa_name"]; ?> - <?php echo $row["pa_amount"]; ?></h6>
+               
                 <div class="inner">
-                  <small class="">Price: </small>
-                  <small> ₹<?php echo $row["pa_amount"]; ?></small>
+                  <small>Price:</small>
+                  <small class="val"><?php echo $row["pa_amount"]; ?>.00RS</small>
                 </div>
 
                 <div class="inner">
                   <small>Term:</small>
-                  <small><?php echo $row["pa_day"]; ?>days</small>
+                  <small class="val"><?php echo $row["pa_day"]; ?> days</small>
                 </div>
 
                 <div class="inner">
-                  <small>Daily Income</small>
-                  <small>₹ <?php echo $row["pa_com_amount"]; ?></small>
+                  <small>Daily income:</small>
+                  <small class="val"><?php echo $row["pa_com_amount"]; ?>RS</small>
                 </div>
 
                 <div class="inner">
-                  <small>Total revenue:</small>
-                  <small>₹<?php echo  $row["pa_com_amount"] * $row["pa_day"]; ?></small>
+                  <small>Total profit:</small>
+                  <small class="val"><?php echo number_format((float)($row["pa_com_amount"] * $row["pa_day"]), 2, '.', ''); ?>RS</small>
                 </div>
-                <div class="btnBox d-grid mt-1">
-                  <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>" class="btn text-white" style="background-color: #014f97; font-size: 15px; padding: 5px;">See details</a>
+
+                <div class="mt-auto">
+                    <button class="view-project-btn">View project</button>
                 </div>                
             </div>
-          </div>
-      </div>
-    </a>   
+        </div>
+      </a>   
 </div>
 <?php  $i++; } } ?>   
 </div>
