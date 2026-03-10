@@ -342,15 +342,45 @@ header .line{
         text-decoration: none;
     }
 
+    .profile-header {
+        background-color: transparent;
+        margin-bottom: 5px;
+    }
+    .profile-img {
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        border: 2px solid white;
+        object-fit: cover;
+    }
+    .user-info h5 {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .user-info p {
+        font-size: 14px;
+        color: rgba(255,255,255,0.9);
+    }
     </style>
   </head>
   <body>
 <div class="appCapsule container">
+    <header class="profile-header px-2 py-3 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+            <img src="https://png.pngtree.com/png-vector/20231127/ourmid/pngtree-demo-red-flat-icon-isolated-demo-icon-png-image_10722763.png" class="profile-img bg-white" alt="Profile Icon">
+            <div class="user-info text-white">
+                <h5 class="mb-1"><?php echo $mobile; ?></h5>
+                <p class="mb-0">ID: <?php echo $userid_access; ?></p>
+            </div>
+        </div>
+        <a href="security.php" class="text-white fs-3 text-decoration-none">
+            <i class="bi bi-gear"></i>
+        </a>
+    </header>
+
     <div class="floating-cs">
         <a href="services.php"><i class="bi bi-headset"></i></a>
     </div>
-
-
   <div class="row gx-3 px-2">
     
     <!-- Action Cards -->
