@@ -38,19 +38,29 @@ include('user_menu/database_connect.php');
 
        .appCapsule, .footerBox{
         max-width: 641px;
+        /* background-color: #014f97; */
         margin: auto;
+
        }
 
-       .appCapsule {
+       .appCapsule{
         padding-bottom: 5rem;
-        background-color: #1a569d;
-        min-height: 100vh;
        }
 
-       body {
-        background-color: #1a569d;
-        color: white;
-       }
+       /* body{
+        background-color: #014f97;
+       } */
+
+       
+
+
+/* ==========================  */
+/* footer section   */
+.footerBox .active2{
+  color:#045EB6 ;
+}
+
+header .line{
   width: 30px;
   height: 2px;
   border-radius: 40px;
@@ -98,94 +108,94 @@ include('user_menu/database_connect.php');
 .product-section .card{
   width: 100%;
   height: 100%;
-  background-color: white;
-  border-radius: 12px;
+  padding: 0 !important;
+  background-color: transparent;
   border: none;
-  overflow: hidden;
-  position: relative;
+  
 }
 
   .product-section .card-title{
-      font-weight: 700;
-      font-size: 14px;
-      color: #333;
-      margin-bottom: 8px;
+      font-weight:bold;
   }
   
     .product-section .card-img{
         width:100%;
-        position: relative;
-        padding-top: 10px;
-        background: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 12px 12px 0 0;
     }
     
-    .product-section .card-img img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
+    .product-section .card-text{
+        width:100%;
+        background-color:#dfeeff;
+        padding:10px;
+        border-radius:10px;
     }
 
-    .image-badge {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: red;
-        color: white;
-        font-size: 8px;
-        font-weight: bold;
-        padding: 2px 4px;
-        border-radius: 2px;
-        z-index: 2;
-    }
 
 .product-section h6{
   color: rgb(75, 75, 75);
   font-weight: normal;
+  
+}
+.product-section .card-body{
+  padding: 0;
+  padding-top: 5px;
+  background-color: #F5F5F5;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  
 }
 
-.product-section .card-body{
-  padding: 12px;
-  background-color: white;
-  border-radius: 0 0 12px 12px;
+.product-section .inner small{
+  color: #424242;
 }
 
 .product-section .inner{
-  display: flex;
-  margin-bottom: 5px;
-  font-size: 11px;
-  justify-content: space-between;
+  margin-top: 5px;
 }
 
-.product-section .inner small:first-child{
-  color: #888;
+
+
+
+/* .product-section .inner small:first-child{
+  color: #CCCCCC;
+  font-size: 12px;
 }
 
 .product-section .inner small:last-child{
-  color: #444;
-  font-weight: 500;
-  text-align: right;
-}
-
-.btnBox a{
-  background-color: #398af2;
-  color: white;
-  border-radius: 20px;
+  color:#014f97;
   font-size: 13px;
-  padding: 8px;
-  font-weight: 500;
+} */
+
+.product-section img{
+  width: 100%;
+  height: 100%;
 }
 
+/* .product-section .btnBox a{
+  padding: 10px;
+} */
 
-.header-title-custom {
-    text-align: center;
-    color: white;
-    font-size: 14px;
-    margin-bottom: 15px;
-    font-weight: 500;
+
+.headerTab a{
+  text-decoration: none;
+  color: white;
+  padding: 7px;
+  width: 47%;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  color:black;
+  transition: .4s;
+
+}
+
+.headerTab .active{
+      background-color: #ff1300;
+    color: #fff;
+}
+
+.headerTab a:hover{
+  background-color: #F5F5F5;
 }
 
 .product-section a{
@@ -197,12 +207,23 @@ include('user_menu/database_connect.php');
   <body>
 <div class="appCapsule container">
     <header class="mt-3">
-        <div class="header-title-custom">
-            <span>H-power tools🔪</span>
-        </div>
-    </header>
+        <!-- <div class="header-title text-center py-3">
+            <h5>Product</h5>
+            <div class="line"></div>
+        </div> -->
 
-<div class="row product-section gx-2 gy-2 px-2">
+        <div class="headerTab d-flex justify-content-around">
+          <a href="product.php" class="active">
+            <i class="bi bi-gear-fill"></i> H-power</a>
+         <!-- <a href="product_2.php">LAY'S</a>-->
+        </div>
+
+      
+  </header>
+
+
+
+<div class="row product-section gx-2 gy-2">
 <?php
       $i=0;
     $result = mysqli_query($con,"SELECT * FROM `package` WHERE `status`='Active' AND `pa_type`='User'"); 
@@ -211,43 +232,44 @@ include('user_menu/database_connect.php');
       while ($row = mysqli_fetch_assoc($result)) {
           
     ?>
- <div class="col-6 mb-2">
+ <div class="col-12">
       <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>">
-        <div class="card">
-            
-            <div class="card-img">
-                <div class="image-badge">HEAVY<br>DUTY</div>
-                <img src="asupport/package/<?php echo $row["pa_image"];?>" class="card-img-top" alt="...">
-            </div>
-               
-            <div class="card-body">
-                <h6 class="card-title"><?php echo $row["pa_name"]; ?></h6>
+        <div class="card p-2">
+           
+            <div class="card-body p-2 d-flex align-items-center ">
+                <div class="card-img">
+                     <img src="asupport/package/<?php echo $row["pa_image"];?>" class="card-img-top  " alt="...">
+                </div>
+                
+             
+              <div class="card-text ">
+                   <h6 class="card-title m-0">🏅<?php echo $row["pa_name"]; ?></h6>
                    
                 <div class="inner">
-                  <small>Price: </small>
-                  <small><?php echo $row["pa_amount"]; ?>.00RS</small>
+                  <small class="">Price: </small>
+                  <small> ₹<?php echo $row["pa_amount"]; ?></small>
                 </div>
 
                 <div class="inner">
                   <small>Term:</small>
-                  <small><?php echo $row["pa_day"]; ?> days</small>
+                  <small><?php echo $row["pa_day"]; ?>days</small>
                 </div>
 
                 <div class="inner">
-                  <small>Daily income:</small>
-                  <small><?php echo $row["pa_com_amount"]; ?>RS</small>
+                  <small>Daily Income</small>
+                  <small>₹ <?php echo $row["pa_com_amount"]; ?></small>
                 </div>
 
                 <div class="inner">
-                  <small>Total profit:</small>
-                  <small><?php echo  $row["pa_com_amount"] * $row["pa_day"]; ?>.00RS</small>
+                  <small>Total revenue:</small>
+                  <small>₹<?php echo  $row["pa_com_amount"] * $row["pa_day"]; ?></small>
                 </div>
-                
-                <div class="btnBox d-grid mt-3">
-                  <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>" class="btn">View project</a>
+                <div class="btnBox d-grid mt-1">
+                  <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>" class="btn text-white" style="background-color: #014f97; font-size: 15px; padding: 5px;">See details</a>
                 </div>                
             </div>
           </div>
+      </div>
     </a>   
 </div>
 <?php  $i++; } } ?>   
