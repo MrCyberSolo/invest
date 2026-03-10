@@ -27,8 +27,8 @@ include('user_menu/database_connect.php');
     <style>
        :root{
         --dark-blue:#213955;
-        --light-blue:#014f97;
-        --yellow:#014f97;
+        --light-blue:#005a36;
+        --yellow:#005a36;
         
        }
 
@@ -38,7 +38,7 @@ include('user_menu/database_connect.php');
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #014f97; */
+        /* background-color: #005a36; */
         margin: auto;
 
        }
@@ -48,7 +48,7 @@ include('user_menu/database_connect.php');
        }
 
        /* body{
-        background-color: #014f97;
+        background-color: #005a36;
        } */
 
        
@@ -57,7 +57,7 @@ include('user_menu/database_connect.php');
 /* ==========================  */
 /* footer section   */
 .footerBox .active2{
-  color:#014f97 ;
+  color:#005a36 ;
 }
 
 header .line{
@@ -140,7 +140,7 @@ header .line{
 }
 
 .product-name-banner {
-    background-color: #014f97;
+    background-color: #005a36;
     color: white;
     text-align: center;
     padding: 6px 4px;
@@ -188,7 +188,7 @@ header .line{
 }
 
 .view-project-btn {
-    background-color: #398af2; 
+    background-color: #009a5f; 
     color: white !important;
     border-radius: 20px;
     font-size: 12px;

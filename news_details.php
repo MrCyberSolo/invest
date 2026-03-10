@@ -31,7 +31,7 @@ if(isset($_GET['pac']))
     <style>
        :root{
         --dark-blue:#213955;
-        --light-blue:#0061bf;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -48,7 +48,7 @@ if(isset($_GET['pac']))
        }
 
        header{
-        background-color:#014f97;
+        background-color:#005a36;
 
        }
 

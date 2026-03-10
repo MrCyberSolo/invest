@@ -37,7 +37,7 @@ $get_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `user` WHERE `em
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
        :root{
-        --light-blue:#07CCFF;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -53,7 +53,7 @@ $get_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `user` WHERE `em
        }
 
        header{
-        background-color: #014f97;
+        background-color: #005a36;
 
        }
 
@@ -64,7 +64,7 @@ $get_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `user` WHERE `em
 
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
        /* input-section================================  */

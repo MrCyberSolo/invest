@@ -46,7 +46,7 @@ if(isset($_GET['rec_id'])){
        }
 
        header{
-        background-color: #014f97;
+        background-color: #005a36;
 
        }
 
@@ -57,7 +57,7 @@ if(isset($_GET['rec_id'])){
 
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
        /* input-section================================  */

@@ -32,8 +32,8 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
        :root{
-        --dark-blue:#07CCFF;
-        --light-blue:#0061bf;
+        --dark-blue:#009a5f;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -49,12 +49,12 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
        }
 
        body {
-        background-color: #1a569d;
+        background-color: #007749;
         color: white;
        }
 
        header{
-        background-color: #1a569d;
+        background-color: #007749;
         border-bottom: 1px solid rgba(255,255,255,0.1);
        }
 
@@ -66,7 +66,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
        /* amount card =========================== */
@@ -80,7 +80,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
        .amtTab button{
         text-decoration: none;
-        color: #1a569d;
+        color: #007749;
         background-color: white;
         text-align: center;
         padding: 10px 0;
@@ -92,7 +92,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
 .amtTab button:hover, .amtTab button.active {
   background-color: #e0eeff;
-  border: 1px solid #1a569d;
+  border: 1px solid #007749;
 }
 
 .amtTabcontent{

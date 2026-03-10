@@ -26,8 +26,8 @@ include('user_menu/database_connect.php');
     <style>
        :root{
         --dark-blue:#213955;
-        --light-blue:#07CCFF;
-        --yellow:#07CCFF;
+        --light-blue:#009a5f;
+        --yellow:#009a5f;
         
        }
 
@@ -37,7 +37,7 @@ include('user_menu/database_connect.php');
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
         margin: auto;
 
        }
@@ -47,7 +47,7 @@ include('user_menu/database_connect.php');
        }
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
        
@@ -144,7 +144,7 @@ header .line{
 }
 
 .product-section .inner small:last-child{
-  color:#07CCFF;
+  color:#009a5f;
   font-size: 13px;
 } */
 
@@ -240,7 +240,7 @@ header .line{
                   <small>₹<?php echo  $row["pa_com_amount"] * $row["pa_day"]; ?></small>
                 </div>
                 <div class="btnBox d-grid mt-1">
-                  <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>" class="btn text-white" style="background-color: #07CCFF; font-size: 15px; padding: 5px;">See details</a>
+                  <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>" class="btn text-white" style="background-color: #009a5f; font-size: 15px; padding: 5px;">See details</a>
                 </div>                
             </div>
           </div>

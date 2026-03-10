@@ -27,8 +27,8 @@ $userid_access = $_SESSION['username'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
        :root{
-        --dark-blue:#07CCFF;
-        --light-blue:#07CCFF;
+        --dark-blue:#009a5f;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -45,7 +45,7 @@ $userid_access = $_SESSION['username'];
        }
 
        header{
-        background-color: #014f97;
+        background-color: #005a36;
 
        }
 
@@ -71,7 +71,7 @@ $userid_access = $_SESSION['username'];
 }
 
 .header-button .active{
-    color: #07CCFF;
+    color: #009a5f;
     border-bottom: 1px solid;
     border-width: 2px;
 }
@@ -81,12 +81,12 @@ $userid_access = $_SESSION['username'];
     text-align: center;
     padding: 13px;
     border-radius: 10px;
-    color: #07CCFF;
+    color: #009a5f;
 }
 
 .couponBox .left span{
     font-size: 15px;
-    color: #07CCFF;
+    color: #009a5f;
 }
 
 .couponBox{

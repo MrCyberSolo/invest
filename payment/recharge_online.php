@@ -315,7 +315,7 @@ if(isset($_POST['recharge'])) {
     
        </header>
         <div class="logo bg-white py-4 px-3 d-flex align-items-center justify-content-between">
-            <p class="m-0" style="color: #07ccff; font-weight: 500; font-size:20px;"> ₹ <?php echo $amount; ?></p>
+            <p class="m-0" style="color: #009a5f; font-weight: 500; font-size:20px;"> ₹ <?php echo $amount; ?></p>
             <code class="code-text">SECURITY BY PAYMENT UPI</code>
         </div>
         
@@ -349,7 +349,7 @@ if(isset($_POST['recharge'])) {
                             <div class="qrcode-holder bg-white px-3 py-4">
                                  <div class="logo bg-white py-4 px-3 ">
             <p style="font-size:13px; color:#31363F; font-weight:500;">Amount Payable</p>
-            <p class="m-0" style="color: #07ccff;"> ₹ <?php echo $amount; ?></p>
+            <p class="m-0" style="color: #009a5f;"> ₹ <?php echo $amount; ?></p>
             
             <div class="countdown-container">
   <div class="countdown" id="countdown" style="font-size:13px; color:#31363F; font-weight:500;">00:00</div>

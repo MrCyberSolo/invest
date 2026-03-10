@@ -26,7 +26,7 @@ $userid_access = $_SESSION['username'];
     <style>
        :root{
         --dark-blue:#213955;
-        --light-blue:#0061bf;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -37,7 +37,7 @@ $userid_access = $_SESSION['username'];
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
         margin: auto;
 
        }
@@ -53,12 +53,12 @@ $userid_access = $_SESSION['username'];
 
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
 
 header{
-  background-color: #014f97;
+  background-color: #005a36;
 }
 
 

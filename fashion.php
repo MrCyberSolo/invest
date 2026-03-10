@@ -15,8 +15,8 @@
     <style>
        :root{
         --dark-blue:#213955;
-        --light-blue:#07CCFF;
-        --yellow:#07CCFF;
+        --light-blue:#009a5f;
+        --yellow:#009a5f;
         
        }
 
@@ -26,7 +26,7 @@
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
         margin: auto;
 
        }
@@ -36,7 +36,7 @@
        }
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
        
@@ -122,7 +122,7 @@ bottom: 10px;
 }
 
 .product-section .inner small:last-child{
-  color:#07CCFF;
+  color:#009a5f;
   font-size: 13px;
 } */
 
@@ -211,12 +211,12 @@ bottom: 10px;
               <small>Total revenue:</small>
               <small>₹916.76</small>
             </div>
-            <!-- <div class="inner" style="background-color: #07CCFF; font-size: 8px; text-align: end; padding: 0 10px; color: white; border-radius: 20px;">
+            <!-- <div class="inner" style="background-color: #009a5f; font-size: 8px; text-align: end; padding: 0 10px; color: white; border-radius: 20px;">
               <p class="">100%</p>
             </div> -->
 
             <div class="btnBox d-grid mt-1">
-              <a href="" class="btn text-white" style="background-color: #07CCFF; font-size: 15px; padding: 5px;">See details</a>
+              <a href="" class="btn text-white" style="background-color: #009a5f; font-size: 15px; padding: 5px;">See details</a>
             </div>
 
             
@@ -255,12 +255,12 @@ bottom: 10px;
               <small>Total revenue:</small>
               <small>₹916.76</small>
             </div>
-            <!-- <div class="inner" style="background-color: #07CCFF; font-size: 8px; text-align: end; padding: 0 10px; color: white; border-radius: 20px;">
+            <!-- <div class="inner" style="background-color: #009a5f; font-size: 8px; text-align: end; padding: 0 10px; color: white; border-radius: 20px;">
               <p class="">100%</p>
             </div> -->
 
             <div class="btnBox d-grid mt-1">
-              <a href="" class="btn text-white" style="background-color: #07CCFF; font-size: 15px; padding: 5px;">See details</a>
+              <a href="" class="btn text-white" style="background-color: #009a5f; font-size: 15px; padding: 5px;">See details</a>
             </div>
 
             

@@ -35,7 +35,7 @@ include('user_menu/database_connect.php');
        }
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
        header .carousel img{
@@ -89,7 +89,7 @@ include('user_menu/database_connect.php');
        }
 
        .textBox .inner{
-        background-color: #045EB6;
+        background-color: #007749;
         padding: 6px 10px;
         border-radius: 5px;
        }
@@ -113,7 +113,7 @@ include('user_menu/database_connect.php');
 /* footer section   */
 
 .footerBox .active4{
-  color:#045EB6 ;
+  color:#007749 ;
 }
 
 

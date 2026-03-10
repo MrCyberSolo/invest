@@ -33,8 +33,8 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
        :root{
-        --dark-blue:#07CCFF;
-        --light-blue:#0061bf;
+        --dark-blue:#009a5f;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -45,7 +45,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
         margin: auto;
 
        }
@@ -61,7 +61,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
        
 
        body{
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
     /* color: rgb(0, 0, 0); */
 
        }
@@ -69,7 +69,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
 
 header{
-  background-color:#014f97;
+  background-color:#005a36;
 }
 
 
@@ -156,13 +156,13 @@ header .line{
 
 
 .member-section button:hover {
-  background-color:#014f97;
+  background-color:#005a36;
   color: rgb(255, 255, 255);
 
 }
 
 .member-section button.active {
-  background-color:#014f97;   color: rgb(255, 255, 255);
+  background-color:#005a36;   color: rgb(255, 255, 255);
 }
 
 .member-section .tabcontent {
@@ -173,7 +173,7 @@ header .line{
 
 /* .member-section{
   height: 100vh;
-  background-color: #07CCFF;
+  background-color: #009a5f;
 } */
 
 	.popup {
@@ -349,7 +349,7 @@ header .line{
     	<input class="form-control"  type="hidden" name="int_acc_id" value='<?php echo $o_id; ?>'  >
     	<input class="form-control"  type="hidden" name="pay_amount" value='<?php echo $int_amount; ?>'  >
     <div class="rec-btn">
-      <button  class="btn " type="submit"  name="int"  style="font-size: 14px; padding: 20px 8px; background-color: #07ccff;">Receive</button>
+      <button  class="btn " type="submit"  name="int"  style="font-size: 14px; padding: 20px 8px; background-color: #009a5f;">Receive</button>
     </div>
     </form>
       <?php }else{?> 
@@ -440,7 +440,7 @@ header .line{
     	<input class="form-control"  type="hidden" name="int_acc_id" value='<?php echo $o_id; ?>'  >
     	<input class="form-control"  type="hidden" name="pay_amount" value='<?php echo $int_amount; ?>'  >
     <div class="rec-btn">
-      <button  class="btn " type="submit"  name="int"  style="font-size: 14px; padding: 20px 8px; background-color: #07ccff;">Receive</button>
+      <button  class="btn " type="submit"  name="int"  style="font-size: 14px; padding: 20px 8px; background-color: #009a5f;">Receive</button>
     </div>
     </form>
       <?php }else{?> 

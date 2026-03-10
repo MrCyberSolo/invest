@@ -18,8 +18,8 @@ include('user_menu/database_connect.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
        :root{
-        --dark-blue:#07CCFF;
-        --light-blue:#0061bf;
+        --dark-blue:#009a5f;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -30,7 +30,7 @@ include('user_menu/database_connect.php');
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
         margin: auto;
 
        }
@@ -40,7 +40,7 @@ include('user_menu/database_connect.php');
        }
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
        
@@ -87,7 +87,7 @@ header .line{
 }
 
 .send at{
-    background-color: #07CCFF;
+    background-color: #009a5f;
     padding: 4px 13px;
     text-decoration: none;
     color: white;
@@ -149,7 +149,7 @@ header .line{
                 <img src="img/me/capcha.png" alt="">
                 <input type="text" name="vcode" class="form-control border-0 " placeholder="please enter" >
                <div class="send">
-               <button type="submit" name="number" style="background-color: #07CCFF; padding: 3px 12px; text-decoration: none; border:none; color: white; border-radius: 5px;" id="startButton"> <div id="timer">Send</div></button>
+               <button type="submit" name="number" style="background-color: #009a5f; padding: 3px 12px; text-decoration: none; border:none; color: white; border-radius: 5px;" id="startButton"> <div id="timer">Send</div></button>
                </div>
                 </div>
             </div>
@@ -180,7 +180,7 @@ header .line{
                 <img src="img/me/capcha.png" alt="">
                 <input type="password" class="form-control border-0 " placeholder="please enter code">
                <div class="send">
-                <button type="submit" name="number" style="background-color: #07CCFF; padding: 3px 12px; border-color: #0dcaf0; text-decoration: none; border:none; color: white; border-radius: 5px;">Send</button>
+                <button type="submit" name="number" style="background-color: #009a5f; padding: 3px 12px; border-color: #0dcaf0; text-decoration: none; border:none; color: white; border-radius: 5px;">Send</button>
                </div>
                 </div>
             </div>

@@ -107,7 +107,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
     <style>
        :root{
         --dark-blue:#213955;
-        --light-blue:#0061bf;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -118,7 +118,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
         margin: auto;
 
        }
@@ -128,7 +128,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
        }
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
        .appBody{
@@ -144,7 +144,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 } */
 
 header{
-  background-color:#014f97;
+  background-color:#005a36;
 }
 
 /* ==========================  */

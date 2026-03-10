@@ -29,7 +29,7 @@ $currentFile = $_SERVER['PHP_SELF'];
   </a>
 
   <a href="me.php" class="inner me-icon active3" style="position:relative; bottom:15px; "   <?php if($currentPage == 'me.php') echo 'active'; ?>">
-    <img src="img/icons/download (1).png" alt=""  style="width:50px; background-color:#014f97; padding:2px; border-radius:50%; margin-bottom:7px ; border:5px solid white; " >
+    <img src="img/icons/download (1).png" alt=""  style="width:50px; background-color:#005a36; padding:2px; border-radius:50%; margin-bottom:7px ; border:5px solid white; " >
     <p>Me</p>
   </a>
 

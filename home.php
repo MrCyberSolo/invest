@@ -28,7 +28,7 @@ include('user_menu/database_connect.php');
 
        .appCapsule, .footerBox{
         max-width: 641px;
-         /* background-color: #07CCFF; */
+         /* background-color: #009a5f; */
       
         margin: auto;
        }
@@ -82,7 +82,7 @@ include('user_menu/database_connect.php');
         width: 100%;
         text-decoration: none;
         color: #ddd;
-        /* background-color: #045EB6; */
+        /* background-color: #007749; */
         width: 100%;
         height:80px;
         margin:0 5px;
@@ -156,7 +156,7 @@ header .line{
 /*}*/
 
 .footerBox .active1{
-  color:#045EB6 ;
+  color:#007749 ;
 }
 
   footer .inner p{
@@ -226,7 +226,7 @@ header .line{
 }
 
 .floating-btn {
-    background: #398af2;
+    background: #009a5f;
     color: white;
     text-decoration: none;
     padding: 7px 8px 7px 12px;
@@ -489,7 +489,7 @@ header .line{
       <div class="modalBody">
           <p>The client himself, will be able to enhance the grace of the client company. There is no architect to meet with the requirements, it is the very labor of those who praise that the flight of features is most criticized, for those who like easy and apart from flattery</p>
           <div class="d-grid px-3 mt-3">
-              <button type="button" class="close" style="background-color: #07CCFF; border: none; color:white; padding: 5px; font-size: 17px; border-radius: 5px;  ">Close</button>
+              <button type="button" class="close" style="background-color: #009a5f; border: none; color:white; padding: 5px; font-size: 17px; border-radius: 5px;  ">Close</button>
 
           </div>
       </div>

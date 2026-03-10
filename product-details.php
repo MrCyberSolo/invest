@@ -56,7 +56,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
     <style>
        :root{
         --dark-blue:#213955;
-        --light-blue:#0061bf;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -77,7 +77,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
        
 
        body{
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
         color: white;
        }
 

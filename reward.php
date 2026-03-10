@@ -26,8 +26,8 @@ $mysqltime = date('Y-m-d H:i:s');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
        :root{
-        --dark-blue:#07CCFF;
-        --light-blue:#0061bf;
+        --dark-blue:#009a5f;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -38,7 +38,7 @@ $mysqltime = date('Y-m-d H:i:s');
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
         margin: auto;
 
        }
@@ -54,7 +54,7 @@ $mysqltime = date('Y-m-d H:i:s');
        
 
        body{
-        /* background-color: #07CCFF; */
+        /* background-color: #009a5f; */
     /* color: rgb(0, 0, 0); */
 
        }
@@ -62,7 +62,7 @@ $mysqltime = date('Y-m-d H:i:s');
 
 
 header{
-  background-color:#014f97;
+  background-color:#005a36;
 }
 
 
@@ -148,13 +148,13 @@ bottom: 10px;
 
 
 .member-section button:hover {
-  background-color:#014f97;
+  background-color:#005a36;
   color: rgb(255, 255, 255);
 
 } */
 
 /* .member-section button.active {
-  background-color:#014f97;   color: rgb(255, 255, 255);
+  background-color:#005a36;   color: rgb(255, 255, 255);
 } */
 
 .member-section .tabcontent {
@@ -165,7 +165,7 @@ bottom: 10px;
 
 /* .member-section{
   height: 100vh;
-  background-color: #07CCFF;
+  background-color: #009a5f;
 } */
 
 .popup {
@@ -296,7 +296,7 @@ bottom: 10px;
          
         if($refer_user >= $rp_business){
           if($order_count == 0){ ?>
-          <a href="?reward_id=<?php echo $reward_id ?>" class="btn" style="background-color: #07ccff; padding: 5px 19px; border-radius: 24px; color: rgb(236, 236, 236);;">Receive</a>
+          <a href="?reward_id=<?php echo $reward_id ?>" class="btn" style="background-color: #009a5f; padding: 5px 19px; border-radius: 24px; color: rgb(236, 236, 236);;">Receive</a>
         <?php }else{?> 
           <button class="btn" style="background-color: #a3a3a3; padding: 5px 19px; border-radius: 24px; color: rgb(236, 236, 236);;">Received</button>
           <?php } }else{ ?>

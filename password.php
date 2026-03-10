@@ -29,7 +29,7 @@ $get_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `user` WHERE `em
     <style>
        :root{
         --dark-blue:black;
-        --light-blue:#0061bf;
+        --light-blue:#009a5f;
         --yellow:#FFCE82;
         
        }
@@ -45,7 +45,7 @@ $get_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `user` WHERE `em
        }
 
        header{
-        background-color: #014f97;
+        background-color: #005a36;
 
        }
 
@@ -55,7 +55,7 @@ $get_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `user` WHERE `em
        }
 
        /* body{
-        background-color: #07CCFF;
+        background-color: #009a5f;
        } */
 
        /* input-section================================  */

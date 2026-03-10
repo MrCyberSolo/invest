@@ -111,13 +111,13 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
        :root {
-        --dark-blue: #1a569d;
-        --light-blue: #0061bf;
+        --dark-blue: #007749;
+        --light-blue: #009a5f;
         --yellow: #FFCE82;
        }
 
        body {
-        background-color: #1a569d;
+        background-color: #007749;
        }
 
        p, h1, h2, h3, h4, h5, h6{
@@ -131,7 +131,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
        .appCapsule{
         padding-bottom: 5rem;
-        background-color: #1a569d;
+        background-color: #007749;
         min-height: 100vh;
        }
 
@@ -139,7 +139,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 /* footer section   */
 
 .footerBox .active3{
-  color:#045EB6 ;
+  color:#007749 ;
 }
 
 
@@ -212,7 +212,7 @@ header .line{
     }
     .action-card i {
         font-size: 24px;
-        color: #398af2;
+        color: #009a5f;
         display: block;
         margin-bottom: 5px;
     }
@@ -248,7 +248,7 @@ header .line{
         color: #666;
     }
     .btn-view-comm {
-        background-color: #398af2;
+        background-color: #009a5f;
         color: white;
         border: none;
         border-radius: 6px;
@@ -328,7 +328,7 @@ header .line{
         position: fixed;
         right: 10px;
         top: 30%;
-        background-color: #398af2;
+        background-color: #009a5f;
         color: white;
         width: 50px;
         height: 50px;

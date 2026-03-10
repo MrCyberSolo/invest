@@ -22,7 +22,7 @@ $userid_access = $_SESSION['username'];
 <style>
    :root {
     --dark-blue: #213955;
-    --light-blue: #0061bf;
+    --light-blue: #009a5f;
     --yellow: #FFCE82;
    }
 
@@ -34,7 +34,7 @@ $userid_access = $_SESSION['username'];
     max-width: 641px;
     margin: auto;
     background-image: url(img/bg.jpeg);
-    background-color: #1a569d;
+    background-color: #007749;
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -42,7 +42,7 @@ $userid_access = $_SESSION['username'];
    }
 
    header {
-    background-color: #1a569d;
+    background-color: #007749;
     border-bottom: none;
    }
 
@@ -75,7 +75,7 @@ $userid_access = $_SESSION['username'];
         top: -10px;
         width: 20px;
         height: 20px;
-        background-color: #1a569d;
+        background-color: #007749;
         border-radius: 50%;
         z-index: 2;
    }
@@ -121,7 +121,7 @@ $userid_access = $_SESSION['username'];
    }
 
    .copy-btn {
-        background-color: #398af2;
+        background-color: #009a5f;
         color: white;
         border: none;
         padding: 5px 12px;
