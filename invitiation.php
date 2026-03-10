@@ -169,8 +169,10 @@ $userid_access = $_SESSION['username'];
   <div class="row appBody">
     <div class="col-12 mt-4">
         <div class="invite-card-wrapper">
+            <!-- Define the invite link early so we can put it in the QR code -->
+            <?php $inviteLinkFull = "https://www.boschch.com/bosch/register/" . $userid_access; ?>
             <div class="qr-top d-flex justify-content-center">
-                <img src="https://1.bp.blogspot.com/-Fskyl2EvIXY/UfV6GKoCkuI/AAAAAAAAALI/QgFLbAUMx0Y/s1600/qr_code.jpg" class="img-fluid" style="border-radius: 10px; width: 85%;" alt="QR Code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo urlencode($inviteLinkFull); ?>" class="img-fluid" style="border-radius: 10px; width: 60%;" alt="QR Code">
             </div>
             
             <div class="qr-top-divider">
@@ -182,8 +184,6 @@ $userid_access = $_SESSION['username'];
                     <div class="copy-text" id="inviteCodeText"><?php echo $userid_access;?></div>
                     <button class="copy-btn" id="copyCodeBtn">Copy</button>
                 </div>
-                <!-- Remove hardcoded domain if you have a variable or want relative base url, kept original for now -->
-                <?php $inviteLinkFull = "https://www.boschch.com/bosch/register/" . $userid_access; ?>
                 <div class="copy-row">
                     <div class="copy-text" id="inviteLinkText"><?php echo $inviteLinkFull; ?></div>
                     <button class="copy-btn" id="copyLinkBtn">Copy</button>
