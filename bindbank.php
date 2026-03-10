@@ -101,7 +101,9 @@ $get_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `user` WHERE `em
 }
     
     </style>
-  </head>
+  
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
+</head>
   <body>
 <div class="appCapsule container mt-4">
   <header class="row fixed-top">

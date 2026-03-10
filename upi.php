@@ -157,6 +157,8 @@ $amount = $_SESSION['amount'];
     }
 }
 	</style>
+
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
 </head>
 
 <body >

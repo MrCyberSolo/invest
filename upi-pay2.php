@@ -299,6 +299,8 @@ $amount_deposite = $_SESSION['amount'];
             jump.click();
         }
     </script>
+
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
 </head>
 <body style="background-color: #eee;">
 <input id="orderId" name="orderId" type="hidden" value="6597a997e4b06502dc8c778f">

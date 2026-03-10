@@ -112,7 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         display: none;
       }
     </style>
-  </head>
+  
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
+</head>
   <body>
     <header>
       <h1>Spin the Wheel and Win Big!</h1>

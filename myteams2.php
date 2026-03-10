@@ -283,7 +283,9 @@ body{
 
 
     </style>
-  </head>
+  
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
+</head>
   <body>
 <div class="appCapsule container ">
   <div class="row">

@@ -146,6 +146,8 @@ $userid_access = $_SESSION['username'];
         line-height: 1.4;
    }
 </style>
+
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
 </head>
 <body>
 

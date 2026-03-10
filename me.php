@@ -362,7 +362,9 @@ header .line{
         color: rgba(255,255,255,0.9);
     }
     </style>
-  </head>
+  
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
+</head>
   <body>
 <div class="appCapsule container">
     <header class="profile-header px-2 py-3 d-flex align-items-center justify-content-between">

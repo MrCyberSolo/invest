@@ -69,7 +69,9 @@ if(isset($_GET['pac']))
 
     
     </style>
-  </head>
+  
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
+</head>
   <body class="bg-light">
 
 

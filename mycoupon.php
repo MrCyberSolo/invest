@@ -109,7 +109,9 @@ $userid_access = $_SESSION['username'];
 
     
     </style>
-  </head>
+  
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
+</head>
   <body class="bg-light">
       
 <div class="appCapsule container ">
