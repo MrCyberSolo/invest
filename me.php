@@ -369,7 +369,7 @@ header .line{
 <div class="appCapsule container">
     <header class="profile-header px-2 py-3 d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center gap-3">
-            <img src="https://png.pngtree.com/png-vector/20231127/ourmid/pngtree-demo-red-flat-icon-isolated-demo-icon-png-image_10722763.png" class="profile-img bg-white" alt="Profile Icon">
+            <img src="img/hikoki_logo.png" class="profile-img" alt="Profile Icon">
             <div class="user-info text-white">
                 <h5 class="mb-1"><?php echo $mobile; ?></h5>
                 <p class="mb-0">ID: <?php echo $userid_access; ?></p>

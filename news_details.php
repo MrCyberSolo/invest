@@ -98,10 +98,10 @@ if(isset($_GET['pac']))
         <p>News <span><?php echo $blog_create_date; ?></span></p>
        <!--  <h3>🔊🔊STANLEY latest notification</h3> -->
         <br>
-		<img src="https://png.pngtree.com/png-vector/20231127/ourmid/pngtree-demo-red-flat-icon-isolated-demo-icon-png-image_10722763.png" class="img-fluid" alt="">
+		<img src="img/hikoki_logo.png" class="img-fluid" alt="">
 		
         <p><?php echo $blog_des; ?></p>
-        <img src="https://png.pngtree.com/png-vector/20231127/ourmid/pngtree-demo-red-flat-icon-isolated-demo-icon-png-image_10722763.png" class="img-fluid" alt="">
+        <img src="img/hikoki_logo.png" class="img-fluid" alt="">
         <br>
     </div>
   </div>

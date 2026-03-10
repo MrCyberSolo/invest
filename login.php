@@ -185,7 +185,7 @@ header .line{
         </div> -->
         <div class="header-title text-center pt-5" >
             <!-- <h5>Login</h5> -->
-            <img src="https://png.pngtree.com/png-vector/20231127/ourmid/pngtree-demo-red-flat-icon-isolated-demo-icon-png-image_10722763.png" class="img-fluid" style="width: 100px; margin: 10px 0; border-radius: 50%;" alt="">
+            <img src="img/hikoki_logo.png" class="img-fluid" style="width: 100px; margin: 10px 0; border-radius: 50%;" alt="">
         </div>
         <center style="color: red">
           <?php

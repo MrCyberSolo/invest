@@ -233,7 +233,7 @@ header .line{
             </div>
   
             <div class="imges">
-              <img src="https://png.pngtree.com/png-vector/20231127/ourmid/pngtree-demo-red-flat-icon-isolated-demo-icon-png-image_10722763.png" class="img-fluid" alt="" style="max-width: 150px; border-radius: 8px;">
+              <img src="img/hikoki_logo.png" class="img-fluid" alt="" style="max-width: 150px; border-radius: 8px;">
             </div>
           </a>
           <?php } } ?>
