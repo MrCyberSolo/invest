@@ -48,10 +48,14 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
        }
 
-       header{
-        /* background-color: #07CCFF; */
-        background-color: #014f97;
+       body {
+        background-color: #1a569d;
+        color: white;
+       }
 
+       header{
+        background-color: #1a569d;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
        }
 
        .appBody{
@@ -67,31 +71,28 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
        /* amount card =========================== */
        .amtTab{
-        display: flex; justify-content: space-around;
-        gap: 15px;
-
+        display: flex; 
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
        }
 
        .amtTab button{
         text-decoration: none;
-        color:rgb(19, 19, 19);
-        background-color: #FFF1F1;
-        width: 100%;
+        color: #1a569d;
+        background-color: white;
         text-align: center;
-        margin: 5px 0;
-        padding: 8px;
+        padding: 10px 0;
         border-radius: 4px;
         border: none;
-
+        width: calc(33.333% - 7px);
+        font-weight: 500;
        } 
 
-.amtTab button:hover {
-  background-color: #E48B00;
-}
-
-/* Create an active/current amtTablink class */
-.amtTab button.active {
-  background-color: #E48B00;
+.amtTab button:hover, .amtTab button.active {
+  background-color: #e0eeff;
+  border: 1px solid #1a569d;
 }
 
 .amtTabcontent{
@@ -107,53 +108,79 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 }
 
 
-/* PAYMENT CHANNEL SECTION ============================ */
-.payOption .checkbox {
-          position: relative;
-          overflow: hidden;
+        /* PAYMENT CHANNEL SECTION ============================ */
+        .payOptionCard {
+            background-color: white;
+            border-radius: 10px;
+            color: black;
+            padding-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        .payOptionCard h6 {
+            padding: 15px 15px 5px 15px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .payOption .checkbox {
+            position: relative;
+            overflow: hidden;
         }
         
         .payOption .checkbox__input {
-          position: absolute;
-          top: -100px;
-          left: -100px;
+            position: absolute;
+            top: -100px;
+            left: -100px;
         }
          
         .payOption .checkbox__inner {
-          display: inline-block;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          border: 1px solid #626262;
-          background: transparent no-repeat center;
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 1px solid #c2c2c2;
+            background: transparent no-repeat center;
         }
         
         .payOption .checkbox__input:checked + .checkbox__inner {
-          /* border-color: #52C6C4; */
-          background-color: #242a26;
-          background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='14px' height='10px' viewBox='0 0 14 10' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 59.1 (86144) - https://sketch.com --%3E%3Ctitle%3Echeck%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='ios_modification' transform='translate(-27.000000, -191.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Group-Copy' transform='translate(0.000000, 164.000000)'%3E%3Cg id='ic-check-18px' transform='translate(25.000000, 23.000000)'%3E%3Cpolygon id='check' points='6.61 11.89 3.5 8.78 2.44 9.84 6.61 14 15.56 5.05 14.5 4'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-          background-size: 12px 12px;
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+            background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='14px' height='10px' viewBox='0 0 14 10' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 59.1 (86144) - https://sketch.com --%3E%3Ctitle%3Echeck%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='ios_modification' transform='translate(-27.000000, -191.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Group-Copy' transform='translate(0.000000, 164.000000)'%3E%3Cg id='ic-check-18px' transform='translate(25.000000, 23.000000)'%3E%3Cpolygon id='check' points='6.61 11.89 3.5 8.78 2.44 9.84 6.61 14 15.56 5.05 14.5 4'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-size: 14px 14px;
         }
         
-        
-        
-        
-          .payOption p{
-                margin: 0;
-            }
-        
-            .payOption{
-                padding: 10px 0;
-                
-            }
-        
-        
-            .payOption .inner{
-                border-bottom:1px solid #aeaeae28;
-                padding: 1rem ;
-                
+        .payOption p{
+            margin: 0;
+            font-size: 14px;
+        }
+    
+        .payOption .inner{
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-            }
+        #amount {
+            position: relative;
+            background: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 10px;
+            padding-right: 40px;
+        }
+        #amount::placeholder {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+        .rs-icon {
+            position: absolute;
+            right: 25px;
+            top: 104px;
+            color: #b0b0b0;
+            font-size: 14px;
+        }
 
 .popup {
 	position: fixed;
@@ -192,88 +219,109 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
   </header>
 
   <div class="row appBody px-3">
-    <div class="col-12 tab-btn p-3 rounded rounded-3 bg-white ">
+    <div class="col-12 w-100">
         
         <form action="" method="post" enctype="multipart/form-data">
-    <div class="col-12 tab-btn px-3">
-        <b>Amount</b>
-        <div class="amtTab">
-            <button type="button" class="amtTablinks" onclick="setAmount(620)">620</button>
-            <button type="button" class="amtTablinks" onclick="setAmount(2560)">2560</button>
-            <button type="button" class="amtTablinks" onclick="setAmount(3000)">3000</button>
-   
+    <div class="col-12 mb-3">
+        <h6 class="mb-3" style="font-weight: 600;">Amount</h6>
+        
+        <div style="position: relative;">
+            <input type="number" class="form-control" id="amount" name="amount" placeholder="Please enter the amount">
+            <span class="rs-icon">RS</span>
         </div>
-        <div class="amtTab">
-            <button type="button" class="amtTablinks" onclick="setAmount(7800)">7800</button>
-            <button type="button" class="amtTablinks" onclick="setAmount(18500)">18500</button>
-            <button type="button" class="amtTablinks" onclick="setAmount(27500)">27500</button>
+
+        <div class="amtTab d-flex mt-2">
+            <button type="button" class="amtTablinks" onclick="setAmount(540)">540</button>
+            <button type="button" class="amtTablinks" onclick="setAmount(3200)">3200</button>
+            <button type="button" class="amtTablinks" onclick="setAmount(7400)">7400</button>
+            <button type="button" class="amtTablinks" onclick="setAmount(15700)">15700</button>
         </div>
-    </div>
-    <div class="col-12 mt-3">
-        <input type="number" class="form-control" id="amount" name="amount" placeholder="Please enter amount">
     </div>
 
-    <div class="col-12">
+    <div class="col-12 payOptionCard">
+        <h6 class="px-3 pt-2">Payment channel</h6>
         <div class="payOption">
-            <h5 class="px-3 pt-2">Payment channel</h5>
-            
-
             <div class="inner text-dark d-flex justify-content-between">
-                <div class="chTitle d-flex gap-2 align-items-center">
-                    <img src="img/me/rs.png" alt="" style="width: 27px;">
-                    <p class="m-0">P-pay1</p>
+                <div class="chTitle d-flex gap-3 align-items-center">
+                    <i class="bi bi-heptagon-fill" style="color: #3b82f6; font-size: 20px;"></i>
+                    <p class="m-0">(car-T) Payment</p>
                 </div>
                 <label class="checkbox">
-                    <input type="radio" name="ptype" value="offline" class="checkbox__input"/>
+                    <input type="radio" name="ptype" value="offline" class="checkbox__input" checked/>
                     <span class="checkbox__inner"></span>
                 </label>
             </div>
-           <!-- <div class="inner text-dark d-flex justify-content-between">
-                <div class="chTitle d-flex gap-2 align-items-center">
-                    <img src="img/me/rs.png" alt="" style="width: 27px;">
-                    <p class="m-0">U-Pay</p>
-                </div>
-                <label class="checkbox">
-                    <input type="radio" name="ptype" value="online" class="checkbox__input"/>
-                    <span class="checkbox__inner"></span>
-                </label>
-            </div>-->
           
-              <div class="inner text-dark d-flex justify-content-between">
-                <div class="chTitle d-flex gap-2 align-items-center">
-                    <img src="img/me/rs.png" alt="" style="width: 27px;">
-                    <p class="m-0">S-Pay2</p>
+            <div class="inner text-dark d-flex justify-content-between">
+                <div class="chTitle d-flex gap-3 align-items-center">
+                    <i class="bi bi-heptagon-fill" style="color: #3b82f6; font-size: 20px;"></i>
+                    <p class="m-0">(car-AN) Payment</p>
                 </div>
                 <label class="checkbox">
                     <input type="radio" name="ptype" value="online2" class="checkbox__input"/>
                     <span class="checkbox__inner"></span>
                 </label>
             </div>
-            <!-- <div class="inner text-dark d-flex justify-content-between">
-                <div class="chTitle d-flex gap-2 align-items-center">
-                    <img src="img/me/rs.png" alt="" style="width: 27px;">
-                    <p class="m-0">U-Pay</p>
-                </div>
-                <label class="checkbox">
-                    <input type="radio" name="ptype" value="online" class="checkbox__input"/>
-                    <span class="checkbox__inner"></span>
-                </label>
-            </div>-->
-            
-             <!--<div class="inner text-dark d-flex justify-content-between">
-                <div class="chTitle d-flex gap-2 align-items-center">
-                    <img src="img/me/rs.png" alt="" style="width: 27px;">
-                    <p class="m-0">P-Pay4</p>
-                </div>
-                <label class="checkbox">
-                    <input type="radio" name="ptype" value="offline3" class="checkbox__input"/>
-                    <span class="checkbox__inner"></span>
-                </label>
-            </div>-->
-        </div> <!-- payOption end -->
 
-        <div class="sub-btn px-3 d-grid mt-2">
-            <button type="submit" name="upload_pay" class="btn" style="background: black; color: white; border-radius: 30px; padding: 10px;">Submit</button>
+            <div class="inner text-dark d-flex justify-content-between">
+                <div class="chTitle d-flex gap-3 align-items-center">
+                    <i class="bi bi-heptagon-fill" style="color: #3b82f6; font-size: 20px;"></i>
+                    <p class="m-0">(car-de) Payment</p>
+                </div>
+                <label class="checkbox">
+                    <input type="radio" name="ptype" value="online3" class="checkbox__input"/>
+                    <span class="checkbox__inner"></span>
+                </label>
+            </div>
+
+            <div class="inner text-dark d-flex justify-content-between">
+                <div class="chTitle d-flex gap-3 align-items-center">
+                    <i class="bi bi-heptagon-fill" style="color: #3b82f6; font-size: 20px;"></i>
+                    <p class="m-0">(car-PPAY) Payment</p>
+                </div>
+                <label class="checkbox">
+                    <input type="radio" name="ptype" value="online4" class="checkbox__input"/>
+                    <span class="checkbox__inner"></span>
+                </label>
+            </div>
+
+            <div class="inner text-dark d-flex justify-content-between">
+                <div class="chTitle d-flex gap-3 align-items-center">
+                    <i class="bi bi-heptagon-fill" style="color: #3b82f6; font-size: 20px;"></i>
+                    <p class="m-0">(car-FF) Payment</p>
+                </div>
+                <label class="checkbox">
+                    <input type="radio" name="ptype" value="online5" class="checkbox__input"/>
+                    <span class="checkbox__inner"></span>
+                </label>
+            </div>
+            
+            <div class="inner text-dark d-flex justify-content-between">
+                <div class="chTitle d-flex gap-3 align-items-center">
+                    <i class="bi bi-heptagon-fill" style="color: #3b82f6; font-size: 20px;"></i>
+                    <p class="m-0">(car-Galli) Payment</p>
+                </div>
+                <label class="checkbox">
+                    <input type="radio" name="ptype" value="online6" class="checkbox__input"/>
+                    <span class="checkbox__inner"></span>
+                </label>
+            </div>
+
+            <div class="inner text-dark d-flex justify-content-between">
+                <div class="chTitle d-flex gap-3 align-items-center">
+                    <i class="bi bi-heptagon-fill" style="color: #3b82f6; font-size: 20px;"></i>
+                    <p class="m-0">(car-ccyv) Payment</p>
+                </div>
+                <label class="checkbox">
+                    <input type="radio" name="ptype" value="online7" class="checkbox__input"/>
+                    <span class="checkbox__inner"></span>
+                </label>
+            </div>
+        </div> <!-- payOption end -->
+    </div>
+
+        <div class="sub-btn d-grid mt-4 mb-4">
+            <button type="submit" name="upload_pay" class="btn" style="background: #3b82f6; color: white; border-radius: 8px; font-weight: 500; font-size: 15px; padding: 12px;">Submit</button>
         </div>
     </div>
 </form>
@@ -284,8 +332,8 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
     }
 </script>
 
-       <div class="tips mt-3 ">
-        <p>Imporatant tip:</p>
+       <div class="tips mt-3 text-white pb-5">
+        <p>Important tip:</p>
         <br>
         <p>
             Please do not save the same payment account and make repeated payments.</p>
