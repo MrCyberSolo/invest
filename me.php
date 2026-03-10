@@ -110,11 +110,14 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-       :root{
-        --dark-blue:#07CCFF;
-        --light-blue:#0061bf;
-        --yellow:#FFCE82;
-        
+       :root {
+        --dark-blue: #1a569d;
+        --light-blue: #0061bf;
+        --yellow: #FFCE82;
+       }
+
+       body {
+        background-color: #1a569d;
        }
 
        p, h1, h2, h3, h4, h5, h6{
@@ -123,21 +126,14 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
        .appCapsule, .footerBox{
         max-width: 641px;
-        /* background-color: #07CCFF; */
         margin: auto;
-
        }
 
        .appCapsule{
         padding-bottom: 5rem;
+        background-color: #1a569d;
+        min-height: 100vh;
        }
-
-       /* body{
-        background-color: #07CCFF;
-       } */
-
-       
-
 
 /* ==========================  */
 /* footer section   */
@@ -195,366 +191,328 @@ header .line{
 
 
 /* me ====  */
-.headerBox{
-    background-color:white;
-    text-align: center;
-    border-radius: 6px;
-    padding: 15px 0;
-
-}
-
-.headerBox a{
-    text-decoration: none;
-    color: #272727;
-}
-
-.headerBox img{
-    width: 4rem;
-    margin-bottom: 5px;
-}
-
-.menuBody p{
-    font-size: 12px;
-
-}
-
-
-/* ============== icon menus */
-        .icon-menu img{
-            width: 30px;
-        }
-
-        .icon-menu .inner{
-            width: 100%;
-            margin: 7px 0;
-        }
-
-        .icon-menu a{
-            text-decoration: none;
-            color: #272727;
-        }
-
-        .menuBox2 {
-            background:none; 
-        }
-
-        .menuBox2 p{
-            color:white; 
-        }
-
-        .commissionBox .inner{
-            background-color:#014f97; 
-            border-radius: 10px; 
-            color:white; 
-            padding:10px; 
-            display: flex; 
-            justify-content:space-between; 
-            margin-bottom: 10px; 
-        }
-
-
+    .action-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 15px;
+    }
     
+    .action-card {
+        background: white;
+        border-radius: 8px;
+        flex: 1;
+        padding: 15px 0;
+        text-align: center;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        font-size: 14px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .action-card i {
+        font-size: 24px;
+        color: #398af2;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .detail-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Commission Section */
+    .comm-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+    .comm-stat-box {
+        text-align: center;
+        flex: 1;
+    }
+    .comm-val {
+        background: #f0f0f0;
+        padding: 5px 0;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 5px;
+    }
+    .comm-label {
+        font-size: 13px;
+        color: #666;
+    }
+    .btn-view-comm {
+        background-color: #398af2;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        width: 100%;
+        padding: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
+
+    /* Wallet Stats Section */
+    .wallet-header {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+    .wallet-box {
+        text-align: center;
+        flex: 1;
+    }
+    .wallet-box p {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 5px;
+    }
+    .wallet-box h4 {
+        color: #333;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        text-align: center;
+    }
+    .stat-item p {
+        font-size: 11px;
+        color: #666;
+        margin-bottom: 5px;
+    }
+    .stat-item h6 {
+        font-weight: bold;
+        color: #333;
+        font-size: 14px;
+    }
+    
+    /* Icon grid */
+    .bottom-icons-wrap {
+        margin-top: 20px;
+    }
+    .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        text-align: center;
+    }
+    .nav-item {
+        color: white;
+        text-decoration: none;
+    }
+    .nav-item i {
+        font-size: 24px;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .nav-item p {
+        font-size: 12px;
+        color: rgba(255,255,255,0.9);
+    }
+    
+    .floating-cs a {
+        position: fixed;
+        right: 10px;
+        top: 30%;
+        background-color: #398af2;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 1000;
+        text-decoration: none;
+    }
+
     </style>
   </head>
   <body>
 <div class="appCapsule container">
-    <header>
-        <div class="setting text-white text-end py-1 fs-5 px-2 py-2 ">
-            <a href="security.php">
-               <i class="bi bi-gear" style="width: 1.6rem; height: 1.6rem; color:white; "></i> 
-                <!-- <i class="bi bi-gear text-white"></i> -->
-            
+    <div class="floating-cs">
+        <a href="services.php"><i class="bi bi-headset"></i></a>
+    </div>
+
+
+  <div class="row gx-3 px-2">
+    
+    <!-- Action Cards -->
+    <div class="col-12">
+        <div class="action-row">
+            <a href="recharge.php" class="action-card">
+                <i class="bi bi-credit-card"></i>
+                Recharge
             </a>
-        </div>
-        <!-- <div class="header-title text-center py-1">
-            <h5>Me</h5>
-            <div class="line"></div>
-        </div> -->
-
-        <div class="id-num text-white text-center d-flex align-items-center gap-3">
-            <img src="https://png.pngtree.com/png-vector/20231127/ourmid/pngtree-demo-red-flat-icon-isolated-demo-icon-png-image_10722763.png" class="img-fluid" style="width: 90px; height: 90px; border-radius: 50%;" alt="">
-            <div class="right">
-                <p><?php echo $mobile; ?></p>
-                <p>ID: <?php echo $userid_access; ?></p>
-            </div>
-
-        </div>
-
-      
-  </header>
-
-
-  <div class="row gx-3 mt-3">
-    <div class="col-6 ">
-        <div class="headerBox">
-            <a href="recharge.php">
-                <img src="img/me/recharge.png" alt="">
-                <h6>Recharge</h6>
+            <a href="withdraw.php" class="action-card">
+                <i class="bi bi-wallet2"></i>
+                Withdraws
             </a>
-         
         </div>
     </div>
 
-    <div class="col-6 ">
-        <div class="headerBox">
-            <a href="withdraw.php">
-                <img src="img/me/withdraw.png" alt="">
-                <h6>Withdraws</h6>
-            </a>
-     
-        </div>
-    </div>
-
-    <div class="col-12 mt-3">
-        <div class="card menuBox p-2 py-3">
-            <div class="menuBody d-flex text-dark text-center justify-content-evenly gap-3">
-                <div class="inner">
-                    <p>Recharge wallet</p>
-                    <b><?php echo $fran_bal; ?>RS</b>
+    <!-- Commission Card -->
+    <div class="col-12">
+        <div class="detail-card">
+            <div class="comm-stats">
+                <div class="comm-stat-box">
+                    <div class="comm-val"><?php echo $direct_refer = mysqli_num_rows(mysqli_query($con, "select * from user where under_userid='$userid_access'")); ?></div>
+                    <div class="comm-label">B-10%</div>
                 </div>
-                <div class="inner">
-                    <p>Balance wallet</p>
-                    <b><?php echo $current_bal; ?>RS</b>
-                </div>
-                <div class="inner">
-                    <p>Total Withdrawl</p>
-                    <b>
-                    <?php					
-                        $income_with = 0;
-                        $query = mysqli_query($con,"select * from income_received where userid='$userid_access' AND status='Paid' order by id desc");
-                        if(mysqli_num_rows($query)>0)
-                        {
-                            while($row=mysqli_fetch_array($query))
-                            {
-                                $amount = $row['amount'];                                        
-                                $income_with = $income_with + $amount;
+                <div class="comm-stat-box" style="margin: 0 10px;">
+                    <div class="comm-val">
+                        <?php 
+                        $total_count=0;
+                        $c_count=0;
+                        foreach($levels as $level) {
+                            $firstValue = array_shift($level);
+                            if($firstValue=='Level 2'){
+                                $c_count = count($level['data']); 
                             }
                         }
-                        echo " "  .$income_with.""
-                    ?>RS</b>
+                        echo $c_count;
+                        ?>
+                    </div>
+                    <div class="comm-label">C-5%</div>
                 </div>
-               
+                <div class="comm-stat-box">
+                    <div class="comm-val">
+                        <?php 
+                        $d_count=0;
+                        foreach($levels as $level) {
+                            $firstValue = array_shift($level);
+                            if($firstValue=='Level 3'){
+                                $d_count = count($level['data']); 
+                            }
+                        }
+                        echo $d_count;
+                        ?>
+                    </div>
+                    <div class="comm-label">D-2%</div>
+                </div>
             </div>
-    
-            <div class="menuBody d-flex text-dark text-center justify-content-evenly gap-3 mt-3">
-                <div class="inner">
-                    <p>Today Income</p>
-                    <b><?php	
-                                $today_date = date('Y-m-d',strtotime("-1 days"));			
-                                $interest_label = 0;
-                                $query = mysqli_query($con,"select * from order_book where o_userid='$userid_access' ");
-                                if(mysqli_num_rows($query)>0)
-                                {
-                                    while($row=mysqli_fetch_array($query))
-                                    {
-                                        $o_amount = $row['o_amount'];
-                                        $interest_label = $interest_label + $o_amount;
-                                    }
-                                }
-                                //echo " "  .$interest_label.""
-                                 $interest_label;
-                              //echo   $formatted = sprintf("%0.2f", $interest_label);
-                            ?>
-                            </b><b><?php	
+            <a href="commission-record.php" class="btn-view-comm">View team commissions</a>
+        </div>
+    </div>
+
+    <!-- Stats Card -->
+    <div class="col-12">
+        <div class="detail-card">
+            <div class="wallet-header">
+                <div class="wallet-box">
+                    <p>Recharge wallet</p>
+                    <h4><?php echo $fran_bal; ?>RS</h4>
+                </div>
+                <div class="wallet-box">
+                    <p>Balance wallet</p>
+                    <h4><?php echo $current_bal; ?>RS</h4>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <p>Total profit</p>
+                    <h6><?php	
+                        $interest_label = 0;
+                        $query = mysqli_query($con,"select * from transaction where t_userid='$userid_access' AND t_type='Credit' AND t_details!='Account Recharge'");
+                        if(mysqli_num_rows($query)>0) {
+                            while($row=mysqli_fetch_array($query)) {
+                                $interest_label = $interest_label + $row['t_amount'];
+                            }
+                        }
+                        echo $interest_label;
+                    ?></h6>
+                </div>
+                <div class="stat-item">
+                    <p>Team income</p>
+                    <h6><?php	
+                        $interest_label = 0;
+                        $query = mysqli_query($con,"select * from interest_label where int_userid='$userid_access'");
+                        if(mysqli_num_rows($query)>0) {
+                            while($row=mysqli_fetch_array($query)) {
+                                $interest_label = $interest_label + $row['int_amount'];
+                            }
+                        }
+                        echo sprintf("%0.2f", $interest_label);
+                    ?></h6>
+                </div>
+                <div class="stat-item">
+                    <p>Income today</p>
+                    <h6><?php	
                         $today_date = date('Y-m-d');			
                         $interest_label = 0;
                         $query = mysqli_query($con,"select * from transaction where t_userid='$userid_access' AND t_type='Credit' AND t_details!='Account Recharge' AND t_date='$today_date'");
-                        if(mysqli_num_rows($query)>0)
-                        {
-                            while($row=mysqli_fetch_array($query))
-                            {
-                                $o_amount = $row['t_amount'];                                        
-                                $interest_label = $interest_label + $o_amount;
+                        if(mysqli_num_rows($query)>0) {
+                            while($row=mysqli_fetch_array($query)) {
+                                $interest_label = $interest_label + $row['t_amount'];
                             }
                         }
-                        echo " "  .$interest_label.""
-                            ?>
-                            RS</b>
+                        echo $interest_label;
+                    ?></h6>
                 </div>
-                <div class="inner">
-                    <p>Team Income</p>
-                    <b><?php	
-                                $today_date = date('Y-m-d',strtotime("-1 days"));			
-                                $interest_label = 0;
-                                $query = mysqli_query($con,"select * from interest_label where int_userid='$userid_access'");
-                                if(mysqli_num_rows($query)>0)
-                                {
-                                    while($row=mysqli_fetch_array($query))
-                                    {
-                                        $o_id = $row['int_id'];
-                                        $o_amount = $row['int_amount'];
-                                        
-                                        $interest_label = $interest_label + $o_amount;
-                                    }
-                                }
-                                //echo " "  .$interest_label.""
-                              echo   $formatted = sprintf("%0.2f", $interest_label);
-                            ?>RS</b>
+                <div class="stat-item">
+                    <p>Total loss</p>
+                    <h6>0.00</h6> <!-- Not implemented in db call -->
                 </div>
-                <div class="inner">
-                    <p>Total Income</p>
-                    <b><?php	
-                        $today_date = date('Y-m-d');			
-                        $interest_label = 0;
-                        $query = mysqli_query($con,"select * from transaction where t_userid='$userid_access' AND t_type='Credit' AND t_details!='Account Recharge'");
-                        if(mysqli_num_rows($query)>0)
-                        {
-                            while($row=mysqli_fetch_array($query))
-                            {
-                                $o_amount = $row['t_amount'];                                        
-                                $interest_label = $interest_label + $o_amount;
-                            }
-                        }
-                        echo " "  .$interest_label.""
-                            ?>RS</b>
+                <div class="stat-item">
+                    <p>Today's loss</p>
+                    <h6>0.00</h6>
                 </div>
-               
-            </div>
-        </div>
-        
-    </div>
-
-    <!-- <div class="col-12 mt-3">
-        <div class="card">
-            <a href="" class="text-decoration-none card-body d-flex justify-content-between">
-                <p>My integral</p>
-                <div class="right d-flex align-items-center gap-2">
-                    <b class="">0</b>
-                    <i class="bi bi-chevron-right"></i>
+                <div class="stat-item">
+                    <p>Product</p>
+                    <h6>0.00</h6>
                 </div>
-            </a>
-           
-        </div>
-    </div> -->
-
-    <div class="col-12 commissionBox mt-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="inner">
-                <p>B-10%</p>
-                    <p><?php echo $direct_refer=  mysqli_num_rows(mysqli_query($con, "select * from user where under_userid='$userid_access'")); ?></p>
-                </div>
-
-                <div class="inner">
-                <p>C-5%</p>
-
-                    <p><?php 
-                        $total_count=0;
-                        
-                        foreach($levels as $level) 
-                        {
-
-                            $label_count= count($level['data']); 
-                            $total_count = ($total_count + $label_count);
-                                $firstValue = array_shift($level);
-                                if($firstValue=='Level 2'){
-                                 echo $label_counts= count($level['data']); 
-                                }
-                        }
-                        ?></p>
-                </div>
-
-                <div class="inner">
-                <p>D-2%</p>
-
-                    <p><?php 
-                    $total_count=0;
-                    foreach($levels as $level) 
-                    {
-                        $label_count= count($level['data']); 
-                        $total_count = ($total_count + $label_count);
-                            $firstValue = array_shift($level);
-                            if($firstValue=='Level 3'){
-                            echo $label_counts= count($level['data']); 
-                            }
-                    }
-                    ?></p>
-                </div>
-
-               
-            </div>
-
-            <div class="btnBox d-grid px-3">
-                <a href="commission-record.php" class="btn bg-dark rounded-pill mb-3 text-white text-center" style="font-size: 17px; padding: 10px 0;">View team commissions</a>
             </div>
         </div>
     </div>
 
     
-    <!-- icons menus  -->
-    <div class="col-12 mt-3 icon-menu">
-        <div class="card menuBox2 p-2 py-3">
-            <div class="menuBody d-flex text-dark text-center justify-content-evenly gap-2">
-                <a href="myproducts.php" class="inner">
-                    <img src="img/iconme/1.png" alt="">
+    <!-- Navigation Grid -->
+    <div class="col-12">
+        <div class="bottom-icons-wrap">
+            <div class="nav-grid">
+                <a href="myproducts.php" class="nav-item">
+                    <i class="bi bi-grid"></i>
                     <p>My product</p>
-                  
                 </a>
-                <a href="mycoupon.php" class="inner">
-                    <img src="img/iconme/2.png" alt="">
+                <a href="mycoupon.php" class="nav-item">
+                    <i class="bi bi-ticket-perforated"></i>
                     <p>Coupon</p>
-                  
                 </a>
-                <a href="funding-details.php" class="inner">
-                    <img src="img/iconme/3.png" alt="">
+                <a href="funding-details.php" class="nav-item">
+                    <i class="bi bi-receipt"></i>
                     <p>Funding details</p>
-                  
                 </a>
-                <a href="bindbank.php" class="inner">
-                    <img src="img/iconme/4.png" alt="">
-                    <p>Bind bank account</p>
-                  
-                </a>
-               
-            </div>
-    
-            <div class="menuBody d-flex text-dark text-center justify-content-evenly gap-2">
-                <a href="redeembonus.php" class="inner">
-                    <img src="img/iconme/5.png" alt="">
+                <a href="redeembonus.php" class="nav-item">
+                    <i class="bi bi-gift"></i>
                     <p>Redeem bonus</p>
-                  
                 </a>
-                <a href="invitiation.php"  class="inner">
-                    <img src="img/iconme/6.png" alt="">
+                <a href="invitiation.php" class="nav-item">
+                    <i class="bi bi-envelope-paper"></i>
                     <p>Invitation</p>
-                  
                 </a>
-                <a href="myteams.php"  class="inner">
-                    <img src="img/iconme/7.png" alt="">
-                    <p>My teams</p>
-                  
-                </a>
-                <a href="services.php"  class="inner">
-                     <img src="img/iconme/8.png" alt="">
+                <a href="services.php" class="nav-item">
+                    <i class="bi bi-chat-dots"></i>
                     <p>Customer service</p>
                 </a>
-                
-
-            <!--<button class="inner" onclick="openServicemodal()" style="background-color: transparent; border: 0;">
-                 <img src="img/iconme/8.png" alt="">
-                 <p>   Customer service</p>
-            </button> -->
-                
-               
-            </div>
-
-            <div class="menuBody d-flex text-dark text-center justify-content-evenly gap-2">
-               <!-- <a href="reward.php"  class="inner text-center">
-                    <img src="img/iconme/10.png" class="text-center" alt="">
-                    <p>Reward </p>
-                  
-                </a>-->
-                 <a href="oceanfoodco.apk"  class="inner" target="_blank">
-                    <img src="img/iconme/9.png" alt="">
-                    <p>App</p>
-                  
-                </a>
-                <a href="" class="inner"></a>
-                <a href="" class="inner"></a>
-               
             </div>
         </div>
-        
     </div>
 
   </div>
