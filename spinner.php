@@ -98,13 +98,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       /* Result Display */
       #result {
-        background: #222222cc;
-        padding: 20px;
+        background: transparent;
+        padding: 5px 20px;
         border-radius: 50px;
-        margin-top: 20px;
+        margin-top: 10px;
         font-size: 1.5rem;
         text-align: center;
         text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+        min-height: 35px;
       }
 
       /* Audio Files (Hidden) */
@@ -137,13 +138,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <audio id="applause" src="./applause.mp3" type="audio/mp3"></audio>
     <audio id="wheel" src="./wheel.mp3" type="audio/mp3"></audio>
     <br>
-    <div style=" background: #4e4148; padding: 10px; "><p><b>Lottery rules:</b></p>
-
-<p>1: New members can get corresponding (big wheel) lucky draw opportunity by purchasing and activating any product.</p>
-
-<p>2: Invite friends to join any product through the exclusive link, and you will get corresponding lucky draw opportunity (big wheel)</p>
-
-<p>3: When you get the lottery opportunity, please be sure to participate in the lottery in time. The (big wheel lucky draw) opportunity is valid for 1 day. The system will automatically clear it at 00:00am.</p></div>
+    <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; margin: 0 15px; font-size: 14px; line-height: 1.5;">
+        <p style="margin-bottom: 10px; color: #FFCE82;"><b>Lottery rules:</b></p>
+        <p style="margin-bottom: 8px;">1: New members can get corresponding (big wheel) lucky draw opportunity by purchasing and activating any product.</p>
+        <p style="margin-bottom: 8px;">2: Invite friends to join any product through the exclusive link, and you will get corresponding lucky draw opportunity (big wheel)</p>
+        <p style="margin-bottom: 0;">3: When you get the lottery opportunity, please be sure to participate in the lottery in time. The (big wheel lucky draw) opportunity is valid for 1 day. The system will automatically clear it at 00:00am.</p>
+    </div>
     <script>
       function spin() {
         // Disable the spin button
