@@ -4,8 +4,37 @@ session_start();
 
 // Check if spin is initiated via POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Generate a random number between 0 and 500
-    $spinResult = rand(0, 500);
+    // Determine the prize: 80% chance to win Cash
+    $rand = rand(1, 100);
+    $itemIndex = 3; // Default to Cash
+    $amount = 0;
+    $itemName = 'Cash';
+
+    if ($rand <= 80) { // Mostly cash
+        $itemIndex = 3;
+        $amount = rand(5, 50); // Amount between 5 and 50
+        $itemName = 'Cash';
+    } else {
+        // distribute remaining 20% among other 7 items
+        $others = [0, 1, 2, 4, 5, 6, 7];
+        $itemIndex = $others[array_rand($others)];
+        $names = [
+            0 => 'Ticket',
+            1 => 'Voucher',
+            2 => 'Phone',
+            4 => 'Speaker',
+            5 => 'Earbuds',
+            6 => 'Camera',
+            7 => 'Watch'
+        ];
+        $itemName = $names[$itemIndex];
+    }
+
+    $spinResult = [
+        'index' => $itemIndex,
+        'amount' => $amount,
+        'item' => $itemName
+    ];
 
     // Store the spin result in a session variable
     if (!isset($_SESSION['spin_results'])) {
@@ -15,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Return result as JSON
     header('Content-Type: application/json');
-    echo json_encode(['amount' => $spinResult]);
+    echo json_encode($spinResult);
     exit;
 }
 ?>
@@ -189,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
       const numBoxes = 8;
       let currentIdx = 0;
-      let finalAmount = 0;
+      let finalData = null;
       let spinning = false;
 
       function spin() {
@@ -208,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         fetch("", { method: "POST" })
           .then((response) => response.json())
           .then((data) => {
-            finalAmount = data.amount;
+            finalData = data;
             startGridAnimation();
           })
           .catch((error) => {
@@ -222,7 +251,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       function startGridAnimation() {
         let speed = 40; // initial fast speed in ms
         let steps = 0;
-        let maxSteps = 40 + Math.floor(Math.random() * 10); // Randomize number of steps before slowing down
+        
+        // Calculate the exact number of steps required to land on the chosen index
+        // We will spin 4 full cycles plus the difference to the target item
+        let distance = (finalData.index - currentIdx + numBoxes) % numBoxes;
+        let totalSteps = (4 * numBoxes) + distance; 
         
         function animateCycle() {
           // Remove active from all
@@ -232,15 +265,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           // Add active to current
           document.getElementById(`box-${currentIdx}`).classList.add('active');
           
-          currentIdx = (currentIdx + 1) % numBoxes;
-          steps++;
-
-          if (steps > maxSteps) {
-            speed += 20; // Start decelerating
-          }
-
-          if (speed >= 350) {
-            // Stop spinning
+          if (steps === totalSteps) {
+            // Exact target reached! Stop spinning.
             const wheelAudio = document.getElementById("wheel");
             wheelAudio.pause();
             wheelAudio.currentTime = 0;
@@ -250,7 +276,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Show Result
             setTimeout(() => {
                 const resultBox = document.getElementById("result");
-                resultBox.innerHTML = `🎉 You won <br> <b>₹${finalAmount}!</b><br><small style="font-size: 14px; opacity: 0.8;">(Tap to close)</small>`;
+                let resultText = '';
+                if (finalData.item === 'Cash') {
+                    resultText = `🎉 You won <br> <b>₹${finalData.amount} Cash!</b>`;
+                } else {
+                    resultText = `🎉 You won <br> <b>${finalData.item}!</b>`;
+                }
+                
+                resultBox.innerHTML = `${resultText}<br><small style="font-size: 14px; opacity: 0.8;">(Tap to close)</small>`;
                 resultBox.style.display = "block";
                 
                 // Clicking anywhere on modal hides it
@@ -267,7 +300,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }, 500);
             return;
           }
+          
+          steps++;
+          let remainingSteps = totalSteps - steps;
+          
+          // Start slowing down gradually during the final 10 steps
+          if (remainingSteps < 10) {
+            speed += 30; // increase delay (decelerate)
+          }
 
+          currentIdx = (currentIdx + 1) % numBoxes;
           setTimeout(animateCycle, speed);
         }
 
