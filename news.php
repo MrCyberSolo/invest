@@ -164,7 +164,7 @@ header .line{
 
     </style>
   
-    <style>body, .appCapsule { background-color: #005b6e !important; }</style>
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
 </head>
   <body>
    <div class="appCapsule" style="padding-bottom: 70px;">
