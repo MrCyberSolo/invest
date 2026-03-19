@@ -14,305 +14,242 @@ include('user_menu/database_connect.php');
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <title>Product</title>
 
-    <!-- bootstrap icons link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-       :root{
-        --dark-blue:#213955;
-        --light-blue:#005a36;
-        --yellow:#005a36;
-        
+       :root {
+          --brand-green: #007749;
+          --brand-dark: #005a36;
+          --text-main: #1e293b;
+          --text-muted: #64748b;
+          --card-bg: #ffffff;
        }
 
-       p, h1, h2, h3, h4, h5, h6{
-        margin: 0;
+       body, html {
+          background-color: var(--brand-green) !important;
+          font-family: 'Inter', sans-serif;
+          -webkit-font-smoothing: antialiased;
+          margin: 0;
+          padding: 0;
        }
 
-       .appCapsule, .footerBox{
-        max-width: 641px;
-        /* background-color: #005a36; */
-        margin: auto;
-
+       .appCapsule {
+          max-width: 641px;
+          margin: auto;
+          min-height: 100vh;
+          background-color: var(--brand-green);
+          padding-bottom: 90px;
        }
 
-       .appCapsule{
-        padding-bottom: 5rem;
+       .page-header {
+          padding: 16px;
+          position: sticky;
+          top: 0;
+          background: rgba(0, 119, 73, 0.95);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          z-index: 50;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
        }
 
-       /* body{
-        background-color: #005a36;
-       } */
+       .headerTab {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin: 0;
+       }
 
-       
+       .headerTab a {
+          text-decoration: none;
+          color: var(--brand-green);
+          background-color: #ffffff;
+          padding: 10px 24px;
+          border-radius: 24px; /* pill shape */
+          font-weight: 600;
+          font-size: 15px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: transform 0.2s, box-shadow 0.2s;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          -webkit-tap-highlight-color: transparent;
+       }
 
+       .headerTab a:active {
+           transform: scale(0.95);
+       }
 
-/* ==========================  */
-/* footer section   */
-.footerBox .active2{
-  color:#005a36 ;
-}
+       .products-grid {
+           padding: 16px;
+           display: grid;
+           grid-template-columns: repeat(2, 1fr);
+           gap: 16px;
+       }
 
-header .line{
-  width: 30px;
-  height: 2px;
-  border-radius: 40px;
-  background-color: var(--yellow);
-  margin:5px auto;
-}
+       .product-card {
+           background: var(--card-bg);
+           border-radius: 20px;
+           overflow: hidden;
+           box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+           display: flex;
+           flex-direction: column;
+           text-decoration: none;
+           transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.2s ease;
+           -webkit-tap-highlight-color: transparent;
+           height: 100%;
+       }
 
-       .footerBox{
-  display: flex;
-  background-color: white;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-  /* padding: 5px 0; */
-  height: 60px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-}
+       .product-card:active {
+           transform: scale(0.96);
+           box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+       }
 
-.footerBox img{
-  width: 24px;
-}
+       .product-image-wrapper {
+           background-color: #f8fafc;
+           padding: 16px;
+           text-align: center;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           height: 120px;
+       }
 
-  footer .inner p{
-    font-size: 13px;
-  }
-  
+       .product-image {
+           max-width: 100%;
+           max-height: 100px;
+           object-fit: contain;
+           filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08));
+       }
 
-.footerBox a{
-  text-decoration: none;
-  color: #CCCCCC;
-  
-}
+       .product-content {
+           padding: 16px;
+           display: flex;
+           flex-direction: column;
+           flex: 1;
+       }
 
-.footerBox .me-icon img{
-    width: 28px;
+       .product-title {
+           font-size: 15px;
+           font-weight: 700;
+           color: var(--text-main);
+           margin-bottom: 12px;
+           line-height: 1.3;
+           display: -webkit-box;
+           -webkit-line-clamp: 2;
+           -webkit-box-orient: vertical;
+           overflow: hidden;
+       }
 
-}
+       .product-stats {
+           display: flex;
+           flex-direction: column;
+           gap: 8px;
+           margin-bottom: 16px;
+           flex: 1;
+       }
 
+       .stat-row {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           font-size: 12px;
+       }
 
-       
-/* end footer section   */   
-/* ==========================  */
+       .stat-label {
+           color: var(--text-muted);
+           font-weight: 500;
+       }
 
-/* product page ================  */
-/* product page ================  */
-.product-section {
-  padding: 0 10px;
-}
+       .stat-value {
+           color: var(--text-main);
+           font-weight: 600;
+       }
 
-.product-section .card {
-  width: 100%;
-  height: 100%;
-  padding: 0 !important;
-  background-color: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-}
+       .val-highlight {
+           color: var(--brand-green);
+           font-weight: 700;
+       }
 
-.product-section .card-img {
-    width: 100%;
-    position: relative;
-    background: white;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.product-section img {
-    max-width: 100%;
-    max-height: 120px;
-    object-fit: contain;
-}
-
-.product-name-banner {
-    background-color: #005a36;
-    color: white;
-    text-align: center;
-    padding: 6px 4px;
-    font-size: 11px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.product-section .card-text {
-    width: 100%;
-    background-color: white;
-    padding: 10px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-section .card-title {
-    font-weight: bold;
-    color: #333;
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.product-section .card-body {
-  padding: 0;
-  background-color: transparent;
-}
-
-.product-section .inner small {
-  color: #666;
-  font-size: 11px;
-}
-
-.product-section .inner small.val {
-  color: #333;
-  font-weight: 500;
-}
-
-.product-section .inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 4px;
-}
-
-.view-project-btn {
-    background-color: #009a5f; 
-    color: white !important;
-    border-radius: 20px;
-    font-size: 12px;
-    padding: 6px 0;
-    text-align: center;
-    text-decoration: none;
-    width: 100%;
-    margin-top: 10px;
-    display: inline-block;
-    border: none;
-}
-
-
-.headerTab a{
-  text-decoration: none;
-  color: white;
-  padding: 7px;
-  width: 47%;
-  text-align: center;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  background-color: #ffffff;
-  color:black;
-  transition: .4s;
-
-}
-
-.headerTab .active{
-      background-color: #005a36;
-    color: #fff;
-}
-
-.headerTab a:hover{
-  background-color: #F5F5F5;
-}
-
-.product-section a{
-  text-decoration: none;
-}
-    
+       .view-btn {
+           background-color: var(--brand-green);
+           color: white;
+           text-align: center;
+           padding: 10px 0;
+           border-radius: 12px;
+           font-size: 13px;
+           font-weight: 600;
+           margin-top: auto;
+           display: block;
+           transition: background-color 0.2s;
+       }
     </style>
-  
-    <style>body, .appCapsule { background-color: #007749 !important; }</style>
-</head>
+  </head>
   <body>
-<div class="appCapsule container">
-    <header class="mt-3">
-        <!-- <div class="header-title text-center py-3">
-            <h5>Product</h5>
-            <div class="line"></div>
-        </div> -->
+    <div class="appCapsule">
+       <header class="page-header">
+          <div class="headerTab">
+            <a href="product.php" class="active">
+              <i class="bi bi-gear-fill"></i> H-power
+            </a>
+          </div>
+       </header>
 
-        <div class="headerTab d-flex justify-content-around">
-          <a href="product.php" class="active">
-            <i class="bi bi-gear-fill"></i> H-power</a>
-         <!-- <a href="product_2.php">LAY'S</a>-->
-        </div>
+       <div class="products-grid">
+       <?php
+          $result = mysqli_query($con,"SELECT * FROM `package` WHERE `status`='Active' AND `pa_type`='User'"); 
+          if (mysqli_num_rows($result) > 0) {
+             while ($row = mysqli_fetch_assoc($result)) {
+       ?>
+          <a href="product-details.php?pr_id=<?php echo htmlspecialchars($row["pa_id"]); ?>" class="product-card">
+              <div class="product-image-wrapper">
+                   <img src="asupport/package/<?php echo htmlspecialchars($row["pa_image"]);?>" class="product-image" alt="Product Image">
+              </div>
+              <div class="product-content">
+                 <h3 class="product-title"><?php echo htmlspecialchars($row["pa_name"]); ?></h3>
+                 
+                 <div class="product-stats">
+                    <div class="stat-row">
+                      <span class="stat-label">Price</span>
+                      <span class="stat-value">₹<?php echo number_format((float)$row["pa_amount"], 2); ?></span>
+                    </div>
 
-      
-  </header>
+                    <div class="stat-row">
+                      <span class="stat-label">Term</span>
+                      <span class="stat-value"><?php echo htmlspecialchars($row["pa_day"]); ?> days</span>
+                    </div>
 
+                    <div class="stat-row">
+                      <span class="stat-label">Daily</span>
+                      <span class="stat-value val-highlight">₹<?php echo number_format((float)$row["pa_com_amount"], 2); ?></span>
+                    </div>
 
+                    <div class="stat-row">
+                      <span class="stat-label">Profit</span>
+                      <span class="stat-value">₹<?php echo number_format((float)($row["pa_com_amount"] * $row["pa_day"]), 2); ?></span>
+                    </div>
+                 </div>
 
-<div class="row product-section gx-2 gy-2">
-<?php
-      $i=0;
-    $result = mysqli_query($con,"SELECT * FROM `package` WHERE `status`='Active' AND `pa_type`='User'"); 
-    if (mysqli_num_rows($result) > 0) {
-      // Output data of each row
-      while ($row = mysqli_fetch_assoc($result)) {
-          
-    ?>
- <div class="col-6 mb-2 mt-2">
-      <a href="product-details.php?pr_id=<?php echo $row["pa_id"]; ?>" class="text-decoration-none">
-        <div class="card">
-            
-            <div class="card-img">
-                 <img src="asupport/package/<?php echo $row["pa_image"];?>" alt="Product Image">
-            </div>
+                 <div class="view-btn">View project</div>                
+              </div>
+          </a>   
+       <?php  } } else { ?>
+           <div style="grid-column: 1 / -1; text-align: center; color: white; padding: 40px 20px;">
+               No active products found.
+           </div>
+       <?php } ?>   
+       </div>
 
-            <!-- Note: Replaced 🏅 with the screenshot's design (just name and blue banner above it if possible, here using banner for pa_name since it matches the layout better) -->
-            <div class="product-name-banner">
-                <?php echo $row["pa_name"]; ?>
-            </div>
-            
-            <div class="card-text">
-               <h6 class="card-title"><?php echo $row["pa_name"]; ?> - <?php echo $row["pa_amount"]; ?></h6>
-               
-                <div class="inner">
-                  <small>Price:</small>
-                  <small class="val"><?php echo $row["pa_amount"]; ?>.00RS</small>
-                </div>
+    </div>
 
-                <div class="inner">
-                  <small>Term:</small>
-                  <small class="val"><?php echo $row["pa_day"]; ?> days</small>
-                </div>
+    <!-- Footer Start Here -->
+    <?php include "user_menu/footer_menu.php";  ?>
+    <!-- Footer End Here -->
 
-                <div class="inner">
-                  <small>Daily income:</small>
-                  <small class="val"><?php echo $row["pa_com_amount"]; ?>RS</small>
-                </div>
-
-                <div class="inner">
-                  <small>Total profit:</small>
-                  <small class="val"><?php echo number_format((float)($row["pa_com_amount"] * $row["pa_day"]), 2, '.', ''); ?>RS</small>
-                </div>
-
-                <div class="mt-auto">
-                    <button class="view-project-btn">View project</button>
-                </div>                
-            </div>
-        </div>
-      </a>   
-</div>
-<?php  $i++; } } ?>   
-</div>
-<!-- Footer Start Here -->
-<?php include "user_menu/footer_menu.php";  ?>
-<!-- Footer End Here -->
-   
-
-</div>    <!--  end appCapsule  -->
-<!-- =================================== -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
