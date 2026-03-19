@@ -215,43 +215,68 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
            grid-template-columns: 1fr 1fr;
            gap: 12px;
            margin-bottom: 24px;
-           margin-top: -60px; /* Pull it up into the green area */
+           margin-top: -30px; 
            position: relative;
            z-index: 20;
        }
 
        .bal-card {
-           background: #ffffff;
-           border-radius: var(--card-radius);
-           padding: 20px;
-           box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+           border-radius: 20px;
+           padding: 16px;
            display: flex;
            flex-direction: column;
-           gap: 6px;
+           gap: 4px;
+           box-shadow: 0 10px 20px rgba(0,0,0,0.15);
            position: relative;
            overflow: hidden;
        }
 
-       .bal-card::before {
+       .primary-card {
+           background: linear-gradient(135deg, #1e293b, #334155);
+       }
+
+       .secondary-card {
+           background: linear-gradient(135deg, var(--brand-green), #059669);
+       }
+
+       .bal-card::after {
            content: '';
            position: absolute;
-           top: 0; right: 0;
-           width: 60px; height: 60px;
-           background: radial-gradient(circle, rgba(0,119,73,0.06) 0%, rgba(255,255,255,0) 70%);
+           right: -20px;
+           bottom: -20px;
+           width: 80px;
+           height: 80px;
+           background: rgba(255,255,255,0.06);
            border-radius: 50%;
        }
 
+       .card-top {
+           display: flex;
+           align-items: center;
+           gap: 6px;
+           position: relative;
+           z-index: 2;
+       }
+
+       .card-top i {
+           font-size: 15px;
+           color: rgba(255,255,255,0.85);
+       }
+
        .bal-label {
-           color: var(--font-muted);
+           color: rgba(255,255,255,0.85);
            font-size: 13px;
-           font-weight: 600;
+           font-weight: 500;
        }
 
        .bal-amount {
-           color: var(--font-dark);
-           font-size: 22px;
+           color: #ffffff;
+           font-size: 21px;
            font-weight: 800;
            letter-spacing: -0.5px;
+           position: relative;
+           z-index: 2;
+           padding-top: 4px;
        }
 
        /* Action Buttons */
@@ -505,12 +530,18 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
         <div class="main-sheet">
             <!-- Balances -->
             <div class="balance-grid">
-                <div class="bal-card">
-                    <span class="bal-label">Balance</span>
+                <div class="bal-card primary-card">
+                    <div class="card-top">
+                        <i class="bi bi-wallet2"></i>
+                        <span class="bal-label">Balance</span>
+                    </div>
                     <span class="bal-amount">₹<?php echo number_format((float)$current_bal, 2); ?></span>
                 </div>
-                <div class="bal-card">
-                    <span class="bal-label">Recharge Bal</span>
+                <div class="bal-card secondary-card">
+                    <div class="card-top">
+                        <i class="bi bi-safe"></i>
+                        <span class="bal-label">Recharge</span>
+                    </div>
                     <span class="bal-amount">₹<?php echo number_format((float)$fran_bal, 2); ?></span>
                 </div>
             </div>
