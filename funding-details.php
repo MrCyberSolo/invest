@@ -75,7 +75,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 <div class="appCapsule container ">
   <header class="row fixed-top">
         <div class="text-white py-3">
-            <a href="me.php" class="text-decoration-none px-3 text-white d-flex align-items-center justify-content-between">
+            <a href="javascript:history.back()" class="text-decoration-none px-3 text-white d-flex align-items-center justify-content-between">
                 <div class="left d-flex align-items-center">
                     <i class="bi bi-chevron-left"></i>
                     <small>Back</small>

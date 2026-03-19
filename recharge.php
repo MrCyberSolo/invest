@@ -206,7 +206,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
   <header class="row fixed-top">
         <div class="text-white py-3 ">
           <div   class="px-3 text-decoration-none  text-white d-flex align-items-center justify-content-between">
-               <a href="me.php" class="left d-flex align-items-center nav-link">
+               <a href="javascript:history.back()" class="left d-flex align-items-center nav-link">
                     <i class="bi bi-chevron-left"></i>
                     <small>Back</small>
                </a>

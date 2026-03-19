@@ -161,7 +161,7 @@ if(isset($_GET['pac']))
   <body>
     <div class="appCapsule">
        <header class="page-header">
-           <a href="news.php" class="back-btn">
+           <a href="javascript:history.back()" class="back-btn">
                <i class="bi bi-chevron-left"></i> Back
            </a>
            <h1 class="page-title">News Details</h1>
@@ -193,7 +193,7 @@ if(isset($_GET['pac']))
              <div class="text-center text-white py-5">
                  <h4>Article not found</h4>
                  <p class="mt-3 opacity-75">The news article you are looking for does not exist or has been removed.</p>
-                 <a href="news.php" class="btn btn-light mt-4 px-4 btn-sm" style="border-radius: 20px;">Back to News</a>
+                 <a href="javascript:history.back()" class="btn btn-light mt-4 px-4 btn-sm" style="border-radius: 20px;">Back to News</a>
              </div>
          <?php } ?>
        </div>

@@ -121,7 +121,7 @@ header .line{
     <header>
         <div class="text-white py-2">
             <!-- <a href=""><i class="bi bi-gear text-white"></i></a> -->
-            <a href="login.php" class="nav-link text-white d-flex align-items-center gap-1">
+            <a href="javascript:history.back()" class="nav-link text-white d-flex align-items-center gap-1">
             <i class="bi bi-chevron-left"></i>
             <small>Back</small>
         </a>

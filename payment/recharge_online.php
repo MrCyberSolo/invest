@@ -504,7 +504,7 @@ var countdown = setInterval(function() {
                            
                           
                         </template> <br>   
-                          <center><a href="../recharge.php">Back to Account</a></center>
+                          <center><a href="javascript:history.back()">Back to Account</a></center>
                     </div>
                 </div>
 

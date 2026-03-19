@@ -172,7 +172,7 @@ $amount = $_SESSION['amount'];
     <!-- App Header -->
     <div class="appheaders container">
         <div class="left">
-            <!--<a href="account.php" class="icon goBack">
+            <!--<a href="javascript:history.back()" class="icon goBack">
                 <i class="icon ion-ios-arrow-back"></i>
             </a>-->
         </div>

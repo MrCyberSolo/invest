@@ -109,7 +109,7 @@ $get_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `user` WHERE `em
   <header class="row fixed-top">
         <div class="text-white py-3 ">
             <div class="text-decoration-none px-3 text-white d-flex align-items-center justify-content-between">
-                <a href="me.php" class="nav-link left d-flex align-items-center">
+                <a href="javascript:history.back()" class="nav-link left d-flex align-items-center">
                     <i class="bi bi-chevron-left"></i>
                     <small>Back</small>
                 </a>

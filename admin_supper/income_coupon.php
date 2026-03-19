@@ -160,7 +160,7 @@ function showUser(str) {
 		<!--start overlay-->
 		<div class="overlay toggle-btn-mobile"></div>
 		<!--end overlay-->
-		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--Start Back To Top Button--> <a href="javascript:history.back()" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
 		<!--footer -->
 		<div class="footer">

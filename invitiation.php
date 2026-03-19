@@ -155,7 +155,7 @@ $userid_access = $_SESSION['username'];
   <header class="row fixed-top">
     <div class="text-white py-3">
       <div class="px-3 d-flex align-items-center justify-content-between">
-        <a href="home.php" class="text-white text-decoration-none left d-flex align-items-center">
+        <a href="javascript:history.back()" class="text-white text-decoration-none left d-flex align-items-center">
           <i class="bi bi-chevron-left"></i>
           <small>Back</small>
         </a>

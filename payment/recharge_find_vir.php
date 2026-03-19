@@ -351,7 +351,7 @@ if(isset($_POST['recharge'])) {
                             </form>
                           
                         </template> <br>   
-                          <center><a href="../account.php">Back to Account</a></center>
+                          <center><a href="javascript:history.back()">Back to Account</a></center>
                     </div>
                 </div>
 

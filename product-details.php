@@ -280,7 +280,7 @@ $userid = $userid_access;
   <body>
     <div class="appCapsule">
        <header class="page-header">
-           <a href="product.php" class="header-btn">
+           <a href="javascript:history.back()" class="header-btn">
                <i class="bi bi-chevron-left"></i> Back
            </a>
            <h1 class="page-title">Product Details</h1>
