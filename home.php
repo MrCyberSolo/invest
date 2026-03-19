@@ -49,9 +49,14 @@ if(isset($_SESSION['username'])) {
 
        /* Top Carousel Area */
        .hero-section {
-           position: relative;
-           padding: 0 16px;
+           display: flex;
+           align-items: center;
+           padding: 0 0 0 16px;
            margin-bottom: 24px;
+       }
+       
+       .carousel-container {
+           width: calc(100% - 110px);
        }
 
        .carousel-inner {
@@ -68,15 +73,12 @@ if(isset($_SESSION['username'])) {
 
        /* Floating Side Menu */
        .floating-right-menu {
-           position: absolute;
-           top: 50%;
-           transform: translateY(-50%);
-           right: 0;
+           width: 110px;
            display: flex;
            flex-direction: column;
            gap: 8px;
-           z-index: 10;
            align-items: flex-end;
+           padding-left: 10px;
        }
 
        .floating-btn {
@@ -84,17 +86,17 @@ if(isset($_SESSION['username'])) {
            backdrop-filter: blur(10px);
            -webkit-backdrop-filter: blur(10px);
            color: white;
-           padding: 8px 12px 8px 14px;
+           padding: 8px 8px 8px 12px;
            border-radius: 24px 0 0 24px;
-           font-size: 12px;
+           font-size: 11.5px;
            font-weight: 500;
            display: flex;
            align-items: center;
-           gap: 8px;
+           gap: 6px;
            box-shadow: -4px 4px 12px rgba(0,0,0,0.1);
-           border: 1px solid rgba(255,255,255,0.1);
+           border: 1px solid rgba(255,255,255,0.15);
            border-right: none;
-           width: 120px;
+           width: 100%;
            transition: transform 0.2s, background 0.2s;
        }
 
@@ -411,18 +413,20 @@ if(isset($_SESSION['username'])) {
 
       <!-- Hero Slider & Floating Menu -->
       <div class="hero-section">
-          <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="img/1.jpg" alt="Banner 1">
+          <div class="carousel-container">
+            <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="img/1.jpg" alt="Banner 1">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/3.jpg" alt="Banner 2">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/2.jpg" alt="Banner 3">
+                  </div>
                 </div>
-                <div class="carousel-item">
-                  <img src="img/3.jpg" alt="Banner 2">
-                </div>
-                <div class="carousel-item">
-                  <img src="img/2.jpg" alt="Banner 3">
-                </div>
-              </div>
+            </div>
           </div>
           
           <div class="floating-right-menu">
