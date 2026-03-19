@@ -1,307 +1,426 @@
-<?PHP 
+<?php 
+session_start();
 include('user_menu/database_connect.php');
-//$userid_access = $_SESSION['username'];
+if(isset($_SESSION['username'])) {
+    $userid_access = $_SESSION['username'];
+}
 ?>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
     <title>Home</title>
 
-    <!-- bootstrap icons link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
     <style>
-       :root{
-        --blue:#213955;
+       :root {
+          --brand-green: #007749;
+          --font-dark: #1e293b;
+          --font-muted: #64748b;
+          --bg-gray: #f8fafc;
+          --accent-blue: #0284c7;
+          --accent-gold: #f59e0b;
        }
 
-       p, h1, h2, h3, h4, h5, h6{
-        margin: 0;
+       body, html {
+          background-color: var(--brand-green) !important;
+          font-family: 'Inter', sans-serif;
+          -webkit-font-smoothing: antialiased;
+          margin: 0;
+          padding: 0;
        }
 
-       .appCapsule, .footerBox{
-        max-width: 641px;
-         /* background-color: #009a5f; */
-      
-        margin: auto;
+       p, h1, h2, h3, h4, h5, h6 { margin: 0; }
+       a { text-decoration: none; }
+
+       .appCapsule {
+          max-width: 641px;
+          margin: auto;
+          min-height: 100vh;
+          background-color: var(--brand-green);
+          padding-bottom: calc(90px + env(safe-area-inset-bottom));
+          padding-top: max(16px, env(safe-area-inset-top));
+          overflow-x: hidden;
        }
 
-       .appCapsule{
-        padding-bottom: 4rem;
-        
+       /* Top Carousel Area */
+       .hero-section {
+           position: relative;
+           padding: 0 16px;
+           margin-bottom: 24px;
        }
 
-   
-
-       header .carousel img{
-        max-height:250px ;
-        height: auto;
-        border-radius: 5px;
+       .carousel-inner {
+           border-radius: 20px;
+           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+           overflow: hidden;
        }
 
-       /* .headerBox .cardBox{
-        background-color:white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        padding: 16px 0;
-        border-radius: 5px;
+       .carousel-item img {
+           height: 220px;
+           object-fit: cover;
+           width: 100%;
        }
 
-       .headerBox img{
-        width: 40px;
-        height: 100%;
-
-        
+       /* Floating Side Menu */
+       .floating-right-menu {
+           position: absolute;
+           top: 50%;
+           transform: translateY(-50%);
+           right: 0;
+           display: flex;
+           flex-direction: column;
+           gap: 8px;
+           z-index: 10;
+           align-items: flex-end;
        }
 
-       .headerBox .cardBox h6{
-        margin: 0;
-       } */
-
-   
-
-       .menuBox{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: white;
-        padding-top: 7px;
+       .floating-btn {
+           background: rgba(255, 255, 255, 0.15);
+           backdrop-filter: blur(10px);
+           -webkit-backdrop-filter: blur(10px);
+           color: white;
+           padding: 8px 12px 8px 14px;
+           border-radius: 24px 0 0 24px;
+           font-size: 12px;
+           font-weight: 500;
+           display: flex;
+           align-items: center;
+           gap: 8px;
+           box-shadow: -4px 4px 12px rgba(0,0,0,0.1);
+           border: 1px solid rgba(255,255,255,0.1);
+           border-right: none;
+           width: 120px;
+           transition: transform 0.2s, background 0.2s;
        }
 
-       .menuBox a{
-        width: 100%;
-        text-decoration: none;
-        color: #ddd;
-        /* background-color: #007749; */
-        width: 100%;
-        height:80px;
-        margin:0 5px;
-        padding: 10px 0;
-        border-radius: 10px;
-        transition: .3s;
+       .floating-btn:active {
+           transform: scale(0.95) translateX(-5px);
+           background: rgba(255, 255, 255, 0.25);
        }
 
-       .menuBox a:hover{
-        background-color: #0254a5;
+       .floating-btn i {
+           font-size: 15px;
+           color: #fff;
        }
 
-       .menuBox img{
-        width: 40px;
+       .floating-btn span {
+           white-space: nowrap;
+           overflow: hidden;
+           text-overflow: ellipsis;
        }
 
-       .menuBox i{
-        font-size: 25px;
-        color:white; 
+       /* Notice Marquee */
+       .notice-bar {
+           background: rgba(255, 255, 255, 0.1);
+           backdrop-filter: blur(10px);
+           margin: 0 16px 24px;
+           border-radius: 16px;
+           padding: 12px 16px;
+           display: flex;
+           align-items: center;
+           gap: 12px;
+           border: 1px solid rgba(255,255,255,0.05);
        }
 
-       .menuBox p{
-        font-size: 12px;
-        color:white;
+       .notice-icon {
+           color: var(--accent-gold);
+           font-size: 20px;
+           display: flex;
+           align-items: center;
        }
 
-       .textBox .inner{
-        background-color: #1761d1;
-        padding: 5px 12px;
-        border-radius: 8px;
-        margin-top: -5px;
+       .notice-text {
+           flex: 1;
+           color: white;
+           font-size: 15px;
+           font-weight: 500;
+           white-space: nowrap;
+           overflow: hidden;
        }
 
-       .textBox .inner i{
-        color: #ffb854;
-        font-size: 22px;
+       /* Main Quick Actions Grid */
+       .quick-actions-grid {
+           display: grid;
+           grid-template-columns: repeat(4, 1fr);
+           gap: 12px;
+           padding: 0 16px;
+           margin-bottom: 32px;
        }
 
-       .newsSection .inner{
-        border-bottom: 1px solid #dddddd5e;
-        padding: 10px 5px;
+       .action-item {
+           background: #ffffff;
+           border-radius: 20px;
+           padding: 16px 8px;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           gap: 8px;
+           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+           transition: transform 0.2s;
        }
 
+       .action-item:active {
+           transform: scale(0.92);
+       }
 
+       .action-icon {
+           width: 46px;
+           height: 46px;
+           border-radius: 14px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-size: 24px;
+       }
 
+       .icon-green { background: rgba(0, 119, 73, 0.1); color: var(--brand-green); }
+       .icon-blue { background: rgba(2, 132, 199, 0.1); color: var(--accent-blue); }
+       .icon-orange { background: rgba(245, 158, 11, 0.1); color: var(--accent-gold); }
+       .icon-purple { background: rgba(147, 51, 234, 0.1); color: #9333ea; }
 
+       .action-label {
+           color: var(--font-dark);
+           font-size: 13px;
+           font-weight: 600;
+           text-align: center;
+       }
 
-/* ==========================  */
-/* footer section   */
+       /* Task & Video Section */
+       .media-section {
+           background: #ffffff;
+           border-radius: 32px 32px 0 0;
+           padding: 32px 20px 20px;
+           min-height: 400px;
+           box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.1);
+       }
 
-header .line{
-  width: 30px;
-  height: 2px;
-  border-radius: 40px;
-  background-color: var(--yellow);
-  margin:5px auto;
-}
+       .section-title {
+           font-size: 18px;
+           font-weight: 700;
+           color: var(--font-dark);
+           margin-bottom: 16px;
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+       }
 
-       .footerBox{
-  display: flex;
-  background-color: white;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-  /* padding: 5px 0; */
-  height: 60px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-}
+       .section-title-link {
+           font-size: 14px;
+           color: var(--font-muted);
+           font-weight: 600;
+           display: flex;
+           align-items: center;
+           gap: 4px;
+       }
 
-/*.footerBox img, i{*/
-/*  width: 20px;*/
-/*}*/
+       .video-wrapper {
+           border-radius: 20px;
+           overflow: hidden;
+           background: #000;
+           margin-bottom: 24px;
+           box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+           position: relative;
+           padding-top: 56.25%; /* 16:9 Aspect Ratio */
+       }
 
-.footerBox .active1{
-  color:#007749 ;
-}
+       .video-wrapper video {
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           object-fit: cover;
+       }
 
-  footer .inner p{
-    font-size: 13px;
-  }
-  
+       .task-banners {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 16px;
+           margin-bottom: 32px;
+       }
 
-.footerBox a{
-  text-decoration: none;
-  color: #CCCCCC;
-  
-}
+       .task-card {
+           background: var(--bg-gray);
+           border-radius: 16px;
+           overflow: hidden;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+           display: flex;
+           flex-direction: column;
+           transition: transform 0.2s;
+       }
 
-.footerBox .me-icon img{
-    width: 28px;
+       .task-card:active {
+           transform: scale(0.96);
+       }
 
-}
+       .task-card img {
+           width: 100%;
+           height: 100px;
+           object-fit: cover;
+       }
 
+       .task-card-label {
+           padding: 12px 8px;
+           text-align: center;
+           font-size: 13px;
+           font-weight: 600;
+           color: var(--font-dark);
+       }
 
+       /* News Items */
+       .news-list {
+           display: flex;
+           flex-direction: column;
+           gap: 16px;
+       }
+
+       .news-item {
+           display: flex;
+           gap: 16px;
+           background: white;
+           border: 1px solid rgba(0,0,0,0.04);
+           border-radius: 16px;
+           padding: 12px;
+           align-items: center;
+           box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+           transition: transform 0.2s;
+       }
+
+       .news-item:active {
+           transform: scale(0.97);
+       }
+
+       .news-thumb {
+           width: 80px;
+           height: 80px;
+           border-radius: 12px;
+           object-fit: cover;
+       }
+
+       .news-info {
+           flex: 1;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+       }
+
+       .news-title {
+           font-size: 15px;
+           font-weight: 600;
+           color: var(--font-dark);
+           line-height: 1.4;
+           display: -webkit-box;
+           -webkit-line-clamp: 2;
+           -webkit-box-orient: vertical;
+           overflow: hidden;
+       }
+
+       /* Modern Popup Toast */
+       .modern-toast {
+            position: fixed;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-align: center;
+            z-index: 99999;
+            font-weight: 500;
+            font-size: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            animation: slideDownToast 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+       }
+
+       @keyframes slideDownToast {
+           from { opacity: 0; transform: translate(-50%, -20px); }
+           to { opacity: 1; transform: translate(-50%, 0); }
+       }
        
-/* end footer section   */   
-/* ==========================  */
+       /* Modal */
+       .modal {
+           display: none;
+           position: fixed;
+           z-index: 9999;
+           left: 0;
+           top: 0;
+           width: 100%;
+           height: 100%;
+           background-color: rgba(0,0,0,0.6);
+           backdrop-filter: blur(4px);
+       }
 
-          .toggleContent{
-            display: none;
-          }
+       .modal-content {
+           background-color: #fefefe;
+           margin: 20vh auto;
+           padding: 24px;
+           width: 85%;
+           max-width: 400px;
+           border-radius: 24px;
+           box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+           text-align: center;
+           position: relative;
+           animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+       }
 
+       @keyframes zoomIn {
+           from { opacity: 0; transform: scale(0.9); }
+           to { opacity: 1; transform: scale(1); }
+       }
 
-.headerBox{
-    background-color:white;
-    text-align: center;
-    border-radius: 15px;
-    padding: 25px;
+       .modal-logo {
+           width: 120px;
+           height: 120px;
+           margin: -60px auto 16px;
+           background: white;
+           padding: 10px;
+           border-radius: 50%;
+           box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+           object-fit: contain;
+       }
 
-}
+       .modal-text {
+           font-size: 15px;
+           color: var(--font-muted);
+           line-height: 1.6;
+           margin-bottom: 24px;
+       }
 
-.headerBox a{
-    text-decoration: none;
-    color: #272727;
-}
-
-.headerBox img{
-    width: 2rem;
-    margin-bottom: 5px;
-}
-
-.menuBody p{
-    font-size: 12px;
-
-}
-
-.task-img img{
-    width:100%;
-    height:80%;
-}
-
-.floating-right-menu {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 10;
-    align-items: flex-end;
-}
-
-.floating-btn {
-    background: #009a5f;
-    color: white;
-    text-decoration: none;
-    padding: 7px 8px 7px 12px;
-    border-radius: 20px 0 0 20px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
-    width: 110px;
-}
-
-.floating-btn i {
-    font-size: 14px;
-    color: white;
-}
-
-.floating-btn span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.news-card {
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: transparent;
-    border: none;
-    margin-bottom: 5px;
-}
-
-.news-card img {
-    height: 110px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-    width: 100%;
-}
-
-.news-card-body {
-    background: linear-gradient(180deg, #4aa3fb, #166fe2);
-    padding: 8px 5px;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
-}
-    
+       .modal-close-btn {
+           background: var(--brand-green);
+           color: white;
+           border: none;
+           padding: 12px 32px;
+           border-radius: 100px;
+           font-weight: 600;
+           font-size: 15px;
+           width: 100%;
+       }
     </style>
-  
-    <style>body, .appCapsule { background-color: #007749 !important; }</style>
-</head>
+  </head>
   <body>
-   <div class="appCapsule">
-    <header class="container">
-<!-- 
-      <div class="header-title text-center py-3">
-        <h5>Home</h5>
-      </div> -->
+    <div class="appCapsule">
 
-      <style>
-.carousel-inner img{
-  height: 220px !important;
-  object-fit: cover;
-}
-      </style>
-      <div class="pt-4 position-relative d-flex align-items-center" style="padding-left: 10px;">
-          <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel" style="width: calc(100% - 118px);">
-              <div class="carousel-inner" style="border-radius: 8px; overflow: hidden; box-shadow: 2px 4px 10px rgba(0,0,0,0.1);">
+      <!-- Hero Slider & Floating Menu -->
+      <div class="hero-section">
+          <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="img/1.jpg" class="d-block w-100" alt="...">
+                  <img src="img/1.jpg" alt="Banner 1">
                 </div>
                 <div class="carousel-item">
-                  <img src="img/3.jpg" class="d-block w-100" alt="...">
+                  <img src="img/3.jpg" alt="Banner 2">
                 </div>
                 <div class="carousel-item">
-                  <img src="img/2.jpg" class="d-block w-100" alt="...">
+                  <img src="img/2.jpg" alt="Banner 3">
                 </div>
               </div>
           </div>
@@ -309,267 +428,136 @@ header .line{
           <div class="floating-right-menu">
               <a href="recharge.php" class="floating-btn"><i class="bi bi-wallet2"></i> <span>Recharge</span></a>
               <a href="withdraw.php" class="floating-btn"><i class="bi bi-cash"></i> <span>Withdraws</span></a>
-              <a href="services.php" class="floating-btn"><i class="bi bi-chat-dots-fill"></i> <span>customer ...</span></a>
+              <a href="services.php" class="floating-btn"><i class="bi bi-chat-dots-fill"></i> <span>Customer</span></a>
               <a href="invitiation.php" class="floating-btn"><i class="bi bi-person-plus-fill"></i> <span>Invitation</span></a>
-              <a href="redeembonus.php" class="floating-btn"><i class="bi bi-gift-fill"></i> <span>Redeem b...</span></a>
-              <a href="reward.php" class="floating-btn"><i class="bi bi-cloud-arrow-down-fill"></i> <span>App Down...</span></a>
+              <a href="redeembonus.php" class="floating-btn"><i class="bi bi-gift-fill"></i> <span>Redeem bonus</span></a>
+              <a href="reward.php" class="floating-btn"><i class="bi bi-cloud-arrow-down-fill"></i> <span>App Download</span></a>
           </div>
       </div>
-      
-  </header>
 
-
-
-  <div class="container appContent mt-3">
-    <!-- <div class="row headerBox px-2 gx-2">
-        <div class="col-6">
-            <div class="cardBox">
-                <img src="img/icons/h1.png" alt="">
-                <h6>Recharge</h6>
-            </div>
-        </div>
-
-        <div class="col-6">
-            <div class="cardBox">
-                <img src="img/icons/h2.png" alt="">
-                <h6>Recharge</h6>
-            </div>
-        </div>
-    </div> -->
-
-
-    <div class="row">
-      <div class="col-12 textBox ">
-        <div class="inner d-flex justify-content-center align-items-center gap-2">
-          <i class="bi bi-volume-up-fill"></i>
-          <?php $query_setting = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `notice`"));
-            $notice_board = $query_setting['message'];
+      <!-- Notice Bar -->
+      <div class="notice-bar">
+          <div class="notice-icon"><i class="bi bi-megaphone-fill"></i></div>
+          <div class="notice-text">
+            <?php 
+              $query_setting = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `notice`"));
+              $notice_board = $query_setting['message'];
             ?>
-          <marquee behavior="" direction="left" class="text-white" style="font-size: 17px;"><?php echo $notice_board; ?></marquee>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="row mt-3 px-2">
-      <div class="col-12">
-        <div class="menuBox" style="display: flex; justify-content: space-between; align-items: center; text-align: center;">
-          <a href="myproducts.php" class="inner" style="flex: 1; text-decoration: none;">
-            <i class="bi bi-box2-heart-fill" style="font-size: 28px; color: white;"></i>
-            <p style="font-size: 13px; color: white; margin-top: 5px;">My Product</p>
-          </a>
-          <a href="task_details3.php" class="inner" style="flex: 1; text-decoration: none;">
-            <i class="bi bi-file-spreadsheet" style="font-size: 28px; color: white;"></i>
-            <p style="font-size: 13px; color: white; margin-top: 5px;">Salary</p>
-          </a>
-          <a href="bindbank.php" class="inner" style="flex: 1; text-decoration: none;">
-             <i class="bi bi-bank2" style="font-size: 28px; color: white;"></i>
-            <p style="font-size: 13px; color: white; margin-top: 5px;">Bank</p>
-          </a>
-          <a href="myteams.php" class="inner" style="flex: 1; text-decoration: none;">
-            <i class="bi bi-people-fill" style="font-size: 28px; color: white;"></i>
-            <p style="font-size: 13px; color: white; margin-top: 5px;">Team</p>
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    
-    <div class="row videoSection mt-4 px-2">
-      <div class="col-12 inner mb-3">
-        <video src="img/video.mp4" class="img-fluid" controls style="width: 100%; border-radius: 8px; background-color: black; min-height: 220px;"></video>
-      </div>
-      
-        <div class="col-12 task mb-2 text-white">
-            <h6>Task Bonus</h6>
-        </div>    
-<div class="col-6 task-img">
-<a href="task-details1.php">
-<img src="img/669803d7c6c3a.jpg" class="img-fluid img-thumbnail">
-<p class="text-center text-white">How to make money?</p>
-</a>
-
-</div>
-
-
-<div class="col-6 task-img">
-<a href="task_details2.php">
-<img src="img/gifts.jpeg" class="img-fluid img-thumbnail">
-<p class="text-center text-white">Selfi Reward</p>
-</a>
-
-
-</div>
-
-
-      <div class="col-12 newsSection mt-5">
-        <div class="topInner d-flex justify-content-between mb-2">
-          <h5 class="text-white border-start border-4 px-3">News</h5>       
-          <a href="news.php" class="text-decoration-none d-flex gap-2 align-items-center text-white border-0" style="background-color: transparent;" onclick="toggleContent('toggleContent')">
-            <p class="m-0">More</p>
-            <i class="bi bi-chevron-right"></i>
-          </a>
-        </div> 
-        <div class="row gx-2">
-        <?php 
-        $i=1;
-        $query = mysqli_query($con,"select * from blog order by b_id desc");
-        if(mysqli_num_rows($query)>0){
-            while($row=mysqli_fetch_array($query)){
-                
-                $blog_id= $row['b_id'];
-                $blog_title = $row['b_title'];
-                $blog_image = $row['b_image'];
-                $blog_short = $row['b_details'];
-                $blog_create_date = $row['b_create_date'];
-          ?> 
-          <div class="col-6 mb-3">
-            <a href="news_details.php?pac=<?php echo $blog_id; ?>" class="text-decoration-none">
-              <div class="card news-card">
-                <img src="asupport/blog/<?php echo $blog_image; ?>" alt="...">
-                <div class="news-card-body">
-                  <p class="text-white mb-0" style="font-size: 13px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"><?php echo $blog_title; ?></p>
-                </div>
-              </div>
-            </a>
-          </div>
-        <?php } } ?>
-        </div>
-      </div>
-    </div>
-
-
-</div>
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#homeModal">
-  Launch demo modal
-</button> -->
-
-<!-- Modal -->
-<style>
-  /* Styles for the modal */
-  .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.5);
-  }
-  .modal-content {
-      position: relative;
-      top: 7rem;
-      background-color: #fefefe;
-      margin:auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 370px;
-      border-radius: 13px;
-      ma
-  }
-
-
-.modalBody p{
-  font-size: 17px;
-  text-align: justify;
-}
-</style>
-
-<!-- Modal -->
-<div id="myModal" class="modal">
-  <div class="modal-content">
-      <!-- <button type="button" class="close">&times;</button> -->
-      <img src="img/hikoki_logo.png" style="width: 150px; height: 150px; margin: auto;" class="img-fluid" alt="">
-      
-      <div class="modalBody">
-          <p>The client himself, will be able to enhance the grace of the client company. There is no architect to meet with the requirements, it is the very labor of those who praise that the flight of features is most criticized, for those who like easy and apart from flattery</p>
-          <div class="d-grid px-3 mt-3">
-              <button type="button" class="close" style="background-color: #009a5f; border: none; color:white; padding: 5px; font-size: 17px; border-radius: 5px;  ">Close</button>
-
+            <marquee behavior="scroll" direction="left" scrollamount="4"><?php echo htmlspecialchars($notice_board); ?></marquee>
           </div>
       </div>
-  </div>
-</div>
 
-<!-- <script>
-  function openModalDelayed(delay) {
-      setTimeout(function() {
-          document.getElementById('myModal').style.display = 'block';
-      }, delay);
-  }
-  
-  document.querySelector('.close').addEventListener('click', function() {
-      document.getElementById('myModal').style.display = 'none';
-  });
-  
-  openModalDelayed(2000);
-  </script> -->
-<!-- Footer Start Here -->
-<?php include "user_menu/footer_menu.php";  ?>
-<!-- Footer End Here -->
+      <!-- Quick Actions Grid -->
+      <div class="quick-actions-grid">
+          <a href="myproducts.php" class="action-item">
+              <div class="action-icon icon-green"><i class="bi bi-box2-heart-fill"></i></div>
+              <span class="action-label">My Product</span>
+          </a>
+          <a href="task_details3.php" class="action-item">
+              <div class="action-icon icon-blue"><i class="bi bi-card-checklist"></i></div>
+              <span class="action-label">Salary</span>
+          </a>
+          <a href="bindbank.php" class="action-item">
+              <div class="action-icon icon-orange"><i class="bi bi-bank2"></i></div>
+              <span class="action-label">Bank</span>
+          </a>
+          <a href="myteams.php" class="action-item">
+              <div class="action-icon icon-purple"><i class="bi bi-people-fill"></i></div>
+              <span class="action-label">Team</span>
+          </a>
+      </div>
 
+      <!-- White Background Media Section -->
+      <div class="media-section">
+          
+          <!-- Video -->
+          <div class="video-wrapper">
+              <video src="img/video.mp4" controls preload="metadata" poster="img/3.jpg"></video>
+          </div>
+          
+          <!-- Tasks -->
+          <div class="section-title">Task Bonus</div>
+          <div class="task-banners">
+              <a href="task-details1.php" class="task-card">
+                  <img src="img/669803d7c6c3a.jpg" alt="How to make money">
+                  <div class="task-card-label">How to make money?</div>
+              </a>
+              <a href="task_details2.php" class="task-card">
+                  <img src="img/gifts.jpeg" alt="Selfi Reward">
+                  <div class="task-card-label">Selfi Reward</div>
+              </a>
+          </div>
 
-   
+          <!-- News -->
+          <div class="section-title">
+              Latest News
+              <a href="news.php" class="section-title-link">More <i class="bi bi-chevron-right"></i></a>
+          </div>
+          <div class="news-list">
+              <?php 
+              $query = mysqli_query($con,"SELECT * FROM blog ORDER BY b_id DESC LIMIT 4");
+              if(mysqli_num_rows($query)>0){
+                  while($row=mysqli_fetch_array($query)){
+                      $blog_id= $row['b_id'];
+                      $blog_title = $row['b_title'];
+                      $blog_image = $row['b_image'];
+              ?> 
+              <a href="news_details.php?pac=<?php echo htmlspecialchars($blog_id); ?>" class="news-item">
+                  <img src="asupport/blog/<?php echo htmlspecialchars($blog_image); ?>" alt="News" class="news-thumb">
+                  <div class="news-info">
+                      <div class="news-title"><?php echo htmlspecialchars($blog_title); ?></div>
+                  </div>
+              </a>
+              <?php } } else { ?>
+                  <p style="color: var(--font-muted); text-align:center; padding: 20px 0;">No new announcements today.</p>
+              <?php } ?>
+          </div>
 
-</div>    <!--  end appCapsule  -->
-<!-- =================================== -->
-<?php
-// Check if the HTTP_REFERER is set and not empty
-if(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])){
-    $lastPage = $_SERVER['HTTP_REFERER'];
-    $last_page_find = 'https://oceanfoodco.vip/login.php';
-    if($lastPage == $last_page_find){
-        // Popup message HTML
-        $popupMessage = '<div id="popupMessage" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7); color: white; padding: 10px; border-radius: 10px; z-index: 9999;">Login succes!</div>';
+      </div> <!-- end media-section -->
+    </div> <!-- end appCapsule -->
 
-        // Display the popup message
-        echo $popupMessage;
+    <!-- Hidden Info Modal -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+          <img src="img/hikoki_logo.png" class="modal-logo" alt="Logo">
+          <p class="modal-text">The client himself, will be able to enhance the grace of the client company. There is no architect to meet with the requirements, it is the very labor of those who praise that the flight of features is most criticized, for those who like easy and apart from flattery</p>
+          <button type="button" class="modal-close-btn" onclick="document.getElementById('myModal').style.display='none'">Close</button>
+      </div>
+    </div>
 
-        // JavaScript to hide the popup after 3 seconds
-        echo '<script>
-                setTimeout(function(){
-                    var popup = document.getElementById("popupMessage");
-                    if(popup){
-                        popup.style.display = "none";
-                    }
-                }, 2000); // 3 seconds delay
-              </script>';
+    <!-- Footer Menu -->
+    <?php include "user_menu/footer_menu.php"; ?>
+
+    <!-- Login Toast Logic -->
+    <?php
+    if(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])){
+        $lastPage = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
+        if(strpos($lastPage, 'login.php') !== false){
+            echo '<script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const popupMessage = document.createElement("div");
+                        popupMessage.textContent = "Login Successful!";
+                        popupMessage.classList.add("modern-toast");
+                        document.body.appendChild(popupMessage);
+                        
+                        setTimeout(function(){
+                            popupMessage.style.opacity = "0";
+                            setTimeout(function(){
+                                if(popupMessage.parentNode) popupMessage.parentNode.removeChild(popupMessage);
+                            }, 500);
+                        }, 2500);
+                    });
+                  </script>';
+        }
     }
-}
-?>
-   
+    ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-
-
-    <!-- show hide content  -->
-   <script>
-    function toggleContent(className) {
-      var contents = document.getElementsByClassName(className);
-      for (var i = 0; i < contents.length; i++) {
-          var content = contents[i];
-          if (content.style.display === "none") {
-              content.style.display = "block";
-          } else {
-              content.style.display = "none";
-          }
-      }
-  }
-  
-  </script>
-  
-
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
-  <!-- <script>
-   $(document).ready(function(){
-    $('#homeModal').modal('show');
-   })
-  </script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Modal Trigger (Currently disabled in original code, can be enabled via logic)
+        // $(document).ready(function(){ $('#myModal').css('display', 'block'); });
+    </script>
   </body>
 </html>
