@@ -116,7 +116,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
     
     </style>
   
-    <style>body, .appCapsule { background-color: #005b6e !important; }</style>
+    <style>body, .appCapsule { background-color: #007749 !important; }</style>
 </head>
   <body>
 <div class="appCapsule container">
