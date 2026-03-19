@@ -1,276 +1,170 @@
-<?PHP 
+<?php 
 include('user_menu/database_connect.php');
-//$userid_access = $_SESSION['username'];
 ?>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <title>News</title>
 
-    <!-- bootstrap icons link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-       :root{
-        --blue:#213955;
+       :root {
+          --brand-green: #007749;
+          --brand-dark: #005a36;
+          --text-main: #1e293b;
+          --text-muted: #64748b;
        }
 
-       p, h1, h2, h3, h4, h5, h6{
-        margin: 0;
+       body, html {
+          background-color: var(--brand-green) !important;
+          font-family: 'Inter', sans-serif;
+          -webkit-font-smoothing: antialiased;
+          margin: 0;
+          padding: 0;
        }
 
-       .appCapsule, .footerBox{
-        max-width: 641px;
-        margin: auto;
+       .appCapsule {
+          max-width: 641px;
+          margin: auto;
+          padding-bottom: 90px;
+          min-height: 100vh;
+          background-color: var(--brand-green);
        }
 
-       .appCapsule{
-        padding-bottom: 4rem;
+       .page-header {
+          padding: 24px 16px 16px;
+          position: sticky;
+          top: 0;
+          background: rgba(0, 119, 73, 0.95);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          z-index: 50;
        }
 
-       /* body{
-        background-color: #009a5f;
-       } */
-
-       header .carousel img{
-        max-height:250px ;
-        height: auto;
-        border-radius: 5px;
+       .page-title {
+          color: white;
+          font-size: 20px;
+          font-weight: 700;
+          margin: 0;
+          letter-spacing: 0.3px;
+          text-align: center;
        }
 
-       /* .headerBox .cardBox{
-        background-color:white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        padding: 16px 0;
-        border-radius: 5px;
+       .news-list {
+          padding: 8px 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
        }
 
-       .headerBox img{
-        width: 40px;
-        height: 100%;
-
-        
+       .news-card {
+          background: #ffffff;
+          border-radius: 20px;
+          padding: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-decoration: none;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.2s ease;
+          -webkit-tap-highlight-color: transparent;
        }
 
-       .headerBox .cardBox h6{
-        margin: 0;
-       } */
-
-   
-
-       .menuBox{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: white;
-        padding-top: 7px;
+       .news-card:active {
+          transform: scale(0.97);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
        }
 
-       .menuBox .inner{
-        width: 100%;
+       .news-content {
+          flex: 1;
+          padding-right: 16px;
        }
 
-       .menuBox img{
-        width: 40px;
+       .news-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: var(--text-main);
+          margin-bottom: 8px;
+          line-height: 1.4;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
        }
 
-       .menuBox p{
-        font-size: 13px;
+       .news-date {
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--text-muted);
+          display: flex;
+          align-items: center;
+          gap: 6px;
        }
 
-       .textBox .inner{
-        background-color: #007749;
-        padding: 6px 10px;
-        border-radius: 5px;
+       .news-image {
+          width: 84px;
+          height: 84px;
+          border-radius: 16px;
+          object-fit: cover;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+          background-color: #f8fafc;
        }
 
-       .textBox .inner i{
-        color: #FFC983;
-        font-size: 20px;
+       .end-of-list {
+          text-align: center;
+          padding: 24px 0;
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 14px;
+          font-weight: 500;
        }
-
-       .newsSection a{
-        text-decoration: none;
-        border-bottom: 1px solid #dddddd5e;
-        padding: 10px 5px;
-       }
-
-
-
-
-
-/* ==========================  */
-/* footer section   */
-
-.footerBox .active4{
-  color:#007749 ;
-}
-
-
-
-header .line{
-  width: 30px;
-  height: 2px;
-  border-radius: 40px;
-  background-color: var(--yellow);
-  margin:5px auto;
-}
-
-       .footerBox{
-  display: flex;
-  background-color: white;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-  /* padding: 5px 0; */
-  height: 60px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-}
-
-.footerBox img{
-  width: 24px;
-}
-
-  footer .inner p{
-    font-size: 13px;
-  }
-  
-
-.footerBox a{
-  text-decoration: none;
-  color: #CCCCCC;
-  
-}
-
-.footerBox .me-icon img{
-    width: 28px;
-
-}
-
-
-       
-/* end footer section   */   
-/* ==========================  */
-
     </style>
-  
-    <style>body, .appCapsule { background-color: #007749 !important; }</style>
-</head>
+  </head>
   <body>
-   <div class="appCapsule" style="padding-bottom: 70px;">
-    <div style="background-color: #007749; padding-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <header class="container">
+    <div class="appCapsule">
+       <header class="page-header">
+         <h1 class="page-title">News</h1>
+       </header>
 
-      <div class="header-title text-center py-3">
-        <h5>News</h5>
-      </div>
-
-      <div class="row ">
-          <div id="carouselExampleControls" class="carousel slide px-3" data-bs-ride="carousel">
-              <!--<div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="img/s1.jpg" class="d-block w-100" alt="..." style="height: 200px;">
-                </div>
-                <div class="carousel-item">
-                  <img src="img/s2.jpg" class="d-block w-100" alt="..." style="height: 200px;">
-                </div>
-                <div class="carousel-item">
-                  <img src="img/s3.jpg" class="d-block w-100" alt="..." style="height: 200px;">
-                </div>
-
-                <div class="carousel-item">
-                  <img src="img/s4.png" class="d-block w-100" alt="..." style="height: 200px;">
-                </div> 
-
-              </div>-->
-              <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button> -->
-              <!-- <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button> -->
+       <div class="news-list">
+         <?php 
+            $query = mysqli_query($con,"SELECT * FROM blog ORDER BY b_id DESC");
+            if(mysqli_num_rows($query) > 0){
+                while($row = mysqli_fetch_array($query)){
+                    $blog_id = $row['b_id'];
+                    $blog_title = htmlspecialchars($row['b_title']);
+                    $blog_image = htmlspecialchars($row['b_image']);
+                    $blog_create_date = date('Y-m-d', strtotime($row['b_create_date']));
+         ?>
+         <a href="news_details.php?pac=<?php echo urlencode($blog_id); ?>" class="news-card">
+            <div class="news-content">
+               <h3 class="news-title"><?php echo $blog_title; ?></h3>
+               <div class="news-date">
+                  <i class="bi bi-calendar3"></i> <?php echo $blog_create_date; ?>
+               </div>
             </div>
-      </div>
-      
-  </header>
+            <img src="asupport/blog/<?php echo $blog_image; ?>" class="news-image" alt="News Image">
+         </a>
+         <?php } } else { ?>
+             <div class="text-center text-white py-4">
+                 <p>No news available at the moment.</p>
+             </div>
+         <?php } ?>
+       </div>
 
-
-
-  <div class="container appContent mt-3">
-    <div class="row videoSection mt-3">
-      <div class="col-12 newsSection mt-2 px-3">
-
-      <div class="newsBox  bg-white" style="border-bottom-right-radius: 8px; border-bottom-left-radius: 8px;">
-
-      <?php 
-        $i=1;
-        $query = mysqli_query($con,"select * from blog order by b_id desc");
-        if(mysqli_num_rows($query)>0){
-            while($row=mysqli_fetch_array($query)){
-                
-                $blog_id= $row['b_id'];
-                $blog_title = $row['b_title'];
-                $blog_image = $row['b_image'];
-                $blog_short = $row['b_details'];
-                $blog_create_date = $row['b_create_date'];
-          ?>
-          <a href="news_details.php?pac=<?php echo $blog_id; ?>" class="inner d-flex justify-content-between align-items-center" style="padding: 15px; border-bottom: 1px solid #eee; text-decoration: none;">
-            <div class="text text-dark" style="flex: 1;">
-              <p style="font-size: 16px; margin-bottom: 15px;"><?php echo $blog_title; ?></p>
-              <small style="color: #666;"><?php echo date('Y-m-d', strtotime($blog_create_date)); ?></small>
-            </div>
-  
-            <div class="imges" style="margin-left: 15px;">
-              <img src="asupport/blog/<?php echo $blog_image; ?>" class="img-fluid" alt="" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
-            </div>
-          </a>
-          <?php } } ?>
-      </div>     
-      <div class="py-3 text-center" style="margin-bottom: 1rem; color: white;">
-        <p>No more</p>
-      </div>
-      </div>
+       <div class="end-of-list">
+          <p>No more</p>
+       </div>
     </div>
-    </div> <!-- Close top green section -->
 
+    <!-- Footer Start Here -->
+    <?php include "user_menu/footer_menu.php"; ?>
+    <!-- Footer End Here -->
 
-</div>
-
-
-
-<!-- Footer Start Here -->
-<?php include "user_menu/footer_menu.php";  ?>
-<!-- Footer End Here -->
-   
-
-</div>    <!--  end appCapsule  -->
-<!-- =================================== -->
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
