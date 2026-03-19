@@ -210,44 +210,40 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
        }
 
        /* Balance Overview */
-       .balance-grid {
-           display: grid;
-           grid-template-columns: 1fr 1fr;
-           gap: 12px;
+       .wallet-overview-card {
+           background: #ffffff;
+           border-radius: var(--card-radius);
+           padding: 24px 16px;
+           box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-top: -64px;
            margin-bottom: 24px;
-           margin-top: -60px; /* Pull it up into the green area */
            position: relative;
            z-index: 20;
        }
-
-       .bal-card {
-           background: #ffffff;
-           border-radius: var(--card-radius);
-           padding: 20px;
-           box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+       .wallet-item {
+           flex: 1;
+           text-align: center;
            display: flex;
            flex-direction: column;
            gap: 6px;
-           position: relative;
-           overflow: hidden;
        }
-
-       .bal-card::before {
-           content: '';
-           position: absolute;
-           top: 0; right: 0;
-           width: 60px; height: 60px;
-           background: radial-gradient(circle, rgba(0,119,73,0.06) 0%, rgba(255,255,255,0) 70%);
-           border-radius: 50%;
+       .wallet-divider {
+           width: 1px;
+           height: 48px;
+           background: #e2e8f0;
+           margin: 0 12px;
        }
-
-       .bal-label {
+       .w-label {
            color: var(--font-muted);
-           font-size: 13px;
+           font-size: 12px;
            font-weight: 600;
+           text-transform: uppercase;
+           letter-spacing: 0.5px;
        }
-
-       .bal-amount {
+       .w-amount {
            color: var(--font-dark);
            font-size: 22px;
            font-weight: 800;
@@ -504,14 +500,15 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 
         <div class="main-sheet">
             <!-- Balances -->
-            <div class="balance-grid">
-                <div class="bal-card">
-                    <span class="bal-label">Balance</span>
-                    <span class="bal-amount">₹<?php echo number_format((float)$current_bal, 2); ?></span>
+            <div class="wallet-overview-card">
+                <div class="wallet-item">
+                    <p class="w-label">Recharge Wallet</p>
+                    <h3 class="w-amount">₹<?php echo number_format((float)$fran_bal, 2); ?></h3>
                 </div>
-                <div class="bal-card">
-                    <span class="bal-label">Recharge Bal</span>
-                    <span class="bal-amount">₹<?php echo number_format((float)$fran_bal, 2); ?></span>
+                <div class="wallet-divider"></div>
+                <div class="wallet-item">
+                    <p class="w-label">Balance Wallet</p>
+                    <h3 class="w-amount">₹<?php echo number_format((float)$current_bal, 2); ?></h3>
                 </div>
             </div>
 
