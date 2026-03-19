@@ -7,7 +7,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-
 include('user_menu/database_connect.php');
 $userid_access = $_SESSION['username'];
 $get_user = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `user` WHERE `email`='$userid_access'"));
@@ -17,6 +16,7 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
 	$current_bal = $get_balance['current_bal'];
 	$fran_bal = $get_balance['fran_bal'];
 	date_default_timezone_set('Asia/Kolkata');
+    
     //label count
     $DB = $con;
     if($DB->connect_error) {
@@ -93,611 +93,611 @@ $get_balance = mysqli_fetch_array(mysqli_query($con,"SELECT * FROM `income` WHER
     $levels = getLevels($parent->email);    
 ?>
 
-
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
+    <title>Profile</title>
 
-    <!-- bootstrap icons link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
        :root {
-        --dark-blue: #007749;
-        --light-blue: #009a5f;
-        --yellow: #FFCE82;
+          --brand-green: #007749;
+          --brand-dark: #005a36;
+          --font-dark: #1e293b;
+          --font-muted: #64748b;
+          --bg-gray: #f8fafc;
+          --accent-blue: #0ea5e9;
+          --accent-gold: #f59e0b;
+          --card-radius: 24px;
        }
 
-       body {
-        background-color: #007749;
+       body, html {
+          background-color: var(--brand-green) !important;
+          font-family: 'Inter', sans-serif;
+          -webkit-font-smoothing: antialiased;
+          margin: 0;
+          padding: 0;
        }
 
-       p, h1, h2, h3, h4, h5, h6{
-        margin: 0;
+       p, h1, h2, h3, h4, h5, h6 { margin: 0; }
+       a { text-decoration: none; }
+
+       .appCapsule {
+          max-width: 641px;
+          margin: auto;
+          min-height: 100vh;
+          background-color: var(--brand-green);
+          padding-bottom: calc(90px + env(safe-area-inset-bottom));
+          overflow-x: hidden;
        }
 
-       .appCapsule, .footerBox{
-        max-width: 641px;
-        margin: auto;
+       /* Profile Header */
+       .profile-header {
+           padding: max(24px, env(safe-area-inset-top)) 24px 24px;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           position: relative;
+           z-index: 10;
        }
 
-       .appCapsule{
-        padding-bottom: 5rem;
-        background-color: #007749;
-        min-height: 100vh;
+       .user-profile {
+           display: flex;
+           align-items: center;
+           gap: 16px;
        }
 
-/* ==========================  */
-/* footer section   */
+       .avatar {
+           width: 60px;
+           height: 60px;
+           border-radius: 50%;
+           border: 3px solid rgba(255,255,255,0.8);
+           background: white;
+           padding: 6px;
+           object-fit: contain;
+           box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+       }
 
-.footerBox .active3{
-  color:#007749 ;
-}
+       .user-info h5 {
+           color: white;
+           font-weight: 700;
+           font-size: 20px;
+           margin-bottom: 2px;
+       }
 
+       .user-info p {
+           color: rgba(255,255,255,0.85);
+           font-size: 13px;
+           font-weight: 500;
+           background: rgba(0,0,0,0.15);
+           padding: 2px 10px;
+           border-radius: 100px;
+           display: inline-block;
+       }
 
+       .settings-icon {
+           color: white;
+           font-size: 24px;
+           width: 44px;
+           height: 44px;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           background: rgba(255,255,255,0.15);
+           border-radius: 50%;
+           backdrop-filter: blur(8px);
+           transition: transform 0.2s;
+       }
 
-header .line{
-  width: 30px;
-  height: 2px;
-  border-radius: 40px;
-  background-color: var(--yellow);
-  margin:5px auto;
-}
+       .settings-icon:active {
+           transform: rotate(45deg);
+       }
 
-       .footerBox{
-  display: flex;
-  background-color: white;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-  /* padding: 5px 0; */
-  height: 60px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-}
+       /* Main Sheet */
+       .main-sheet {
+           background: #ffffff;
+           border-radius: 36px 36px 0 0;
+           min-height: calc(100vh - 120px);
+           padding: 24px 20px;
+           box-shadow: 0 -8px 24px rgba(0,0,0,0.1);
+           position: relative;
+           z-index: 5;
+       }
 
-.footerBox img{
-  width: 24px;
-}
+       /* Balance Overview */
+       .balance-grid {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 12px;
+           margin-bottom: 24px;
+           margin-top: -60px; /* Pull it up into the green area */
+           position: relative;
+           z-index: 20;
+       }
 
-  footer .inner p{
-    font-size: 13px;
-  }
-  
+       .bal-card {
+           background: #ffffff;
+           border-radius: var(--card-radius);
+           padding: 20px;
+           box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+           display: flex;
+           flex-direction: column;
+           gap: 6px;
+           position: relative;
+           overflow: hidden;
+       }
 
-.footerBox a{
-  text-decoration: none;
-  color: #CCCCCC;
-  
-}
+       .bal-card::before {
+           content: '';
+           position: absolute;
+           top: 0; right: 0;
+           width: 60px; height: 60px;
+           background: radial-gradient(circle, rgba(0,119,73,0.06) 0%, rgba(255,255,255,0) 70%);
+           border-radius: 50%;
+       }
 
-.footerBox .me-icon img{
-    width: 28px;
+       .bal-label {
+           color: var(--font-muted);
+           font-size: 13px;
+           font-weight: 600;
+       }
 
-}
+       .bal-amount {
+           color: var(--font-dark);
+           font-size: 22px;
+           font-weight: 800;
+           letter-spacing: -0.5px;
+       }
 
+       /* Action Buttons */
+       .action-buttons {
+           display: flex;
+           gap: 12px;
+           margin-bottom: 28px;
+       }
 
-       
-/* end footer section   */   
-/* ==========================  */
+       .btn-action {
+           flex: 1;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           gap: 8px;
+           padding: 14px 0;
+           border-radius: 16px;
+           font-weight: 600;
+           font-size: 15px;
+           color: white;
+           transition: transform 0.2s, background 0.2s;
+       }
 
+       .btn-action:active {
+           transform: scale(0.96);
+       }
 
+       .btn-deposit {
+           background: var(--brand-green);
+           box-shadow: 0 8px 16px rgba(0,119,73,0.2);
+       }
+       .btn-deposit:hover { background: var(--brand-dark); }
 
-/* me ====  */
-    .action-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        margin-top: 15px;
-    }
-    
-    .action-card {
-        background: white;
-        border-radius: 8px;
-        flex: 1;
-        padding: 15px 0;
-        text-align: center;
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-        font-size: 14px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .action-card i {
-        font-size: 24px;
-        color: #009a5f;
-        display: block;
-        margin-bottom: 5px;
-    }
+       .btn-withdraw {
+           background: #1e293b;
+           box-shadow: 0 8px 16px rgba(30,41,59,0.2);
+       }
+       .btn-withdraw:hover { background: #0f172a; }
 
-    .detail-card {
-        background: white;
-        border-radius: 12px;
-        padding: 20px;
-        margin-top: 15px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+       .btn-action i {
+           font-size: 18px;
+       }
 
-    /* Commission Section */
-    .comm-stats {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-    }
-    .comm-stat-box {
-        text-align: center;
-        flex: 1;
-    }
-    .comm-val {
-        background: #f0f0f0;
-        padding: 5px 0;
-        border-radius: 4px;
-        font-weight: bold;
-        color: #555;
-        margin-bottom: 5px;
-    }
-    .comm-label {
-        font-size: 13px;
-        color: #666;
-    }
-    .btn-view-comm {
-        background-color: #009a5f;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        width: 100%;
-        padding: 12px;
-        font-weight: 500;
-        text-decoration: none;
-        display: block;
-        text-align: center;
-    }
+       /* Stats Grid */
+       .stats-panel {
+           background: var(--bg-gray);
+           border-radius: var(--card-radius);
+           padding: 20px;
+           display: grid;
+           grid-template-columns: repeat(3, 1fr);
+           gap: 16px;
+           margin-bottom: 24px;
+           border: 1px solid rgba(0,0,0,0.03);
+       }
 
-    /* Wallet Stats Section */
-    .wallet-header {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid #f0f0f0;
-        padding-bottom: 15px;
-        margin-bottom: 15px;
-    }
-    .wallet-box {
-        text-align: center;
-        flex: 1;
-    }
-    .wallet-box p {
-        font-size: 12px;
-        color: #666;
-        margin-bottom: 5px;
-    }
-    .wallet-box h4 {
-        color: #333;
-        font-weight: bold;
-        font-size: 18px;
-    }
+       .stat-item {
+           text-align: center;
+           display: flex;
+           flex-direction: column;
+           gap: 4px;
+       }
 
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        text-align: center;
-    }
-    .stat-item p {
-        font-size: 11px;
-        color: #666;
-        margin-bottom: 5px;
-    }
-    .stat-item h6 {
-        font-weight: bold;
-        color: #333;
-        font-size: 14px;
-    }
-    
-    /* Icon grid */
-    .bottom-icons-wrap {
-        margin-top: 20px;
-    }
-    .nav-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        text-align: center;
-    }
-    .nav-item {
-        color: white;
-        text-decoration: none;
-    }
-    .nav-item i {
-        font-size: 24px;
-        display: block;
-        margin-bottom: 5px;
-    }
-    .nav-item p {
-        font-size: 12px;
-        color: rgba(255,255,255,0.9);
-    }
-    
-    .floating-cs a {
-        position: fixed;
-        right: 10px;
-        top: 30%;
-        background-color: #009a5f;
-        color: white;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        z-index: 1000;
-        text-decoration: none;
-    }
+       .stat-val {
+           color: var(--font-dark);
+           font-size: 15px;
+           font-weight: 700;
+       }
 
-    .profile-header {
-        background-color: transparent;
-        margin-bottom: 5px;
-    }
-    .profile-img {
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        border: 2px solid white;
-        object-fit: cover;
-    }
-    .user-info h5 {
-        font-size: 16px;
-        font-weight: 500;
-    }
-    .user-info p {
-        font-size: 14px;
-        color: rgba(255,255,255,0.9);
-    }
+       .stat-label {
+           color: var(--font-muted);
+           font-size: 12px;
+           font-weight: 500;
+       }
+
+       /* Team Commission */
+       .team-panel {
+           background: #ffffff;
+           border: 1px solid rgba(0,0,0,0.06);
+           border-radius: var(--card-radius);
+           padding: 20px;
+           margin-bottom: 28px;
+           box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+       }
+
+       .team-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: 16px;
+       }
+
+       .team-header h3 {
+           font-size: 16px;
+           font-weight: 700;
+           color: var(--font-dark);
+       }
+
+       .team-link {
+           font-size: 13px;
+           font-weight: 600;
+           color: var(--accent-blue);
+           display: flex;
+           align-items: center;
+           gap: 4px;
+       }
+
+       .team-stats {
+           display: flex;
+           justify-content: space-between;
+           gap: 10px;
+       }
+
+       .team-box {
+           flex: 1;
+           background: var(--bg-gray);
+           padding: 12px 0;
+           border-radius: 12px;
+           text-align: center;
+           display: flex;
+           flex-direction: column;
+           gap: 4px;
+       }
+
+       .t-val {
+           font-size: 16px;
+           font-weight: 700;
+           color: var(--brand-green);
+       }
+
+       .t-label {
+           font-size: 12px;
+           font-weight: 600;
+           color: var(--font-muted);
+       }
+
+       /* Menu List */
+       .menu-list {
+           display: flex;
+           flex-direction: column;
+           gap: 8px;
+       }
+
+       .menu-item {
+           display: flex;
+           align-items: center;
+           background: #ffffff;
+           padding: 16px 20px;
+           border-radius: 16px;
+           color: var(--font-dark);
+           font-weight: 600;
+           font-size: 15px;
+           text-decoration: none;
+           border: 1px solid rgba(0,0,0,0.04);
+           transition: background 0.2s, transform 0.2s;
+       }
+
+       .menu-item:active {
+           background: var(--bg-gray);
+           transform: scale(0.98);
+       }
+
+       .m-icon {
+           width: 32px;
+           height: 32px;
+           border-radius: 8px;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           margin-right: 16px;
+           font-size: 16px;
+       }
+
+       .bg-green { background: rgba(0, 119, 73, 0.1); color: var(--brand-green); }
+       .bg-blue { background: rgba(14, 165, 233, 0.1); color: var(--accent-blue); }
+       .bg-orange { background: rgba(245, 158, 11, 0.1); color: var(--accent-gold); }
+       .bg-purple { background: rgba(147, 51, 234, 0.1); color: #9333ea; }
+       .bg-red { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+       .m-arrow {
+           margin-left: auto;
+           color: #cbd5e1;
+           font-size: 18px;
+       }
+
+       /* Floating Customer Service */
+       .floating-cs a {
+           position: fixed;
+           right: 16px;
+           bottom: 100px;
+           background-color: var(--brand-green);
+           color: white;
+           width: 56px;
+           height: 56px;
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-size: 24px;
+           box-shadow: 0 8px 24px rgba(0,119,73,0.3);
+           z-index: 1000;
+           transition: transform 0.2s;
+       }
+       .floating-cs a:active { transform: scale(0.9); }
+
+       /* Toast Configuration */
+       .modern-toast {
+            position: fixed;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-align: center;
+            z-index: 99999;
+            font-weight: 500;
+            font-size: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            animation: slideDownToast 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+       }
+       @keyframes slideDownToast {
+           from { opacity: 0; transform: translate(-50%, -20px); }
+           to { opacity: 1; transform: translate(-50%, 0); }
+       }
     </style>
-  
-    <style>body, .appCapsule { background-color: #007749 !important; }</style>
-</head>
+  </head>
   <body>
-<div class="appCapsule container">
-    <header class="profile-header px-2 py-3 d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center gap-3">
-            <img src="img/hikoki_logo.png" class="profile-img" alt="Profile Icon">
-            <div class="user-info text-white">
-                <h5 class="mb-1"><?php echo $mobile; ?></h5>
-                <p class="mb-0">ID: <?php echo $userid_access; ?></p>
+    <!-- Top Header -->
+    <header class="profile-header">
+        <div class="user-profile">
+            <img src="img/hikoki_logo.png" class="avatar" alt="Avatar">
+            <div class="user-info">
+                <h5><?php echo htmlspecialchars($mobile); ?></h5>
+                <p>ID: <?php echo htmlspecialchars($userid_access); ?></p>
             </div>
         </div>
-        <a href="security.php" class="text-white fs-3 text-decoration-none">
-            <i class="bi bi-gear"></i>
+        <a href="security.php" class="settings-icon">
+            <i class="bi bi-gear-fill"></i>
         </a>
     </header>
 
-    <div class="floating-cs">
-        <a href="services.php"><i class="bi bi-headset"></i></a>
-    </div>
-  <div class="row gx-3 px-2">
-    
-    <!-- Action Cards -->
-    <div class="col-12">
-        <div class="action-row">
-            <a href="recharge.php" class="action-card">
-                <i class="bi bi-credit-card"></i>
-                Recharge
-            </a>
-            <a href="withdraw.php" class="action-card">
-                <i class="bi bi-wallet2"></i>
-                Withdraws
-            </a>
+    <div class="appCapsule">
+        
+        <!-- Floating CS -->
+        <div class="floating-cs">
+            <a href="services.php"><i class="bi bi-headset"></i></a>
         </div>
-    </div>
 
-    <!-- Commission Card -->
-    <div class="col-12">
-        <div class="detail-card">
-            <div class="comm-stats">
-                <div class="comm-stat-box">
-                    <div class="comm-val"><?php echo $direct_refer = mysqli_num_rows(mysqli_query($con, "select * from user where under_userid='$userid_access'")); ?></div>
-                    <div class="comm-label">B-10%</div>
+        <div class="main-sheet">
+            <!-- Balances -->
+            <div class="balance-grid">
+                <div class="bal-card">
+                    <span class="bal-label">Balance</span>
+                    <span class="bal-amount">₹<?php echo number_format((float)$current_bal, 2); ?></span>
                 </div>
-                <div class="comm-stat-box" style="margin: 0 10px;">
-                    <div class="comm-val">
-                        <?php 
-                        $total_count=0;
-                        $c_count=0;
-                        foreach($levels as $level) {
-                            $firstValue = array_shift($level);
-                            if($firstValue=='Level 2'){
-                                $c_count = count($level['data']); 
-                            }
-                        }
-                        echo $c_count;
-                        ?>
-                    </div>
-                    <div class="comm-label">C-5%</div>
-                </div>
-                <div class="comm-stat-box">
-                    <div class="comm-val">
-                        <?php 
-                        $d_count=0;
-                        foreach($levels as $level) {
-                            $firstValue = array_shift($level);
-                            if($firstValue=='Level 3'){
-                                $d_count = count($level['data']); 
-                            }
-                        }
-                        echo $d_count;
-                        ?>
-                    </div>
-                    <div class="comm-label">D-2%</div>
-                </div>
-            </div>
-            <a href="commission-record.php" class="btn-view-comm">View team commissions</a>
-        </div>
-    </div>
-
-    <!-- Stats Card -->
-    <div class="col-12">
-        <div class="detail-card">
-            <div class="wallet-header">
-                <div class="wallet-box">
-                    <p>Recharge wallet</p>
-                    <h4><?php echo $fran_bal; ?>RS</h4>
-                </div>
-                <div class="wallet-box">
-                    <p>Balance wallet</p>
-                    <h4><?php echo $current_bal; ?>RS</h4>
+                <div class="bal-card">
+                    <span class="bal-label">Recharge Bal</span>
+                    <span class="bal-amount">₹<?php echo number_format((float)$fran_bal, 2); ?></span>
                 </div>
             </div>
 
-            <div class="stats-grid">
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="recharge.php" class="btn-action btn-deposit">
+                    <i class="bi bi-wallet2"></i> Recharge
+                </a>
+                <a href="withdraw.php" class="btn-action btn-withdraw">
+                    <i class="bi bi-cash-stack"></i> Withdraw
+                </a>
+            </div>
+
+            <!-- Income Stats -->
+            <div class="stats-panel">
                 <div class="stat-item">
-                    <p>Total profit</p>
-                    <h6><?php	
+                    <span class="stat-val">₹<?php	
                         $interest_label = 0;
-                        $query = mysqli_query($con,"select * from transaction where t_userid='$userid_access' AND t_type='Credit' AND t_details!='Account Recharge'");
+                        $query = mysqli_query($con,"SELECT * FROM transaction WHERE t_userid='$userid_access' AND t_type='Credit' AND t_details!='Account Recharge'");
                         if(mysqli_num_rows($query)>0) {
                             while($row=mysqli_fetch_array($query)) {
                                 $interest_label = $interest_label + $row['t_amount'];
                             }
                         }
-                        echo $interest_label;
-                    ?></h6>
+                        echo number_format((float)$interest_label, 2);
+                    ?></span>
+                    <span class="stat-label">Total profit</span>
                 </div>
+                
                 <div class="stat-item">
-                    <p>Team income</p>
-                    <h6><?php	
+                    <span class="stat-val">₹<?php	
                         $interest_label = 0;
-                        $query = mysqli_query($con,"select * from interest_label where int_userid='$userid_access'");
+                        $query = mysqli_query($con,"SELECT * FROM interest_label WHERE int_userid='$userid_access'");
                         if(mysqli_num_rows($query)>0) {
                             while($row=mysqli_fetch_array($query)) {
                                 $interest_label = $interest_label + $row['int_amount'];
                             }
                         }
-                        echo sprintf("%0.2f", $interest_label);
-                    ?></h6>
+                        echo number_format((float)$interest_label, 2);
+                    ?></span>
+                    <span class="stat-label">Team inc.</span>
                 </div>
+
                 <div class="stat-item">
-                    <p>Income today</p>
-                    <h6><?php	
+                    <span class="stat-val">₹<?php	
                         $today_date = date('Y-m-d');			
                         $interest_label = 0;
-                        $query = mysqli_query($con,"select * from transaction where t_userid='$userid_access' AND t_type='Credit' AND t_details!='Account Recharge' AND t_date='$today_date'");
+                        $query = mysqli_query($con,"SELECT * FROM transaction WHERE t_userid='$userid_access' AND t_type='Credit' AND t_details!='Account Recharge' AND t_date='$today_date'");
                         if(mysqli_num_rows($query)>0) {
                             while($row=mysqli_fetch_array($query)) {
                                 $interest_label = $interest_label + $row['t_amount'];
                             }
                         }
-                        echo $interest_label;
-                    ?></h6>
+                        echo number_format((float)$interest_label, 2);
+                    ?></span>
+                    <span class="stat-label">Today's inc.</span>
+                </div>
+
+                <div class="stat-item">
+                    <span class="stat-val">₹0.00</span>
+                    <span class="stat-label">Total loss</span>
                 </div>
                 <div class="stat-item">
-                    <p>Total loss</p>
-                    <h6>0.00</h6> <!-- Not implemented in db call -->
+                    <span class="stat-val">₹0.00</span>
+                    <span class="stat-label">Today loss</span>
                 </div>
                 <div class="stat-item">
-                    <p>Today's loss</p>
-                    <h6>0.00</h6>
-                </div>
-                <div class="stat-item">
-                    <p>Product</p>
-                    <h6>0.00</h6>
+                    <span class="stat-val">₹0.00</span>
+                    <span class="stat-label">Product</span>
                 </div>
             </div>
-        </div>
-    </div>
 
-    
-    <!-- Navigation Grid -->
-    <div class="col-12">
-        <div class="bottom-icons-wrap">
-            <div class="nav-grid">
-                <a href="myproducts.php" class="nav-item">
-                    <i class="bi bi-grid"></i>
-                    <p>My product</p>
+            <!-- Team Commission Overview -->
+            <div class="team-panel">
+                <div class="team-header">
+                    <h3>My Team</h3>
+                    <a href="commission-record.php" class="team-link">Details <i class="bi bi-chevron-right"></i></a>
+                </div>
+                <div class="team-stats">
+                    <div class="team-box">
+                        <span class="t-val"><?php echo $direct_refer = mysqli_num_rows(mysqli_query($con, "SELECT * FROM user WHERE under_userid='$userid_access'")); ?></span>
+                        <span class="t-label">B-10%</span>
+                    </div>
+                    <div class="team-box">
+                        <span class="t-val">
+                            <?php 
+                            $total_count=0;
+                            $c_count=0;
+                            foreach($levels as $level) {
+                                $firstValue = array_shift($level);
+                                if($firstValue=='Level 2'){
+                                    $c_count = count($level['data']); 
+                                }
+                            }
+                            echo $c_count;
+                            ?>
+                        </span>
+                        <span class="t-label">C-5%</span>
+                    </div>
+                    <div class="team-box">
+                        <span class="t-val">
+                            <?php 
+                            $d_count=0;
+                            foreach($levels as $level) {
+                                $firstValue = array_shift($level);
+                                if($firstValue=='Level 3'){
+                                    $d_count = count($level['data']); 
+                                }
+                            }
+                            echo $d_count;
+                            ?>
+                        </span>
+                        <span class="t-label">D-2%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modern Menu List -->
+            <div class="menu-list">
+                <a href="myproducts.php" class="menu-item">
+                    <div class="m-icon bg-green"><i class="bi bi-grid-fill"></i></div>
+                    My product
+                    <i class="bi bi-chevron-right m-arrow"></i>
                 </a>
-                <a href="mycoupon.php" class="nav-item">
-                    <i class="bi bi-ticket-perforated"></i>
-                    <p>Coupon</p>
+                <a href="mycoupon.php" class="menu-item">
+                    <div class="m-icon bg-blue"><i class="bi bi-ticket-perforated-fill"></i></div>
+                    Coupon
+                    <i class="bi bi-chevron-right m-arrow"></i>
                 </a>
-                <a href="funding-details.php" class="nav-item">
-                    <i class="bi bi-receipt"></i>
-                    <p>Funding details</p>
+                <a href="funding-details.php" class="menu-item">
+                    <div class="m-icon bg-orange"><i class="bi bi-receipt"></i></div>
+                    Funding details
+                    <i class="bi bi-chevron-right m-arrow"></i>
                 </a>
-                <a href="redeembonus.php" class="nav-item">
-                    <i class="bi bi-gift"></i>
-                    <p>Redeem bonus</p>
+                <a href="redeembonus.php" class="menu-item">
+                    <div class="m-icon bg-purple"><i class="bi bi-gift-fill"></i></div>
+                    Redeem bonus
+                    <i class="bi bi-chevron-right m-arrow"></i>
                 </a>
-                <a href="invitiation.php" class="nav-item">
-                    <i class="bi bi-envelope-paper"></i>
-                    <p>Invitation</p>
-                </a>
-                <a href="services.php" class="nav-item">
-                    <i class="bi bi-chat-dots"></i>
-                    <p>Customer service</p>
+                <a href="invitiation.php" class="menu-item">
+                    <div class="m-icon bg-red"><i class="bi bi-people-fill"></i></div>
+                    Invitation
+                    <i class="bi bi-chevron-right m-arrow"></i>
                 </a>
             </div>
-        </div>
-    </div>
 
-  </div>
+        </div> <!-- end main-sheet -->
 
+        <!-- Footer Start Here -->
+        <?php include "user_menu/footer_menu.php";  ?>
+        <!-- Footer End Here -->
 
-<!-- open service modal box here ========================== -->
-<style>
-    .modal-container {
-        display: none;
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        transition: opacity 0.3s ease;
-        z-index: 9999;
-    }
+    </div> <!-- end appCapsule -->
 
-    .service-Content {
-        position: relative;
-        background-color: #fff;
-        margin: auto;
-        /* padding: 20px; */
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-        border-top-right-radius: 20px;
-        border-top-left-radius: 20px;
+    <!-- Login Toast Logic -->
+    <?php
+    if(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])){
+        $lastPage = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
         
+        $message = "";
+        if(strpos($lastPage, 'signup_access.php') !== false){
+            $message = "Register Success!";
+        } else if(strpos($lastPage, 'login.php') !== false){
+            $message = "Login Success!";
+        }
+
+        if(!empty($message)) {
+            echo '<script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const popupMessage = document.createElement("div");
+                        popupMessage.textContent = "'.$message.'";
+                        popupMessage.classList.add("modern-toast");
+                        document.body.appendChild(popupMessage);
+                        
+                        setTimeout(function(){
+                            popupMessage.style.opacity = "0";
+                            setTimeout(function(){
+                                if(popupMessage.parentNode) popupMessage.parentNode.removeChild(popupMessage);
+                            }, 500);
+                        }, 2500);
+                    });
+                  </script>';
+        }
     }
+    ?>
 
-    /* .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-    } */
-</style>
-
-
-
-<div id="serviceContainer" class="modal-container">
-
-    <div id="serviceContent" class="service-Content bg-light p-2">
-        
-        <p class="text-muted text-center border-bottom pb-3 px-3 bg-white">Customer service</p>
-        <div class="inner d-flex align-items-center justify-content-between bg-white px-3">
-            <i class="bi bi-whatsapp" style="font-size: 35px; color: green ;"></i>
-
-            <div class="right text-end ">
-               <small>WhatsApp Customer Service</small>
-                <br>
-                <small class="text-muted"><a href="">+12512724799</a></small>
-            </div>
-        </div>
-        <div class="inner d-flex align-items-center justify-content-between bg-white px-3">
-            <i class="bi bi-telegram" style="font-size: 35px; color: green ;"></i>
-
-            <div class="right text-end ">
-               <small>Telegram Customer Service</small>
-                <br>
-                <small class="text-muted"><a href="">+12512724799</a></small>
-            </div>
-        </div>
-
-        <div class=" text-center mt-2 bg-white px-3 d-grid">
-            <span class="close-btn  py-3 text-muted text-center " onclick="closeModal()">Close</span>
-
-        </div>
-
-    </div>
-</div>
-<?php
-// Check if the HTTP_REFERER is set and not empty
-if(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])){
-    $lastPage = $_SERVER['HTTP_REFERER'];
-    $last_page_find = 'https://oceanfoodco.vip/login.php';
-    $last_page_signup = 'https://oceanfoodco.vip/signup_access.php';
-    if($lastPage == $last_page_signup){
-        // Popup message HTML
-        $popupMessage = '<div id="popupMessage" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7); color: white; padding: 10px; border-radius: 10px; z-index: 9999;">Register Success!</div>';
-
-        // Display the popup message
-        echo $popupMessage;
-
-        // JavaScript to hide the popup after 3 seconds
-        echo '<script>
-                setTimeout(function(){
-                    var popup = document.getElementById("popupMessage");
-                    if(popup){
-                        popup.style.display = "none";
-                    }
-                }, 2000); // 3 seconds delay
-              </script>';
-    }
-   if($lastPage == $last_page_find){
-        // Popup message HTML
-        $popupMessage = '<div id="popupMessage" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7); color: white; padding: 10px; border-radius: 10px; z-index: 9999;">Login Success!</div>';
-
-        // Display the popup message
-        echo $popupMessage;
-
-        // JavaScript to hide the popup after 3 seconds
-        echo '<script>
-                setTimeout(function(){
-                    var popup = document.getElementById("popupMessage");
-                    if(popup){
-                        popup.style.display = "none";
-                    }
-                }, 2000); // 3 seconds delay
-              </script>';
-    }
-}
-?>
-
-
-<script>
-    var serviceContainer = document.getElementById("serviceContainer");
-    var serviceContent = document.getElementById("serviceContent");
-
-    function openServicemodal() {
-        serviceContainer.style.display = "block";
-        setTimeout(function () {
-            serviceContent.style.transform = "translateY(0%)";
-        }, 10);
-    }
-
-    function closeModal() {
-        serviceContent.style.transform = "translateY(100%)";
-        setTimeout(function () {
-            serviceContainer.style.display = "none";
-        }, 300); 
-    }
-</script>
-<!-- Footer Start Here -->
-<?php include "user_menu/footer_menu.php";  ?>
-<!-- Footer End Here -->
-
-</div>    <!--  end container appCapsule  -->
-<!-- =================================== -->
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
